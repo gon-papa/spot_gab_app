@@ -1,0 +1,6 @@
+{
+    "flavor": "develop",
+    "appName": "SpotGab develop",
+    "appIdSuffix": ".develop",
+    "api_url": "http://localhost:8000"
+}
