@@ -1,0 +1,4 @@
+arb-dir: lib/l10n # arbファイルの格納先
+template-arb-file: ja.arb # テンプレートのファイル（lib/l10nに格納）
+output-class: L10n        # クラスの名前を定義、デフォルトはAppLocalizations
+output-localization-file: app_localizations.dart # importするファイル名

@@ -1,9 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:spot_gab_app/gen/assets.gen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterBasicInfo extends ConsumerWidget {
   const RegisterBasicInfo({Key? key}) : super(key: key);
@@ -50,7 +50,7 @@ class _Scaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('基本情報を入力してください'),
+        title: Text(L10n.of(context)?.enterBasicInfoTitle ?? ''),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
