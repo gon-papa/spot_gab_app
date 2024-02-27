@@ -1,0 +1,59 @@
+{
+    "@@locale": "ja",
+    "shareMomentTitle": "今を共有しよう",
+    "@shareMomentTitle": {
+        "description": "アプリのサブタイトル"
+    },
+    "createAccount": "新しいアカウントを作成する",
+    "@createAccount": {
+        "description": "新しいアカウントを作成する"
+    },
+    "loginButton": "サインイン",
+    "@loginButton": {
+        "description": "サインイン"
+    },
+    "logoutButton": "サインアウト",
+    "@logoutButton": {
+        "description": "サインアウト"
+    },
+    "enterBasicInfoTitle": "基本情報を入力してください",
+    "@enterBasicInfoTitle": {
+        "description": "基本情報を入力してください"
+    },
+    "accountInfoSubtitle": "あなたのアカウントの情報",
+    "@accountInfoSubtitle": {
+        "description": "あなたのアカウントの情報"
+    },
+    "emailLabel": "メールアドレス",
+    "@emailLabel": {
+        "description": "メールアドレス"
+    },
+    "emailInputPlaceholder": "メールアドレスを入力してください",
+    "@emailInputPlaceholder": {
+        "description": "メールアドレスを入力してください"
+    },
+    "passwordLabel": "パスワード",
+    "@passwordLabel": {
+        "description": "パスワード"
+    },
+    "passwordInputPlaceholder": "パスワードを入力してください",
+    "@passwordInputPlaceholder": {
+        "description": "パスワードを入力してください"
+    },
+    "birthdateLabel": "生年月日",
+    "@birthdateLabel": {
+        "description": "生年月日"
+    },
+    "birthdateInputPlaceholder": "生年月日を選択してください",
+    "@birthdateInputPlaceholder": {
+        "description": "生年月日を選択してください"
+    },
+    "needHelpQuestion": "何か問題が発生しましたか？",
+    "@needHelpQuestion": {
+        "description": "何か問題が発生しましたか？"
+    },
+    "contactSupportButton": "サポートに連絡",
+    "@contactSupportButton": {
+        "description": "サポートに連絡"
+    }
+}
