@@ -1,0 +1,59 @@
+{
+    "@@locale": "en",
+    "shareMomentTitle": "Share the moment",
+    "@shareMomentTitle": {
+        "description": "App subtitle"
+    },
+    "createAccount": "Create a new account",
+    "@createAccount": {
+        "description": "Create a new account"
+    },
+    "loginButton": "Sign In",
+    "@loginButton": {
+        "description": "Sign In"
+    },
+    "logoutButton": "Sign Out",
+    "@logoutButton": {
+        "description": "Sign Out"
+    },
+    "enterBasicInfoTitle": "Basic information",
+    "@enterBasicInfoTitle": {
+        "description": "Please enter your basic information"
+    },
+    "accountInfoSubtitle": "Your account information",
+    "@accountInfoSubtitle": {
+        "description": "Your account information"
+    },
+    "emailLabel": "Email Address",
+    "@emailLabel": {
+        "description": "Email Address"
+    },
+    "emailInputPlaceholder": "Please enter your email address",
+    "@emailInputPlaceholder": {
+        "description": "Please enter your email address"
+    },
+    "passwordLabel": "Password",
+    "@passwordLabel": {
+        "description": "Password"
+    },
+    "passwordInputPlaceholder": "Please enter your password",
+    "@passwordInputPlaceholder": {
+        "description": "Please enter your password"
+    },
+    "birthdateLabel": "Birthdate",
+    "@birthdateLabel": {
+        "description": "Birthdate"
+    },
+    "birthdateInputPlaceholder": "Please select your birthdate",
+    "@birthdateInputPlaceholder": {
+        "description": "Please select your birthdate"
+    },
+    "needHelpQuestion": "Are you experiencing any issues?",
+    "@needHelpQuestion": {
+        "description": "Are you experiencing any issues?"
+    },
+    "contactSupportButton": "Contact Support",
+    "@contactSupportButton": {
+        "description": "Contact Support"
+    }
+}
