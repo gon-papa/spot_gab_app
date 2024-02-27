@@ -80,7 +80,7 @@ class _Title extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const Text('1/3 あなたのアカウントの情報'),
+        Text('1/3 ${L10n.of(context)?.accountInfoSubtitle ?? ""}'),
         const Spacer(),
         Assets.images.settingIcon.image(
           width: 30.w,
@@ -97,8 +97,8 @@ class _EmailInput extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return TextFormField(
-      decoration: const InputDecoration(
-        labelText: 'メールアドレス',
+      decoration: InputDecoration(
+        labelText: L10n.of(context)?.emailLabel ?? '',
       ),
     );
   }
