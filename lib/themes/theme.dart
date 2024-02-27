@@ -1,9 +1,9 @@
 // theme.dart
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppTheme {
   static ThemeData get lightTheme {
-    // ライトテーマの定義
     return ThemeData(
       primaryColor: const Color(0xFF1DA1F2),
       colorScheme: const ColorScheme.light(
@@ -13,16 +13,37 @@ class AppTheme {
         onSecondary: Colors.white,
         surface: Colors.white,
         onSurface: Colors.black,
-        background: Color(0xFFE1E8ED),
-        onBackground: Colors.black,
+        background: Color(0xFFF4F4F4),
+        onBackground: Color(0xFF3C4043),
         error: Colors.red,
         onError: Colors.white,
       ),
-      scaffoldBackgroundColor: const Color(0xFFE1E8ED),
+      scaffoldBackgroundColor: Colors.white,
       appBarTheme: const AppBarTheme(
-        color: Color(0xFF1DA1F2),
-        iconTheme: IconThemeData(color: Colors.white),
-        titleTextStyle: TextStyle(color: Colors.white, fontSize: 20.0),
+        color: Colors.white,
+        iconTheme: IconThemeData(color: Color(0xFF3C4043)),
+        titleTextStyle: TextStyle(
+          color: Color(0xFF3C4043),
+          fontSize: 20.0,
+        ),
+        centerTitle: false,
+        titleSpacing: 0.0,
+      ),
+      textTheme: TextTheme(
+        displayLarge: TextStyle(
+          fontSize: 32.0.sp,
+          fontWeight: FontWeight.bold,
+          color: const Color(0xFF3C4043),
+        ),
+        titleLarge: TextStyle(
+          fontSize: 24.0.sp,
+          fontWeight: FontWeight.bold,
+          color: const Color(0xFF3C4043),
+        ),
+        bodyMedium: TextStyle(
+          fontSize: 16.0.sp,
+          color: const Color(0xFF3C4043),
+        ),
       ),
       // その他のカスタムテーマ設定をここに追加
     );
@@ -49,6 +70,22 @@ class AppTheme {
         color: Color(0xFF1DA1F2),
         iconTheme: IconThemeData(color: Colors.white),
         titleTextStyle: TextStyle(color: Colors.white, fontSize: 20.0),
+      ),
+      textTheme: TextTheme(
+        displayLarge: TextStyle(
+          fontSize: 32.0.sp,
+          fontWeight: FontWeight.bold,
+          color: const Color(0xFF3C4043),
+        ),
+        titleLarge: TextStyle(
+          fontSize: 24.0.sp,
+          fontWeight: FontWeight.bold,
+          color: const Color(0xFF3C4043),
+        ),
+        bodyMedium: TextStyle(
+          fontSize: 16.0.sp,
+          color: const Color(0xFF3C4043),
+        ),
       ),
       // その他のカスタムテーマ設定をここに追加
     );

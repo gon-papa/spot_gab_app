@@ -12,12 +12,21 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/setting_icon.png
+  AssetGenImage get settingIcon =>
+      const AssetGenImage('assets/images/setting_icon.png');
+
+  /// File path: assets/images/spot_gab_icon.png
+  AssetGenImage get spotGabIcon =>
+      const AssetGenImage('assets/images/spot_gab_icon.png');
+
   /// File path: assets/images/spot_gab_splash_icon.png
   AssetGenImage get spotGabSplashIcon =>
       const AssetGenImage('assets/images/spot_gab_splash_icon.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [spotGabSplashIcon];
+  List<AssetGenImage> get values =>
+      [settingIcon, spotGabIcon, spotGabSplashIcon];
 }
 
 class Assets {
