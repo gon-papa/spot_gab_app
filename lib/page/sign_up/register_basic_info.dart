@@ -2,8 +2,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:spot_gab_app/gen/assets.gen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:spot_gab_app/page/sign_up/register_provider.dart';
 
 class RegisterBasicInfo extends ConsumerWidget {
   const RegisterBasicInfo({Key? key}) : super(key: key);
@@ -41,20 +43,25 @@ class _Margin extends ConsumerWidget {
   }
 }
 
-class _Scaffold extends StatelessWidget {
+class _Scaffold extends ConsumerWidget {
   const _Scaffold({Key? key, required this.child}) : super(key: key);
 
   final Widget child;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: Text(L10n.of(context)?.enterBasicInfoTitle ?? ''),
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
-        child: child,
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 24.w),
+          child: Form(
+            key: ref.read(_Providers.keyProvider),
+            child: child,
+          ),
+        ),
       ),
       floatingActionButton: SizedBox(
         width: 50.w,
@@ -97,6 +104,7 @@ class _EmailInput extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return TextFormField(
+      controller: ref.read(_Providers.emailProvider),
       decoration: InputDecoration(
         labelText: L10n.of(context)?.emailLabel ?? '',
       ),
@@ -109,10 +117,20 @@ class _PasswordInput extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isObscured = ref.watch(_Providers.passwordVisibilityProvider);
     return TextFormField(
-      decoration: const InputDecoration(
-        labelText: 'パスワード',
-      ),
+      obscureText: !isObscured,
+      controller: ref.read(_Providers.passwordProvider),
+      decoration: InputDecoration(
+          labelText: 'パスワード',
+          suffixIcon: IconButton(
+            onPressed: () {
+              ref.read(_Providers.passwordVisibilityProvider.notifier).state =
+                  !isObscured;
+            },
+            icon: const Icon(Icons.remove_red_eye),
+          )),
+      keyboardType: TextInputType.visiblePassword,
     );
   }
 }
@@ -123,19 +141,28 @@ class _BirthdayInput extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final formatter = DateFormat('yyyy-MM-dd');
     return TextFormField(
-      decoration: const InputDecoration(
-        labelText: '生年月日',
-      ),
-      onTap: () {
-        showDatePicker(
-          context: context,
-          initialDate: DateTime.now(),
-          firstDate: DateTime(1900),
-          lastDate: DateTime.now(),
-        );
-      },
-    );
+        controller: ref.watch(_Providers.birthdayProvider),
+        decoration: const InputDecoration(
+          labelText: '生年月日',
+        ),
+        readOnly: true,
+        onTap: () {
+          showDatePicker(
+            context: context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(1900),
+            lastDate: DateTime.now(),
+          ).then(
+            (value) {
+              if (value != null) {
+                ref.read(_Providers.birthdayProvider).text =
+                    formatter.format(value);
+              }
+            },
+          );
+        });
   }
 }
 
@@ -198,3 +225,5 @@ class _HelpSection extends StatelessWidget {
     );
   }
 }
+
+typedef _Providers = RegisterProviders;
