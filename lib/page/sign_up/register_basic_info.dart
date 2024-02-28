@@ -57,8 +57,8 @@ class _Scaffold extends StatelessWidget {
         child: child,
       ),
       floatingActionButton: SizedBox(
-        width: 60.w,
-        height: 60.h,
+        width: 50.w,
+        height: 50.h,
         child: FloatingActionButton(
           onPressed: () {},
           shape: const CircleBorder(),
