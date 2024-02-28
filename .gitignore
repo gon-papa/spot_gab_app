@@ -46,3 +46,6 @@ app.*.map.json
 /android/app/release
 
 + **/ios/Flutter/Dart-Defines.xcconfig
+
+lib/gen/openapi/
+openapi.json
