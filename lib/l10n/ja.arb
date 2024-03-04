@@ -6,54 +6,94 @@
     },
     "createAccount": "新しいアカウントを作成する",
     "@createAccount": {
-        "description": "新しいアカウントを作成する"
+        "description": "新しいアカウントを作成するボタン"
     },
-    "loginButton": "サインイン",
-    "@loginButton": {
-        "description": "サインイン"
+    "signInButton": "サインイン",
+    "@signInButton": {
+        "description": "サインインボタン"
     },
-    "logoutButton": "サインアウト",
-    "@logoutButton": {
-        "description": "サインアウト"
+    "signOutButton": "サインアウト",
+    "@signOutButton": {
+        "description": "サインアウトボタン"
     },
     "enterBasicInfoTitle": "基本情報を入力してください",
     "@enterBasicInfoTitle": {
-        "description": "基本情報を入力してください"
+        "description": "新規登録画面のタイトル"
     },
     "accountInfoSubtitle": "あなたのアカウントの情報",
     "@accountInfoSubtitle": {
-        "description": "あなたのアカウントの情報"
+        "description": "新規登録画面のサブタイトル"
     },
     "emailLabel": "メールアドレス",
     "@emailLabel": {
-        "description": "メールアドレス"
+        "description": "email入力ラベル"
     },
     "emailInputPlaceholder": "メールアドレスを入力してください",
     "@emailInputPlaceholder": {
-        "description": "メールアドレスを入力してください"
+        "description": "email入力プレースホルダー"
     },
     "passwordLabel": "パスワード",
     "@passwordLabel": {
-        "description": "パスワード"
+        "description": "パスワード入力ラベル"
     },
     "passwordInputPlaceholder": "パスワードを入力してください",
     "@passwordInputPlaceholder": {
-        "description": "パスワードを入力してください"
+        "description": "パスワード入力プレースホルダー"
     },
     "birthdateLabel": "生年月日",
     "@birthdateLabel": {
-        "description": "生年月日"
+        "description": "生年月日入力ラベル"
     },
     "birthdateInputPlaceholder": "生年月日を選択してください",
     "@birthdateInputPlaceholder": {
-        "description": "生年月日を選択してください"
+        "description": "生年月日入力プレースホルダー"
     },
     "needHelpQuestion": "何か問題が発生しましたか？",
     "@needHelpQuestion": {
-        "description": "何か問題が発生しましたか？"
+        "description": "ヘルプ文字列"
     },
     "contactSupportButton": "サポートに連絡",
     "@contactSupportButton": {
-        "description": "サポートに連絡"
+        "description": "ヘルプ文字列のサポートに連絡するリンク"
+    },
+    "error": "エラー", 
+    "@error": {
+        "description": "エラー表示"
+    },
+    "errorHasOccurred": "エラーが発生しました",
+    "@errorHasOccurred": {
+        "description": "不明なエラーメッセージ"
+    },
+    "requiredFieldError": "入力してください",
+    "@requiredFieldError": {
+        "description": "バリデーション"
+    },
+    "accountIdPatternError": "半角英数字と_のみ使用できます",
+    "@accountIdPatternError": {
+        "description": "バリデーション"
+    },
+    "min4LengthError": "4文字以上で入力してください",
+    "@min4LengthError": {
+        "description": "バリデーション"
+    },
+    "max8LengthError": "8文字以内で入力してください",
+    "@max8LengthError": {
+        "description": "バリデーション"
+    },
+    "max30LengthError": "30文字以内で入力してください",
+    "@max30LengthError": {
+        "description": "バリデーション"
+    },
+    "max100LengthError": "100文字以内で入力してください",
+    "@max100LengthError": {
+        "description": "バリデーション"
+    },
+    "emailFormatError": "メールアドレスの形式が正しくありません",
+    "@emailFormatError": {
+        "description": "バリデーション"
+    },
+    "passwordPatternError": "大文字1文字以上、数字1文字以上を含む必要があります",
+    "@passwordPatternError": {
+        "description": "バリデーション"
     }
 }

@@ -6,6 +6,7 @@ run: ## fulutter run
 
 gen: ## Generate files
 	fvm flutter pub run build_runner build --delete-conflicting-outputs
+	fvm flutter pub get
 
 pubget: ## fulutter pub get
 	fvm flutter pub get

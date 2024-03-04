@@ -1,98 +1,52 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:spot_gab_app/gen/assets.gen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:spot_gab_app/page/sign_up/register_provider.dart';
+import 'package:spot_gab_app/page/sign_up/widget/register_scaffold.dart';
+import 'package:spot_gab_app/page/sign_up/widget/register_title.dart';
+import 'package:spot_gab_app/page/util_widget/margin/margin.dart';
+import 'package:spot_gab_app/page/util_widget/support_section.dart';
+import 'package:spot_gab_app/page/validation/sign_up/sign_up_validation.dart';
+
+typedef _Providers = RegisterProviders;
 
 class RegisterBasicInfo extends ConsumerWidget {
   const RegisterBasicInfo({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return const _Scaffold(
-      child: Column(
-        children: [
-          _Margin(height: 10),
-          _Title(),
-          _Margin(height: 15),
-          _EmailInput(),
-          _Margin(height: 15),
-          _PasswordInput(),
-          _Margin(height: 15),
-          _BirthdayInput(),
-          _Margin(height: 45),
-          _HelpSection(),
-        ],
-      ),
+    return RegisterScaffold(
+      child: _Body(),
+      title: L10n.of(context)?.enterBasicInfoTitle ?? '',
+      formKey: ref.watch(_Providers.basicInfoGlobalKeyProvider),
+      onPressed: () async {
+        await ref.watch(_Providers.basicInfoSubmitProvider)(
+            context, ref.read(_Providers.emailProvider).text);
+      },
     );
   }
 }
 
-class _Margin extends ConsumerWidget {
-  const _Margin({required this.height});
-  final double height;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return SizedBox(
-      height: height.h,
-    );
-  }
-}
-
-class _Scaffold extends ConsumerWidget {
-  const _Scaffold({Key? key, required this.child}) : super(key: key);
-
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(L10n.of(context)?.enterBasicInfoTitle ?? ''),
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.w),
-          child: Form(
-            key: ref.read(_Providers.keyProvider),
-            child: child,
-          ),
-        ),
-      ),
-      floatingActionButton: SizedBox(
-        width: 50.w,
-        height: 50.h,
-        child: FloatingActionButton(
-          onPressed: () {},
-          shape: const CircleBorder(),
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          child: const Icon(
-            Icons.navigate_next,
-            size: 40,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _Title extends StatelessWidget {
-  const _Title({Key? key}) : super(key: key);
+class _Body extends StatelessWidget {
+  const _Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       children: [
-        Text('1/3 ${L10n.of(context)?.accountInfoSubtitle ?? ""}'),
-        const Spacer(),
-        Assets.images.settingIcon.image(
-          width: 30.w,
-          height: 30.h,
+        VerticalMargin(height: 10),
+        RegisterTitle(
+          title: '1/2 あなたのアカウント情報',
         ),
+        VerticalMargin(height: 15),
+        _EmailInput(),
+        VerticalMargin(height: 15),
+        _PasswordInput(),
+        VerticalMargin(height: 15),
+        _BirthdayInput(),
+        VerticalMargin(height: 45),
+        SupportSection(),
       ],
     );
   }
@@ -104,10 +58,12 @@ class _EmailInput extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return TextFormField(
-      controller: ref.read(_Providers.emailProvider),
+      controller: ref.watch(_Providers.emailProvider),
       decoration: InputDecoration(
         labelText: L10n.of(context)?.emailLabel ?? '',
       ),
+      keyboardType: TextInputType.emailAddress,
+      validator: ref.watch(signUpValidation).emailValidator.call(context),
     );
   }
 }
@@ -131,6 +87,7 @@ class _PasswordInput extends ConsumerWidget {
             icon: const Icon(Icons.remove_red_eye),
           )),
       keyboardType: TextInputType.visiblePassword,
+      validator: ref.watch(signUpValidation).passwordValidator.call(context),
     );
   }
 }
@@ -147,6 +104,7 @@ class _BirthdayInput extends ConsumerWidget {
         decoration: const InputDecoration(
           labelText: '生年月日',
         ),
+        validator: ref.watch(signUpValidation).birthDateValidator(context),
         readOnly: true,
         onTap: () {
           showDatePicker(
@@ -165,65 +123,3 @@ class _BirthdayInput extends ConsumerWidget {
         });
   }
 }
-
-class _HelpSection extends StatelessWidget {
-  const _HelpSection({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final TapGestureRecognizer tapGestureRecognizer = TapGestureRecognizer()
-      ..onTap = () {
-        showDialog(
-          context: context,
-          builder: (context) {
-            // TODO: サポートに連絡する方法を表示する
-            return const AlertDialog(
-              content: Text("サポートに連絡する方法"),
-            );
-          },
-        );
-      };
-
-    return Container(
-      alignment: Alignment.centerLeft,
-      child: Column(
-        children: <Widget>[
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(vertical: 12.0),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.background,
-              borderRadius: BorderRadius.circular(4.0),
-            ),
-            child: Center(
-              child: RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: "何か問題が発生しましたか？",
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Theme.of(context).colorScheme.onBackground,
-                      ),
-                    ),
-                    TextSpan(
-                      text: " サポートに連絡",
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Theme.of(context).primaryColor,
-                        decoration: TextDecoration.underline,
-                      ),
-                      recognizer: tapGestureRecognizer,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-typedef _Providers = RegisterProviders;
