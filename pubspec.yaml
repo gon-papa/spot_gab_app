@@ -5,7 +5,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.16.2 <3.0.0"
+  sdk: ">=2.15.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -23,6 +23,10 @@ dependencies:
   analyzer: ^6.4.1
   intl: ^0.18.1
   flutter_native_splash: ^2.3.13
+  dio: ^5.4.1 # API通信用openapiでも使用
+  built_collection: ^5.1.1 # openapiのリストで使用
+  openapi: 
+    path: lib/gen/openapi # openapiのコード生成
 
 dev_dependencies:
   flutter_test:

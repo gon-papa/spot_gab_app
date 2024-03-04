@@ -5,6 +5,7 @@ import 'package:spot_gab_app/page/main/home/home.dart';
 import 'package:spot_gab_app/page/sign_in/sign_in.dart';
 import 'package:spot_gab_app/page/sign_in/sign_in_form.dart';
 import 'package:spot_gab_app/page/sign_up/register_basic_info.dart';
+import 'package:spot_gab_app/page/sign_up/register_id_account.dart';
 
 part 'route.g.dart';
 
@@ -36,6 +37,9 @@ final routerProvider = Provider(
         ),
         TypedGoRoute<RegisterBasicInfoRoute>(
           path: 'register_basic_info',
+        ),
+        TypedGoRoute<RegisterIdAccountRoute>(
+          path: 'register_id_account',
         ),
       ],
     ),
@@ -93,6 +97,15 @@ class RegisterBasicInfoRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const RegisterBasicInfo();
+  }
+}
+
+class RegisterIdAccountRoute extends GoRouteData {
+  const RegisterIdAccountRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const RegisterIdAccount();
   }
 }
 
