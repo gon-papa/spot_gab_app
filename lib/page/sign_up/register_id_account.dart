@@ -19,7 +19,12 @@ class RegisterIdAccount extends ConsumerWidget {
       title: '2/2 あなたのアカウントID',
       formKey: ref.watch(_Providers.idAccountGlobalKeyProvider),
       child: _Body(),
-      onPressed: () {},
+      onPressed: () async {
+        await ref.watch(_Providers.idAccountSubmitProvider)(
+          context,
+          ref.read(_Providers.idAccountProvider).text,
+        );
+      },
     );
   }
 }
@@ -48,13 +53,13 @@ class _iDAccountInput extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return TextFormField(
-      controller: ref.watch(_Providers.emailProvider),
+      controller: ref.watch(_Providers.idAccountProvider),
       decoration: InputDecoration(
         labelText: 'アカウントID',
-        prefix: const Text('@'),
+        prefixText: '@',
       ),
-      keyboardType: TextInputType.emailAddress,
-      validator: ref.watch(signUpValidation).emailValidator.call(context),
+      keyboardType: TextInputType.name,
+      validator: ref.watch(signUpValidation).accountIdValidator.call(context),
     );
   }
 }
