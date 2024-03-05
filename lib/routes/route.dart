@@ -6,7 +6,7 @@ import 'package:spot_gab_app/page/sign_in/sign_in.dart';
 import 'package:spot_gab_app/page/sign_in/sign_in_form.dart';
 import 'package:spot_gab_app/page/sign_up/register_basic_info.dart';
 import 'package:spot_gab_app/page/sign_up/register_complete.dart';
-import 'package:spot_gab_app/page/sign_up/register_id_account.dart';
+import 'package:spot_gab_app/page/sign_up/register_account.dart';
 
 part 'route.g.dart';
 
@@ -109,7 +109,7 @@ class RegisterIdAccountRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const RegisterIdAccount();
+    return const RegisterAccount();
   }
 }
 

@@ -10,13 +10,13 @@ import 'package:spot_gab_app/page/validation/sign_up/sign_up_validation.dart';
 
 typedef _Providers = RegisterProviders;
 
-class RegisterIdAccount extends ConsumerWidget {
-  const RegisterIdAccount({Key? key}) : super(key: key);
+class RegisterAccount extends ConsumerWidget {
+  const RegisterAccount({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return RegisterScaffold(
-      title: '2/2 あなたのアカウントID',
+      title: '2/2 あなたのアカウント情報',
       formKey: ref.watch(_Providers.idAccountGlobalKeyProvider),
       child: _Body(),
       onPressed: () async {
@@ -39,10 +39,28 @@ class _Body extends ConsumerWidget {
         VerticalMargin(height: 10),
         RegisterTitle(title: '2/2 あなたのアカウントID'),
         VerticalMargin(height: 15),
+        _AccountNameInput(),
+        VerticalMargin(height: 15),
         _iDAccountInput(),
         VerticalMargin(height: 45),
         SupportSection(),
       ],
+    );
+  }
+}
+
+class _AccountNameInput extends ConsumerWidget {
+  const _AccountNameInput({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return TextFormField(
+      controller: ref.watch(_Providers.accountNameProvider),
+      decoration: InputDecoration(
+        labelText: 'アカウント名',
+      ),
+      keyboardType: TextInputType.name,
+      validator: ref.watch(signUpValidation).accountNameValidator.call(context),
     );
   }
 }
