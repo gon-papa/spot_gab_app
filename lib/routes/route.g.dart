@@ -34,6 +34,14 @@ RouteBase get $rootShellRoute => ShellRouteData.$route(
               path: 'register_basic_info',
               factory: $RegisterBasicInfoRouteExtension._fromState,
             ),
+            GoRouteData.$route(
+              path: 'register_id_account',
+              factory: $RegisterIdAccountRouteExtension._fromState,
+            ),
+            GoRouteData.$route(
+              path: 'register_complete',
+              factory: $RegisterCompleteRouteExtension._fromState,
+            ),
           ],
         ),
       ],
@@ -119,6 +127,42 @@ extension $RegisterBasicInfoRouteExtension on RegisterBasicInfoRoute {
 
   String get location => GoRouteData.$location(
         '/sign_in/register_basic_info',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $RegisterIdAccountRouteExtension on RegisterIdAccountRoute {
+  static RegisterIdAccountRoute _fromState(GoRouterState state) =>
+      const RegisterIdAccountRoute();
+
+  String get location => GoRouteData.$location(
+        '/sign_in/register_id_account',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $RegisterCompleteRouteExtension on RegisterCompleteRoute {
+  static RegisterCompleteRoute _fromState(GoRouterState state) =>
+      const RegisterCompleteRoute();
+
+  String get location => GoRouteData.$location(
+        '/sign_in/register_complete',
       );
 
   void go(BuildContext context) => context.go(location);
