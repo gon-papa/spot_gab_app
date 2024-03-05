@@ -27,6 +27,7 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
+
     return ScreenUtilInit(
       designSize: const Size(320, 568),
       builder: (BuildContext context, Widget? child) => MaterialApp.router(
@@ -42,3 +43,6 @@ class MyApp extends ConsumerWidget {
     );
   }
 }
+
+// TODO: ボタンが押されたら更新として、ここはshared_preferencesを使う
+final languageProvider = StateProvider<String>((ref) => 'ja');
