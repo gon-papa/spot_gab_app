@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:spot_gab_app/repository/secure_token_repository.dart';
 import 'user.dart';
 
 class UserNotifier extends StateNotifier<User?> {
@@ -9,6 +10,8 @@ class UserNotifier extends StateNotifier<User?> {
     state = user;
     return state!;
   }
+
+  SecureTokenRepository get secure_token_repository => SecureTokenRepository();
 
   // ユーザー情報を更新するメソッド
   bool updateUser({
@@ -36,6 +39,11 @@ class UserNotifier extends StateNotifier<User?> {
       return true;
     }
     return false;
+  }
+
+  Future<bool> isSignIn() async {
+    final isToken = await secure_token_repository.getToken();
+    return isToken != null;
   }
 }
 

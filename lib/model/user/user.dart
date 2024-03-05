@@ -1,5 +1,6 @@
-// freezedでUserを書く
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:spot_gab_app/repository/secure_token_repository.dart';
 
 part 'user.freezed.dart';
 
