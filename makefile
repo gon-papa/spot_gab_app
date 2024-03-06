@@ -6,6 +6,7 @@ run: ## fulutter run
 
 gen: ## Generate files
 	fvm flutter pub run build_runner build --delete-conflicting-outputs
+	make merge_arb
 	fvm flutter pub get
 
 pubget: ## fulutter pub get
@@ -29,6 +30,9 @@ schema: ## Generate schema
 	fvm flutter pub get && \
 	fvm flutter pub run build_runner build --delete-conflicting-outputs
 
+merge_arb:
+	@echo "Merging ARB files..."
+	@fvm dart run scripts/merge_arb.dart
 
 help: ## Show options
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \

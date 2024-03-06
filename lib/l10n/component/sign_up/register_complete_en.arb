@@ -1,0 +1,15 @@
+{
+    "@@locale": "en",
+    "registerCompleteTitle": "Registration Complete",
+    "@registerCompleteTitle": {
+        "description": "Title of the registration completion screen"
+    },
+    "registerCompleteDescription": "Thank you for registering.\nAn email has been sent to the registered email address.\nPlease click the link in the email to complete the registration. If the link has expired,\nyou can resend it from [My Page>Account Information].",
+    "@registerCompleteDescription": {
+        "description": "Description of the registration completion screen"
+    },
+    "letsStartButton": "Let's Get Started",
+    "@letsStartButton": {
+        "description": "Button on the registration completion screen"
+    }
+}

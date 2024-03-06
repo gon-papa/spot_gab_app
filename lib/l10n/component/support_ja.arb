@@ -1,0 +1,11 @@
+{
+    "@@locale": "ja",
+    "needHelpQuestion": "何か問題が発生しましたか？",
+    "@needHelpQuestion": {
+        "description": "ヘルプ文字列"
+    },
+    "contactSupportButton": "サポートに連絡",
+    "@contactSupportButton": {
+        "description": "ヘルプ文字列"
+    }
+}

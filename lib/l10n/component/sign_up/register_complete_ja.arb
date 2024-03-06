@@ -1,0 +1,15 @@
+{
+    "@@locale": "ja",
+    "registerCompleteTitle": "登録が完了しました",
+    "@registerCompleteTitle": {
+        "description": "登録完了画面のタイトル"
+    },
+    "registerCompleteDescription": "ご登録ありがとうございます。\nご登録したメールアドレスにメールを送信しました。\nメール内のリンクをクリックして登録を完了してください。※有効期限が切れてしまった場合は、\n[マイページ>アカウント情報]より再送信を行えます。",
+    "@registerCompleteDescription": {
+        "description": "登録完了画面の説明"
+    },
+    "letsStartButton": "さあ、はじめましょう",
+    "@letsStartButton": {
+        "description": "登録完了画面のボタン"
+    }
+}

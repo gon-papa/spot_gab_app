@@ -1,0 +1,19 @@
+{
+    "@@locale": "en",
+    "error": "Error",
+    "@error": {
+        "description": "Error display"
+    },
+    "errorHasOccurred": "An error has occurred",
+    "@errorHasOccurred": {
+        "description": "Unknown error message"
+    },
+    "emailExsitError": "This email address is not available",
+    "@emailExsitError": {
+        "description": "Dialog message when a response error occurs"
+    },
+    "idAccountExsitError": "This account ID is not available",
+    "@idAccountExsitError": {
+        "description": "Dialog message when a response error occurs"
+    }
+}
