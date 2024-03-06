@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spot_gab_app/page/util_widget/button/primary_button.dart';
-import 'package:spot_gab_app/repository/secure_token_repository.dart';
-import 'package:spot_gab_app/routes/route.dart';
+import 'package:spot_gab_app/importer.dart';
 
 class Home extends ConsumerWidget {
   const Home({Key? key}) : super(key: key);

@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:spot_gab_app/gen/assets.gen.dart';
+import 'package:spot_gab_app/importer.dart';
 
 class RegisterTitle extends StatelessWidget {
   final String title;

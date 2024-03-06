@@ -1,10 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:spot_gab_app/gen/assets.gen.dart';
-import 'package:spot_gab_app/page/util_widget/button/primary_button.dart';
-import 'package:spot_gab_app/page/util_widget/margin/margin.dart';
-import 'package:spot_gab_app/page/util_widget/support_section.dart';
+import 'package:spot_gab_app/importer.dart';
 
 class RegisterComplete extends ConsumerWidget {
   const RegisterComplete({Key? key}) : super(key: key);
@@ -62,8 +56,8 @@ class _Title extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      '登録が完了しました',
+    return Text(
+      L10n.of(context)?.registerCompleteTitle ?? '',
       style: TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.bold,
@@ -77,13 +71,8 @@ class _Description extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      '''
-ご登録ありがとうございます。
-ご登録したメールアドレスにメールを送信しました。\n
-メール内のリンクをクリックして登録を完了してください。
-※有効期限が切れてしまった場合は、\n[マイページ>アカウント情報]より再送信を行えます。
-      ''',
+    return Text(
+      L10n.of(context)?.registerCompleteDescription ?? '',
       style: TextStyle(
         fontSize: 16,
       ),
@@ -98,7 +87,7 @@ class RegisterCompleteButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return PrimaryButton(
       onPressed: () {},
-      text: 'さあ、はじめましょう',
+      text: L10n.of(context)?.letsStartButton ?? '',
       width: 280,
       height: 38,
     );

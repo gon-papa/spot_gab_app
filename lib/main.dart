@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:spot_gab_app/routes/route.dart';
-import 'package:spot_gab_app/themes/theme.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:spot_gab_app/importer.dart';
 
 Future<void> main() async {
   MyApp.run();
