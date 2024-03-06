@@ -1,0 +1,35 @@
+{
+    "@@locale": "en",
+    "requiredFieldError": "Please enter",
+    "@requiredFieldError": {
+        "description": "Validation"
+    },
+    "accountIdPatternError": "Only alphanumeric characters and _ are allowed",
+    "@accountIdPatternError": {
+        "description": "Validation"
+    },
+    "min4LengthError": "Please enter at least 4 characters",
+    "@min4LengthError": {
+        "description": "Validation"
+    },
+    "max8LengthError": "Please enter no more than 8 characters",
+    "@max8LengthError": {
+        "description": "Validation"
+    },
+    "max30LengthError": "Please enter no more than 30 characters",
+    "@max30LengthError": {
+        "description": "Validation"
+    },
+    "max100LengthError": "Please enter no more than 100 characters",
+    "@max100LengthError": {
+        "description": "Validation"
+    },
+    "emailFormatError": "The email address format is incorrect",
+    "@emailFormatError": {
+        "description": "Validation"
+    },
+    "passwordPatternError": "Must contain at least one uppercase letter and one number",
+    "@passwordPatternError": {
+        "description": "Validation"
+    }
+}

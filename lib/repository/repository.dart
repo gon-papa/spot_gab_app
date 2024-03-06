@@ -1,5 +1,4 @@
-import 'package:openapi/openapi.dart';
-import 'package:dio/dio.dart';
+import 'package:spot_gab_app/importer.dart';
 
 class BaseRepository {
   BaseRepository();

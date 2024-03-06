@@ -1,13 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:spot_gab_app/page/sign_up/register_provider.dart';
-import 'package:spot_gab_app/page/sign_up/widget/register_scaffold.dart';
-import 'package:spot_gab_app/page/sign_up/widget/register_title.dart';
-import 'package:spot_gab_app/page/util_widget/margin/margin.dart';
-import 'package:spot_gab_app/page/util_widget/support_section.dart';
-import 'package:spot_gab_app/page/validation/sign_up/sign_up_validation.dart';
+import 'package:spot_gab_app/importer.dart';
 
 typedef _Providers = RegisterProviders;
 
@@ -18,7 +9,7 @@ class RegisterBasicInfo extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return RegisterScaffold(
       child: _Body(),
-      title: L10n.of(context)?.enterBasicInfoTitle ?? '',
+      title: L10n.of(context)?.registerBasicInfoTitle ?? '',
       formKey: ref.watch(_Providers.basicInfoGlobalKeyProvider),
       onPressed: () async {
         await ref.watch(_Providers.basicInfoSubmitProvider)(
@@ -37,7 +28,7 @@ class _Body extends StatelessWidget {
       children: [
         VerticalMargin(height: 10),
         RegisterTitle(
-          title: '1/2 あなたのアカウント情報',
+          title: '1/2 ${L10n.of(context)?.registerBasicInfoSubTitle ?? ''}',
         ),
         VerticalMargin(height: 15),
         _EmailInput(),
@@ -61,6 +52,7 @@ class _EmailInput extends ConsumerWidget {
       controller: ref.watch(_Providers.emailProvider),
       decoration: InputDecoration(
         labelText: L10n.of(context)?.emailLabel ?? '',
+        hintText: L10n.of(context)?.emailInputPlaceholder ?? '',
       ),
       keyboardType: TextInputType.emailAddress,
       validator: ref.watch(signUpValidation).emailValidator.call(context),
@@ -78,7 +70,8 @@ class _PasswordInput extends ConsumerWidget {
       obscureText: !isObscured,
       controller: ref.read(_Providers.passwordProvider),
       decoration: InputDecoration(
-          labelText: 'パスワード',
+          labelText: L10n.of(context)?.passwordLabel ?? '',
+          hintText: L10n.of(context)?.passwordInputPlaceholder ?? '',
           suffixIcon: IconButton(
             onPressed: () {
               ref.read(_Providers.passwordVisibilityProvider.notifier).state =
@@ -101,8 +94,9 @@ class _BirthdayInput extends ConsumerWidget {
     final formatter = DateFormat('yyyy-MM-dd');
     return TextFormField(
         controller: ref.watch(_Providers.birthdayProvider),
-        decoration: const InputDecoration(
-          labelText: '生年月日',
+        decoration: InputDecoration(
+          labelText: L10n.of(context)?.birthdateLabel ?? '',
+          hintText: L10n.of(context)?.birthdateInputPlaceholder ?? '',
         ),
         validator: ref.watch(signUpValidation).birthDateValidator(context),
         readOnly: true,

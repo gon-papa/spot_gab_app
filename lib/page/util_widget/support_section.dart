@@ -1,5 +1,4 @@
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
+import 'package:spot_gab_app/importer.dart';
 
 class SupportSection extends StatelessWidget {
   const SupportSection({Key? key}) : super(key: key);

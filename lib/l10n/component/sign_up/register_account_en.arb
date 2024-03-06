@@ -1,0 +1,27 @@
+{
+    "@@locale": "en",
+    "registerAccountTitle": "Enter Account Information",
+    "@registerAccountTitle": {
+        "description": "Title of the account information entry page for new registration"
+    },
+    "registerAccountSubtitle": "Basic Account Information",
+    "@registerAccountSubtitle": {
+        "description": "Subtitle of the account information entry page for new registration"
+    },
+    "accountName": "Account Name",
+    "@accountName": {
+        "description": "Label for account name"
+    },
+    "accountNamePlaceholder": "Please enter your account name",
+    "@accountNamePlaceholder": {
+        "description": "Placeholder for account name"
+    },
+    "idAccount": "Account ID",
+    "@idAccount": {
+        "description": "Label for account ID"
+    },
+    "idAccountPlaceholder": "Please enter your account ID",
+    "@idAccountPlaceholder": {
+        "description": "Placeholder for account ID"
+    }
+}

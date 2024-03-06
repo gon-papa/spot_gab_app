@@ -27,6 +27,7 @@ dependencies:
   built_collection: ^5.1.1 # openapiのリストで使用
   openapi: 
     path: lib/gen/openapi # openapiのコード生成
+  flutter_secure_storage: ^4.2.1
 
 dev_dependencies:
   flutter_test:

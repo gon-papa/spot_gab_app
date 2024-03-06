@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spot_gab_app/page/util_widget/button/primary_button.dart';
-import 'package:spot_gab_app/page/util_widget/margin/margin.dart';
-import 'package:spot_gab_app/page/util_widget/support_section.dart';
+import 'package:spot_gab_app/importer.dart';
 
 class RegisterComplete extends ConsumerWidget {
   const RegisterComplete({Key? key}) : super(key: key);
@@ -11,13 +7,14 @@ class RegisterComplete extends ConsumerWidget {
     return _Scaffold(
         child: Column(
       children: [
-        const VerticalMargin(height: 100),
+        const VerticalMargin(height: 60),
+        const _LogoImage(),
         const _Title(),
-        const VerticalMargin(height: 40),
+        const VerticalMargin(height: 20),
         const _Description(),
         const VerticalMargin(height: 20),
         const SupportSection(),
-        const VerticalMargin(height: 60),
+        const VerticalMargin(height: 40),
         const RegisterCompleteButton(),
       ],
     ));
@@ -30,11 +27,26 @@ class _Scaffold extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25),
-        child: Center(child: child),
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25),
+          child: Center(child: child),
+        ),
       ),
+    );
+  }
+}
+
+class _LogoImage extends StatelessWidget {
+  const _LogoImage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Assets.images.spotGabIcon.image(
+      width: 100.w,
+      height: 100.h,
     );
   }
 }
@@ -44,10 +56,11 @@ class _Title extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      '登録が完了しました',
+    return Text(
+      L10n.of(context)?.registerCompleteTitle ?? '',
       style: TextStyle(
         fontSize: 24,
+        fontWeight: FontWeight.bold,
       ),
     );
   }
@@ -58,13 +71,8 @@ class _Description extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      '''
-ご登録ありがとうございます。
-ご登録したメールアドレスにメールを送信しました。\n
-メール内のリンクをクリックして登録を完了してください。
-※有効期限が切れてしまった場合は、\n[マイページ>アカウント情報]より再送信を行えます。
-      ''',
+    return Text(
+      L10n.of(context)?.registerCompleteDescription ?? '',
       style: TextStyle(
         fontSize: 16,
       ),
@@ -79,7 +87,7 @@ class RegisterCompleteButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return PrimaryButton(
       onPressed: () {},
-      text: 'さあ、はじめましょう',
+      text: L10n.of(context)?.letsStartButton ?? '',
       width: 280,
       height: 38,
     );
