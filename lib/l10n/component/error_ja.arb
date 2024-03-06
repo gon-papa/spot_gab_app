@@ -1,0 +1,20 @@
+{
+    "@@locale": "ja",
+    "error": "エラー", 
+    "@error": {
+        "description": "エラー表示"
+    },
+    "errorHasOccurred": "エラーが発生しました",
+    "@errorHasOccurred": {
+        "description": "不明なエラーメッセージ"
+    },
+
+    "emailExsitError": "このメールアドレスは使用できません",   
+    "@emailExsitError": {
+        "description": "レスポンスエラー時のダイアログメッセージ"
+    },
+    "idAccountExsitError": "このアカウントIDは使用できません",
+    "@idAccountExsitError": {
+        "description": "レスポンスエラー時のダイアログメッセージ"
+    }
+}

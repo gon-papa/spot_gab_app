@@ -1,0 +1,35 @@
+{
+    "@@locale": "en",
+    "registerBasicInfoTitle": "Enter Basic Information",
+    "@registerBasicInfoTitle": {
+        "description": "Title of the basic information entry page for new registration"
+    },
+    "registerBasicInfoSubTitle": "Basic Information of the Account",
+    "@registerBasicInfoSubTitle": {
+        "description": "Subtitle of the basic information entry page for new registration"
+    },
+    "emailLabel": "Email Address",
+    "@emailLabel": {
+        "description": "Label for email input"
+    },
+    "emailInputPlaceholder": "Please enter your email address",
+    "@emailInputPlaceholder": {
+        "description": "Placeholder for email input"
+    },
+    "passwordLabel": "Password",
+    "@passwordLabel": {
+        "description": "Label for password input"
+    },
+    "passwordInputPlaceholder": "Please enter your password",
+    "@passwordInputPlaceholder": {
+        "description": "Placeholder for password input"
+    },
+    "birthdateLabel": "Date of Birth",
+    "@birthdateLabel": {
+        "description": "Label for date of birth input"
+    },
+    "birthdateInputPlaceholder": "Please select your date of birth",
+    "@birthdateInputPlaceholder": {
+        "description": "Placeholder for date of birth input"
+    }
+}

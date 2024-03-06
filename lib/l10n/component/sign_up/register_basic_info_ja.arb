@@ -1,0 +1,35 @@
+{
+    "@@locale": "ja",
+    "registerBasicInfoTitle": "基本情報の入力",
+    "@registerBasicInfoTitle": {
+        "description": "新規登録の基本情報入力ページのタイトル"
+    },
+    "registerBasicInfoSubTitle": "アカウントの基本情報",
+    "@registerBasicInfoSubTitle": {
+        "description": "新規登録の基本情報入力ページのサブタイトル"
+    },
+    "emailLabel": "メールアドレス",
+    "@emailLabel": {
+        "description": "email入力ラベル"
+    },
+    "emailInputPlaceholder": "メールアドレスを入力してください",
+    "@emailInputPlaceholder": {
+        "description": "email入力プレースホルダー"
+    },
+    "passwordLabel": "パスワード",
+    "@passwordLabel": {
+        "description": "パスワード入力ラベル"
+    },
+    "passwordInputPlaceholder": "パスワードを入力してください",
+    "@passwordInputPlaceholder": {
+        "description": "パスワード入力プレースホルダー"
+    },
+    "birthdateLabel": "生年月日",
+    "@birthdateLabel": {
+        "description": "生年月日入力ラベル"
+    },
+    "birthdateInputPlaceholder": "生年月日を選択してください",
+    "@birthdateInputPlaceholder": {
+        "description": "生年月日入力プレースホルダー"
+    }
+}
