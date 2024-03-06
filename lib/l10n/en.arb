@@ -1,59 +1,139 @@
 {
-    "@@locale": "en",
-    "shareMomentTitle": "Share the moment",
-    "@shareMomentTitle": {
-        "description": "App subtitle"
-    },
-    "createAccount": "Create a new account",
-    "@createAccount": {
-        "description": "Create a new account"
-    },
-    "loginButton": "Sign In",
-    "@loginButton": {
-        "description": "Sign In"
-    },
-    "logoutButton": "Sign Out",
-    "@logoutButton": {
-        "description": "Sign Out"
-    },
-    "enterBasicInfoTitle": "Basic information",
-    "@enterBasicInfoTitle": {
-        "description": "Please enter your basic information"
-    },
-    "accountInfoSubtitle": "Your account information",
-    "@accountInfoSubtitle": {
-        "description": "Your account information"
-    },
-    "emailLabel": "Email Address",
-    "@emailLabel": {
-        "description": "Email Address"
-    },
-    "emailInputPlaceholder": "Please enter your email address",
-    "@emailInputPlaceholder": {
-        "description": "Please enter your email address"
-    },
-    "passwordLabel": "Password",
-    "@passwordLabel": {
-        "description": "Password"
-    },
-    "passwordInputPlaceholder": "Please enter your password",
-    "@passwordInputPlaceholder": {
-        "description": "Please enter your password"
-    },
-    "birthdateLabel": "Birthdate",
-    "@birthdateLabel": {
-        "description": "Birthdate"
-    },
-    "birthdateInputPlaceholder": "Please select your birthdate",
-    "@birthdateInputPlaceholder": {
-        "description": "Please select your birthdate"
-    },
-    "needHelpQuestion": "Are you experiencing any issues?",
-    "@needHelpQuestion": {
-        "description": "Are you experiencing any issues?"
-    },
-    "contactSupportButton": "Contact Support",
-    "@contactSupportButton": {
-        "description": "Contact Support"
-    }
+  "@@locale": "en",
+  "requiredFieldError": "Please enter",
+  "@requiredFieldError": {
+    "description": "Validation"
+  },
+  "accountIdPatternError": "Only alphanumeric characters and _ are allowed",
+  "@accountIdPatternError": {
+    "description": "Validation"
+  },
+  "min4LengthError": "Please enter at least 4 characters",
+  "@min4LengthError": {
+    "description": "Validation"
+  },
+  "max8LengthError": "Please enter no more than 8 characters",
+  "@max8LengthError": {
+    "description": "Validation"
+  },
+  "max30LengthError": "Please enter no more than 30 characters",
+  "@max30LengthError": {
+    "description": "Validation"
+  },
+  "max100LengthError": "Please enter no more than 100 characters",
+  "@max100LengthError": {
+    "description": "Validation"
+  },
+  "emailFormatError": "The email address format is incorrect",
+  "@emailFormatError": {
+    "description": "Validation"
+  },
+  "passwordPatternError": "Must contain at least one uppercase letter and one number",
+  "@passwordPatternError": {
+    "description": "Validation"
+  },
+  "needHelpQuestion": "Are you experiencing any problems?",
+  "@needHelpQuestion": {
+    "description": "Help string"
+  },
+  "contactSupportButton": "Contact Support",
+  "@contactSupportButton": {
+    "description": "Help string"
+  },
+  "shareMomentTitle": "Share the Moment",
+  "@shareMomentTitle": {
+    "description": "Subtitle of the app"
+  },
+  "createAccount": "Create New Account",
+  "@createAccount": {
+    "description": "Button to create a new account"
+  },
+  "signInButton": "Sign In",
+  "@signInButton": {
+    "description": "Sign in button"
+  },
+  "error": "Error",
+  "@error": {
+    "description": "Error display"
+  },
+  "errorHasOccurred": "An error has occurred",
+  "@errorHasOccurred": {
+    "description": "Unknown error message"
+  },
+  "emailExsitError": "This email address is not available",
+  "@emailExsitError": {
+    "description": "Dialog message when a response error occurs"
+  },
+  "idAccountExsitError": "This account ID is not available",
+  "@idAccountExsitError": {
+    "description": "Dialog message when a response error occurs"
+  },
+  "registerBasicInfoTitle": "Enter Basic Information",
+  "@registerBasicInfoTitle": {
+    "description": "Title of the basic information entry page for new registration"
+  },
+  "registerBasicInfoSubTitle": "Basic Information of the Account",
+  "@registerBasicInfoSubTitle": {
+    "description": "Subtitle of the basic information entry page for new registration"
+  },
+  "emailLabel": "Email Address",
+  "@emailLabel": {
+    "description": "Label for email input"
+  },
+  "emailInputPlaceholder": "Please enter your email address",
+  "@emailInputPlaceholder": {
+    "description": "Placeholder for email input"
+  },
+  "passwordLabel": "Password",
+  "@passwordLabel": {
+    "description": "Label for password input"
+  },
+  "passwordInputPlaceholder": "Please enter your password",
+  "@passwordInputPlaceholder": {
+    "description": "Placeholder for password input"
+  },
+  "birthdateLabel": "Date of Birth",
+  "@birthdateLabel": {
+    "description": "Label for date of birth input"
+  },
+  "birthdateInputPlaceholder": "Please select your date of birth",
+  "@birthdateInputPlaceholder": {
+    "description": "Placeholder for date of birth input"
+  },
+  "registerAccountTitle": "Enter Account Information",
+  "@registerAccountTitle": {
+    "description": "Title of the account information entry page for new registration"
+  },
+  "registerAccountSubtitle": "Basic Account Information",
+  "@registerAccountSubtitle": {
+    "description": "Subtitle of the account information entry page for new registration"
+  },
+  "accountName": "Account Name",
+  "@accountName": {
+    "description": "Label for account name"
+  },
+  "accountNamePlaceholder": "Please enter your account name",
+  "@accountNamePlaceholder": {
+    "description": "Placeholder for account name"
+  },
+  "idAccount": "Account ID",
+  "@idAccount": {
+    "description": "Label for account ID"
+  },
+  "idAccountPlaceholder": "Please enter your account ID",
+  "@idAccountPlaceholder": {
+    "description": "Placeholder for account ID"
+  },
+  "registerCompleteTitle": "Registration Complete",
+  "@registerCompleteTitle": {
+    "description": "Title of the registration completion screen"
+  },
+  "registerCompleteDescription": "Thank you for registering.\nAn email has been sent to the registered email address.\nPlease click the link in the email to complete the registration. If the link has expired,\nyou can resend it from [My Page>Account Information].",
+  "@registerCompleteDescription": {
+    "description": "Description of the registration completion screen"
+  },
+  "letsStartButton": "Let's Get Started",
+  "@letsStartButton": {
+    "description": "Button on the registration completion screen"
+  }
 }

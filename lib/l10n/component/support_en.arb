@@ -1,0 +1,11 @@
+{
+    "@@locale": "en",
+    "needHelpQuestion": "Are you experiencing any problems?",
+    "@needHelpQuestion": {
+        "description": "Help string"
+    },
+    "contactSupportButton": "Contact Support",
+    "@contactSupportButton": {
+        "description": "Help string"
+    }
+}

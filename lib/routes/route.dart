@@ -1,12 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import 'package:spot_gab_app/page/main/home/home.dart';
-import 'package:spot_gab_app/page/sign_in/sign_in.dart';
-import 'package:spot_gab_app/page/sign_in/sign_in_form.dart';
-import 'package:spot_gab_app/page/sign_up/register_basic_info.dart';
-import 'package:spot_gab_app/page/sign_up/register_complete.dart';
-import 'package:spot_gab_app/page/sign_up/register_id_account.dart';
+import 'package:spot_gab_app/importer.dart';
 
 part 'route.g.dart';
 
@@ -18,7 +10,11 @@ final routerProvider = Provider(
       routes: [...$appRoutes],
       redirect: (BuildContext context, GoRouterState state) async {
         if (state.uri.path == const RootRoute().location) {
-          // TODO: ログイン状態をチェックする
+          final isSignIn =
+              await ref.read(userNotifierProvider.notifier).isSignIn();
+          if (isSignIn) {
+            return const HomeRoute().location;
+          }
           return const SignInRoute().location;
         }
       },
@@ -109,7 +105,7 @@ class RegisterIdAccountRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const RegisterIdAccount();
+    return const RegisterAccount();
   }
 }
 

@@ -1,0 +1,27 @@
+{
+    "@@locale": "ja",
+    "registerAccountTitle": "アカウント情報の入力",
+    "@registerAccountTitle": {
+        "description": "新規登録のアカウント情報入力ページのタイトル"
+    },
+    "registerAccountSubtitle": "アカウント基本情報",
+    "@registerAccountSubtitle": {
+        "description": "新規登録のアカウント情報入力ページのサブタイトル"
+    },
+    "accountName": "アカウント名",
+    "@accountName": {
+        "description": "アカウント名のラベル"
+    },
+    "accountNamePlaceholder": "アカウント名を入力してください",
+    "@accountNamePlaceholder": {
+        "description": "アカウント名のプレースホルダ"
+    },
+    "idAccount": "アカウントID",
+    "@idAccount": {
+        "description": "アカウントIDのラベル"
+    },
+    "idAccountPlaceholder": "アカウントIDを入力してください",
+    "@idAccountPlaceholder": {
+        "description": "アカウントIDのプレースホルダ"
+    }
+}

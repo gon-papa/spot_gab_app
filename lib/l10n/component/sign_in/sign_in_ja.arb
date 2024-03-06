@@ -1,0 +1,15 @@
+{
+    "@@locale": "ja",
+    "shareMomentTitle": "今を共有しよう",
+    "@shareMomentTitle": {
+        "description": "アプリのサブタイトル"
+    },
+    "createAccount": "新しいアカウントを作成する",
+    "@createAccount": {
+        "description": "新しいアカウントを作成するボタン"
+    },
+    "signInButton": "サインイン",
+    "@signInButton": {
+        "description": "サインインボタン"
+    }
+}
