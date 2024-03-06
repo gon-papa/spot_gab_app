@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:spot_gab_app/page/util_widget/floating_action_button/floating_action_button.dart';
+import 'package:spot_gab_app/importer.dart';
 
 class RegisterScaffold extends ConsumerWidget {
   const RegisterScaffold({

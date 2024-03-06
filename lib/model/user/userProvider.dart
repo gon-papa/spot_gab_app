@@ -1,6 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spot_gab_app/repository/secure_token_repository.dart';
-import 'user.dart';
+import 'package:spot_gab_app/importer.dart';
 
 class UserNotifier extends StateNotifier<User?> {
   UserNotifier() : super(null);

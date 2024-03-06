@@ -1,12 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
-import 'package:spot_gab_app/gen/openapi/lib/openapi.dart';
-import 'package:spot_gab_app/model/user/user.dart';
-import 'package:spot_gab_app/model/user/userProvider.dart';
-import 'package:spot_gab_app/repository/auth_repository.dart';
-import 'package:spot_gab_app/repository/secure_token_repository.dart';
-import 'package:spot_gab_app/routes/route.dart';
+import 'package:spot_gab_app/importer.dart';
 
 class RegisterProviders {
   static final basicInfoGlobalKeyProvider = Provider(

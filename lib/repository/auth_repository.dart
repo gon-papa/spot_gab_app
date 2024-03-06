@@ -1,10 +1,4 @@
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:openapi/openapi.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:spot_gab_app/repository/repository.dart';
-import 'package:spot_gab_app/util/error_dialog.dart';
-import 'package:spot_gab_app/util/run_api.dart';
+import 'package:spot_gab_app/importer.dart';
 
 class AuthRepository extends BaseRepository {
   AuthRepository() : super();
@@ -51,7 +45,9 @@ class AuthRepository extends BaseRepository {
     if (response is Response<EmailExistsResponse>) {
       if (response.data?.data?.exists == true) {
         if (context.mounted) {
-          showErrorDialog(context: context, message: "このメールアドレスは使用できません");
+          showErrorDialog(
+              context: context,
+              message: L10n.of(context)?.emailExsitError ?? "");
         }
         return null; // 異常系
       }
@@ -81,7 +77,10 @@ class AuthRepository extends BaseRepository {
     if (response is Response<IdAccountExistsResponse>) {
       if (response.data?.data?.exists == true) {
         if (context.mounted) {
-          showErrorDialog(context: context, message: "このアカウントIDは使用できません");
+          showErrorDialog(
+            context: context,
+            message: L10n.of(context)?.idAccountExsitError ?? "",
+          );
         }
         return null; // 異常系
       }
