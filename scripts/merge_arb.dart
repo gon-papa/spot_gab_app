@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:convert';
 
+// L10nファイルをマージするスクリプト
 void main() async {
   const directoryPath = 'lib/l10n/component';
   const outputPath = 'lib/l10n';
