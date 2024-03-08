@@ -26,6 +26,30 @@ class AuthRepository extends BaseRepository {
     return null; // 異常系
   }
 
+  Future<Response<SignInResponse>?>? signIn({
+    required BuildContext context,
+    required String email,
+    required String password,
+  }) async {
+    final response = await _helper.run(onSuccess: () async {
+      final authApi = getClient().getAuthApi();
+      final response = await authApi.signIn(
+        xLanguage: "ja",
+        xUserAgent: "spot-gab-app",
+        username: email,
+        password: password,
+      );
+      return response;
+    }, onError: (error, message) {
+      showErrorDialog(context: context, message: message);
+    });
+
+    if (response is Response<SignInResponse>) {
+      return response; // 正常系
+    }
+    return null; // 異常系
+  }
+
   Future<Response<EmailExistsResponse>?>? emailExists(
     BuildContext context,
     String email,

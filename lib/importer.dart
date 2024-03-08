@@ -35,4 +35,5 @@ export 'package:spot_gab_app/util/run_api.dart';
 export 'package:go_router/go_router.dart';
 export 'package:spot_gab_app/page/main/home/home.dart';
 export 'package:spot_gab_app/page/sign_in/sign_in.dart';
+export 'package:spot_gab_app/page/sign_in/sign_in_provider.dart';
 export 'package:spot_gab_app/page/sign_up/register_complete.dart';
