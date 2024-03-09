@@ -9,7 +9,7 @@ class SignInForm extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return RegisterScaffold(
       child: _Body(),
-      title: 'SpotGabにログイン',
+      title: L10n.of(context)?.signInFormTitle ?? '',
       formKey: ref.watch(_Providers.globalKeyProvider),
       onPressed: () async {
         await ref.watch(_Providers.signInSubmitProvider)(

@@ -1,0 +1,7 @@
+{
+    "@@locale": "en",
+    "signInFormTitle": "Sign in to SpotGab",
+    "@shareMomentTitle": {
+        "description": "Sign-in form title"
+    }
+}

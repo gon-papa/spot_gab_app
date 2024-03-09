@@ -67,7 +67,7 @@ class _iDAccountInput extends ConsumerWidget {
     return TextFormField(
       controller: ref.watch(_Providers.idAccountProvider),
       decoration: InputDecoration(
-        labelText: 'アカウントID',
+        labelText: L10n.of(context)?.idAccount ?? '',
         prefixText: '@',
       ),
       keyboardType: TextInputType.name,

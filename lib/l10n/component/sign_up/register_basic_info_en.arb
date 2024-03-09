@@ -4,7 +4,7 @@
     "@registerBasicInfoTitle": {
         "description": "Title of the basic information entry page for new registration"
     },
-    "registerBasicInfoSubTitle": "Basic Information of the Account",
+    "registerBasicInfoSubTitle": "Basic Information",
     "@registerBasicInfoSubTitle": {
         "description": "Subtitle of the basic information entry page for new registration"
     },

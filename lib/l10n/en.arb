@@ -12,8 +12,8 @@
   "@min4LengthError": {
     "description": "Validation"
   },
-  "max8LengthError": "Please enter no more than 8 characters",
-  "@max8LengthError": {
+  "min8LengthError": "Please enter no more than 8 characters",
+  "@min8LengthError": {
     "description": "Validation"
   },
   "max30LengthError": "Please enter no more than 30 characters",
@@ -32,7 +32,7 @@
   "@passwordPatternError": {
     "description": "Validation"
   },
-  "needHelpQuestion": "Are you experiencing any problems?",
+  "needHelpQuestion": "Are you experiencing any problems?\n",
   "@needHelpQuestion": {
     "description": "Help string"
   },
@@ -40,10 +40,11 @@
   "@contactSupportButton": {
     "description": "Help string"
   },
-  "shareMomentTitle": "Share the Moment",
+  "signInFormTitle": "Sign in to SpotGab",
   "@shareMomentTitle": {
     "description": "Subtitle of the app"
   },
+  "shareMomentTitle": "Share the Moment",
   "createAccount": "Create New Account",
   "@createAccount": {
     "description": "Button to create a new account"
@@ -72,7 +73,7 @@
   "@registerBasicInfoTitle": {
     "description": "Title of the basic information entry page for new registration"
   },
-  "registerBasicInfoSubTitle": "Basic Information of the Account",
+  "registerBasicInfoSubTitle": "Basic Information",
   "@registerBasicInfoSubTitle": {
     "description": "Subtitle of the basic information entry page for new registration"
   },
