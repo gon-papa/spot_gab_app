@@ -1,6 +1,6 @@
 {
     "@@locale": "en",
-    "needHelpQuestion": "Are you experiencing any problems?",
+    "needHelpQuestion": "Are you experiencing any problems?\n",
     "@needHelpQuestion": {
         "description": "Help string"
     },

@@ -86,7 +86,9 @@ class RegisterCompleteButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return PrimaryButton(
-      onPressed: () {},
+      onPressed: () {
+        HomeRoute().go(context);
+      },
       text: L10n.of(context)?.letsStartButton ?? '',
       width: 280,
       height: 38,

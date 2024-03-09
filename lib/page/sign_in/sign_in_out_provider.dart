@@ -1,7 +1,7 @@
 import 'package:spot_gab_app/importer.dart';
 
 class SignInProviders {
-  static final globalKeyProvider = Provider(
+  static final globalKeyProvider = Provider.autoDispose(
     (_) => GlobalKey<FormState>(),
   );
 
@@ -32,6 +32,7 @@ class SignInProviders {
             accessToken: response!.data!.accessToken,
             storage: ref.read(secure_token_provider),
           );
+          _clearTextEditingController(ref);
           HomeRoute().go(context);
         }
       });
@@ -42,6 +43,22 @@ class SignInProviders {
   }) async {
     await storage.saveToken(accessToken);
   }
+
+  static void _clearTextEditingController(ProviderRef ref) {
+    ref.read(emailProvider).clear();
+    ref.read(passwordProvider).clear();
+  }
 }
 
-final SignInProvider = Provider((ref) => SignInProviders());
+class SignOutProviders {
+  static final signOutSubmitProvider = Provider((ref) => ({
+        required BuildContext context,
+      }) async {
+        final se = ref.watch(secure_token_provider);
+        await se.deleteToken();
+        SignInRoute().go(context);
+      });
+}
+
+final SignInProvider = Provider.autoDispose((ref) => SignInProviders());
+final SignOutProvider = Provider.autoDispose((ref) => SignOutProviders());
