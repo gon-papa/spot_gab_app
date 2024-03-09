@@ -77,6 +77,7 @@ class RegisterProviders {
               refreshToken: user.refreshToken,
               storage: ref.read(secure_token_provider),
             );
+            _clearTextEditingController(ref);
 
             RegisterCompleteRoute().go(context);
           }
@@ -140,6 +141,14 @@ class RegisterProviders {
   }) async {
     await storage.saveToken(token.toString());
     await storage.saveRefreshToken(refreshToken);
+  }
+
+  static void _clearTextEditingController(ProviderRef ref) {
+    ref.read(emailProvider).clear();
+    ref.read(passwordProvider).clear();
+    ref.read(birthdayProvider).clear();
+    ref.read(accountNameProvider).clear();
+    ref.read(idAccountProvider).clear();
   }
 }
 

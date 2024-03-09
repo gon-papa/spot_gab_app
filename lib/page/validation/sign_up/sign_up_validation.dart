@@ -16,16 +16,20 @@ class SignUpValidation {
 
   MultiValidator passwordValidator(BuildContext context) {
     return MultiValidator([
-      RequiredValidator(errorText: '入力してください'),
-      MinLengthValidator(8, errorText: '8文字以上で入力してください'),
+      RequiredValidator(
+          errorText: L10n.of(context)?.requiredFieldError ?? '入力してください'),
+      MinLengthValidator(8,
+          errorText: L10n.of(context)?.min8LengthError ?? '8文字以上で入力してください'),
       PatternValidator(r'(?=.*[A-Z])(?=.*\d)',
-          errorText: '大文字1文字以上、数字1文字以上を含む必要があります'),
+          errorText: L10n.of(context)?.passwordPatternError ??
+              '大文字1文字以上、数字1文字以上を含む必要があります'),
     ]);
   }
 
   MultiValidator birthDateValidator(BuildContext context) {
     return MultiValidator([
-      RequiredValidator(errorText: '入力してください'),
+      RequiredValidator(
+          errorText: L10n.of(context)?.requiredFieldError ?? '入力してください'),
     ]);
   }
 

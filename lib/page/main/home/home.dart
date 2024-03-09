@@ -1,5 +1,7 @@
 import 'package:spot_gab_app/importer.dart';
 
+typedef _SignOutProviders = SignOutProviders;
+
 class Home extends ConsumerWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -12,10 +14,9 @@ class Home extends ConsumerWidget {
       body: Center(
         child: PrimaryButton(
           onPressed: () async {
-            final se = ref.watch(secure_token_provider);
-            await se.deleteToken();
-            // SignIn画面に遷移
-            SignInRoute().go(context);
+            ref.read(_SignOutProviders.signOutSubmitProvider)(
+              context: context,
+            );
           },
           width: 300,
           height: 20,

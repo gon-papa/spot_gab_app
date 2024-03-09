@@ -12,8 +12,8 @@
   "@min4LengthError": {
     "description": "バリデーション"
   },
-  "max8LengthError": "8文字以内で入力してください",
-  "@max8LengthError": {
+  "min8LengthError": "8文字以内で入力してください",
+  "@min8LengthError": {
     "description": "バリデーション"
   },
   "max30LengthError": "30文字以内で入力してください",
@@ -40,10 +40,11 @@
   "@contactSupportButton": {
     "description": "ヘルプ文字列"
   },
-  "shareMomentTitle": "今を共有しよう",
+  "signInFormTitle": "SpotGabにサインイン",
   "@shareMomentTitle": {
     "description": "アプリのサブタイトル"
   },
+  "shareMomentTitle": "今を共有しよう",
   "createAccount": "新しいアカウントを作成する",
   "@createAccount": {
     "description": "新しいアカウントを作成するボタン"

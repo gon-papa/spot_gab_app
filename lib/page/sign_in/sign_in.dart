@@ -63,7 +63,7 @@ class _SubTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      '今を共有しよう',
+      L10n.of(context)?.shareMomentTitle ?? '',
       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
             fontWeight: FontWeight.bold,
           ),
@@ -82,7 +82,7 @@ class _SignInButton extends ConsumerWidget {
       },
       width: 280,
       height: 38,
-      text: '新しいアカウントを作成する',
+      text: L10n.of(context)?.createAccount ?? '',
     );
   }
 }
@@ -98,7 +98,7 @@ class _SignUpButton extends ConsumerWidget {
       },
       width: 280,
       height: 38,
-      text: 'サインイン',
+      text: L10n.of(context)?.signInButton ?? '',
     );
   }
 }
