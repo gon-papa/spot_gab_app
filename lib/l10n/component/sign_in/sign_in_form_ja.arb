@@ -1,0 +1,7 @@
+{
+    "@@locale": "ja",
+    "signInFormTitle": "SpotGabにサインイン",
+    "@shareMomentTitle": {
+        "description": "サインインフォームタイトル"
+    }
+}

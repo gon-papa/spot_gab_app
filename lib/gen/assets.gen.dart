@@ -20,13 +20,17 @@ class $AssetsImagesGen {
   AssetGenImage get spotGabIcon =>
       const AssetGenImage('assets/images/spot_gab_icon.png');
 
+  /// File path: assets/images/spot_gab_icon_only.png
+  AssetGenImage get spotGabIconOnly =>
+      const AssetGenImage('assets/images/spot_gab_icon_only.png');
+
   /// File path: assets/images/spot_gab_splash_icon.png
   AssetGenImage get spotGabSplashIcon =>
       const AssetGenImage('assets/images/spot_gab_splash_icon.png');
 
   /// List of all assets
   List<AssetGenImage> get values =>
-      [settingIcon, spotGabIcon, spotGabSplashIcon];
+      [settingIcon, spotGabIcon, spotGabIconOnly, spotGabSplashIcon];
 }
 
 class Assets {

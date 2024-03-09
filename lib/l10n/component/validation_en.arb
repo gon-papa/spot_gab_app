@@ -12,8 +12,8 @@
     "@min4LengthError": {
         "description": "Validation"
     },
-    "max8LengthError": "Please enter no more than 8 characters",
-    "@max8LengthError": {
+    "min8LengthError": "Please enter no more than 8 characters",
+    "@min8LengthError": {
         "description": "Validation"
     },
     "max30LengthError": "Please enter no more than 30 characters",

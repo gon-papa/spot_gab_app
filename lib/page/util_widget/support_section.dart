@@ -32,14 +32,14 @@ class SupportSection extends StatelessWidget {
                 text: TextSpan(
                   children: [
                     TextSpan(
-                      text: "何か問題が発生しましたか？",
+                      text: L10n.of(context)?.needHelpQuestion ?? "",
                       style: TextStyle(
                         fontSize: 14,
                         color: Theme.of(context).colorScheme.onBackground,
                       ),
                     ),
                     TextSpan(
-                      text: " サポートに連絡",
+                      text: L10n.of(context)?.contactSupportButton ?? "",
                       style: TextStyle(
                         fontSize: 14,
                         color: Theme.of(context).primaryColor,
