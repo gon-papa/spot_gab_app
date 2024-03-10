@@ -35,12 +35,17 @@ class RegisterProviders {
       final formState = ref.watch(basicInfoGlobalKeyProvider).currentState;
       if (formState != null && formState.validate()) {
         final authRepository = ref.read(authRepositoryProvider);
-        final emailExistsResponse =
-            await authRepository.emailExists(context, email);
-        if (emailExistsResponse != null) {
+        final emailExistsResponse = await authRepository.emailExists(email);
+        if (emailExistsResponse != null &&
+            emailExistsResponse.data?.data?.exists == false) {
           RegisterIdAccountRoute().push(context);
+          return true;
+        } else {
+          debugPrint("email exists");
+          ref
+              .read(errorListnerProviders)
+              .notifyError(ref, L10n.of(context)?.emailExsitError ?? "error");
         }
-        return true;
       }
       return false;
     },
@@ -53,13 +58,13 @@ class RegisterProviders {
         final AuthRepository authRepository = ref.read(authRepositoryProvider);
         final bool isIdAccountExists = await _isIdAccountExists(
           context: context,
+          ref: ref,
           idAccount: idAccount,
           repository: authRepository,
         );
 
         if (isIdAccountExists) {
           final response = await authRepository.sign_up(
-            context,
             _createRequest(
               email: ref.read(emailProvider).text,
               password: ref.read(passwordProvider).text,
@@ -90,11 +95,16 @@ class RegisterProviders {
 
   static Future<bool> _isIdAccountExists(
       {required BuildContext context,
+      required ProviderRef ref,
       required String idAccount,
       required AuthRepository repository}) async {
-    final response = await repository.idAccountExists(context, idAccount);
-    if (response != null) {
+    final response = await repository.idAccountExists(idAccount);
+    if (response != null && response.data?.data?.exists == false) {
       return true;
+    } else {
+      ref
+          .read(errorListnerProviders)
+          .notifyError(ref, L10n.of(context)?.idAccountExsitError ?? "");
     }
 
     return false;

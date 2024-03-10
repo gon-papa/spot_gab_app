@@ -1,7 +1,4 @@
-import 'package:dio/dio.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
-import 'package:spot_gab_app/const/util_const.dart';
+import 'package:spot_gab_app/importer.dart';
 
 typedef OnError = Function(
   Exception exception,
@@ -10,6 +7,7 @@ typedef OnError = Function(
 
 class RunApi {
   final Logger logger = Logger();
+  final ref = ProviderContainer();
 
   // 全てのAPIリクエストを実行する際に共通で行う処理をまとめた関数
   Future<Object?> run<T>({
@@ -17,6 +15,7 @@ class RunApi {
     OnError? onError,
     StateController<bool>? isInProgressController,
   }) async {
+    final defaultError = ref.read(errorListnerProviders).defaultError;
     try {
       _updateLoadingState(isInProgressController, true);
       final result = await onSuccess();
@@ -28,13 +27,13 @@ class RunApi {
         logger.e(error);
         return null;
       } else {
-        onError?.call(error, defaultMsg);
+        onError?.call(error, defaultError);
         logger.e(error);
         return null;
       }
     } on Exception catch (error) {
       logger.e(error);
-      onError?.call(error, defaultMsg);
+      onError?.call(error, defaultError);
       return null;
     } finally {
       _updateLoadingState(isInProgressController, false);
@@ -48,11 +47,19 @@ class RunApi {
     }
   }
 
-  void _handleDioException(OnError? onError, DioException error) {
+  void _handleDioException(OnError? onError, DioException error) async {
     logger.e(error);
     // TODO:401ならリフレッシュトークンを使って再ログインを試みる
     if (error.response?.statusCode == 401) {
-      // res = refreshToken();
+      final refreshToken = ref.read(secure_token_provider).getRefreshToken();
+      if (refreshToken == null) {
+        // リフレッシュトークンがない場合はログアウト
+        ref.read(authRepositoryProvider).signOut();
+        return;
+      }
+      // final response = await ref.read(authRepositoryProvider).refreshToken(
+      // refreshToken: refreshToken,
+      // );
       // if(res.status !== 200) {
       // logout();
       // }

@@ -11,6 +11,7 @@ export 'package:intl/intl.dart' hide TextDirection;
 export 'package:spot_gab_app/gen/openapi/lib/openapi.dart';
 export 'package:flutter/gestures.dart';
 export 'package:dio/dio.dart';
+export 'package:logger/logger.dart';
 
 // 独自widget
 export 'package:spot_gab_app/page/util_widget/button/primary_button.dart';
@@ -30,7 +31,7 @@ export 'package:spot_gab_app/model/user/userProvider.dart';
 export 'package:spot_gab_app/repository/auth_repository.dart';
 export 'package:spot_gab_app/repository/secure_token_repository.dart';
 export 'package:spot_gab_app/repository/repository.dart';
-export 'package:spot_gab_app/util/error_dialog.dart';
+export 'package:spot_gab_app/util/error_listener.dart';
 export 'package:spot_gab_app/util/run_api.dart';
 export 'package:go_router/go_router.dart';
 export 'package:spot_gab_app/page/main/home/home.dart';
