@@ -22,7 +22,6 @@ class SignInProviders {
       }) async {
         final AuthRepository authRepository = ref.read(authRepositoryProvider);
         final response = await authRepository.signIn(
-          context: context,
           email: email,
           password: password,
         );
@@ -59,7 +58,7 @@ class SignOutProviders {
       }) async {
         final AuthRepository authRepository = ref.read(authRepositoryProvider);
         final se = ref.watch(secure_token_provider);
-        await authRepository.signOut(context: context);
+        await authRepository.signOut();
         await se.deleteToken();
         await se.deleteRefreshToken();
         SignInRoute().go(context);

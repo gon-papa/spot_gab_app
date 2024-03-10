@@ -8,6 +8,7 @@ final routerProvider = Provider(
     return GoRouter(
       initialLocation: const RootRoute().location,
       routes: [...$appRoutes],
+      navigatorKey: ref.watch(globalKeyProvider),
       redirect: (BuildContext context, GoRouterState state) async {
         if (state.uri.path == const RootRoute().location) {
           final isSignIn =
@@ -21,6 +22,8 @@ final routerProvider = Provider(
     );
   },
 );
+
+final globalKeyProvider = Provider((_) => GlobalKey<NavigatorState>());
 
 @TypedShellRoute<RootShellRoute>(
   routes: [

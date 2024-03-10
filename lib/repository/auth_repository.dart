@@ -6,7 +6,6 @@ class AuthRepository extends BaseRepository {
   final ref = ProviderContainer();
 
   Future<Response<SignUpResponse>?>? sign_up(
-    BuildContext context,
     SignUpRequest signUpRequest,
   ) async {
     final response = await _helper.run(onSuccess: () async {
@@ -18,7 +17,7 @@ class AuthRepository extends BaseRepository {
       );
       return response;
     }, onError: (error, message) {
-      showErrorDialog(context: context, message: message);
+      ref.read(errorListnerProviders).notifyError(ref, message);
     });
 
     if (response is Response<SignUpResponse>) {
@@ -28,7 +27,6 @@ class AuthRepository extends BaseRepository {
   }
 
   Future<Response<SignInResponse>?>? signIn({
-    required BuildContext context,
     required String email,
     required String password,
   }) async {
@@ -40,7 +38,7 @@ class AuthRepository extends BaseRepository {
       );
       return response;
     }, onError: (error, message) {
-      showErrorDialog(context: context, message: message);
+      ref.read(errorListnerProviders).notifyError(ref, message);
     });
 
     if (response is Response<SignInResponse>) {
@@ -49,9 +47,7 @@ class AuthRepository extends BaseRepository {
     return null; // 異常系
   }
 
-  Future<Response<JsonResponse>?>? signOut({
-    required BuildContext context,
-  }) async {
+  Future<Response<JsonResponse>?>? signOut() async {
     final response = await _helper.run(onSuccess: () async {
       final token = await ref.read(secure_token_provider).getToken();
       final authApi = getClient(token: token).getAuthApi();
@@ -61,7 +57,7 @@ class AuthRepository extends BaseRepository {
       );
       return response;
     }, onError: (error, message) {
-      showErrorDialog(context: context, message: message);
+      ref.read(errorListnerProviders).notifyError(ref, message);
     });
 
     if (response is Response<JsonResponse>) {
@@ -70,8 +66,30 @@ class AuthRepository extends BaseRepository {
     return null; // 異常系
   }
 
+  Future<Response<SignUpResponse>?>? refreshToken({
+    required String refreshToken,
+  }) async {
+    final response = await _helper.run(onSuccess: () async {
+      final authApi = getClient().getAuthApi();
+      final response = await authApi.refreshToken(
+        xLanguage: "ja",
+        xUserAgent: "spot-gab-app",
+        refreshTokenRequest: RefreshTokenRequest(
+          (b) => b.refreshToken = refreshToken,
+        ),
+      );
+      return response;
+    }, onError: (error, message) {
+      ref.read(errorListnerProviders).notifyError(ref, message);
+    });
+
+    if (response is Response<SignUpResponse>) {
+      return response; // 正常系
+    }
+    return null; // 異常系
+  }
+
   Future<Response<EmailExistsResponse>?>? emailExists(
-    BuildContext context,
     String email,
   ) async {
     final response = await _helper.run(onSuccess: () async {
@@ -83,26 +101,16 @@ class AuthRepository extends BaseRepository {
       );
       return response;
     }, onError: (error, message) {
-      showErrorDialog(context: context, message: message);
+      ref.read(errorListnerProviders).notifyError(ref, message);
     });
 
     if (response is Response<EmailExistsResponse>) {
-      if (response.data?.data?.exists == true) {
-        if (context.mounted) {
-          showErrorDialog(
-              context: context,
-              message: L10n.of(context)?.emailExsitError ?? "");
-        }
-        return null; // 異常系
-      }
-
       return response; // 正常系
     }
-    return null; // 異常系
+    return null;
   }
 
   Future<Response<IdAccountExistsResponse>?>? idAccountExists(
-    BuildContext context,
     String idAccount,
   ) async {
     final response = await _helper.run(onSuccess: () async {
@@ -115,20 +123,10 @@ class AuthRepository extends BaseRepository {
       );
       return response;
     }, onError: (error, message) {
-      showErrorDialog(context: context, message: message);
+      ref.read(errorListnerProviders).notifyError(ref, message);
     });
 
     if (response is Response<IdAccountExistsResponse>) {
-      if (response.data?.data?.exists == true) {
-        if (context.mounted) {
-          showErrorDialog(
-            context: context,
-            message: L10n.of(context)?.idAccountExsitError ?? "",
-          );
-        }
-        return null; // 異常系
-      }
-
       return response; // 正常系
     }
     return null; // 異常系
