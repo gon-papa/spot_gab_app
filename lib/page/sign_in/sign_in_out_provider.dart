@@ -20,32 +20,24 @@ class SignInProviders {
         required String email,
         required String password,
       }) async {
-        final AuthRepository authRepository = ref.read(authRepositoryProvider);
-        final response = await authRepository.signIn(
-          context: context,
-          email: email,
-          password: password,
-        );
-
-        if (response?.data?.accessToken != null) {
-          await _saveAccessToken(
-            accessToken: response!.data!.accessToken,
-            refresh_token: response.data!.refreshToken,
-            storage: ref.read(secure_token_provider),
+        try {
+          final AuthRepository authRepository =
+              ref.read(authRepositoryProvider);
+          final response = await authRepository.signIn(
+            email: email,
+            password: password,
           );
-          _clearTextEditingController(ref);
-          HomeRoute().go(context);
+
+          if (response.isSuccess && response.data != null) {
+            _clearTextEditingController(ref);
+            HomeRoute().go(context);
+          } else {
+            ref.read(errorMessageHandle)(response.error, context);
+          }
+        } on Exception catch (error) {
+          ref.read(errorMessageHandle)(error.toString(), context);
         }
       });
-
-  static Future<void> _saveAccessToken({
-    required String accessToken,
-    required String refresh_token,
-    required SecureTokenRepository storage,
-  }) async {
-    await storage.saveToken(accessToken);
-    await storage.saveRefreshToken(refresh_token);
-  }
 
   static void _clearTextEditingController(ProviderRef ref) {
     ref.read(emailProvider).clear();
@@ -59,7 +51,7 @@ class SignOutProviders {
       }) async {
         final AuthRepository authRepository = ref.read(authRepositoryProvider);
         final se = ref.watch(secure_token_provider);
-        await authRepository.signOut(context: context);
+        await authRepository.signOut();
         await se.deleteToken();
         await se.deleteRefreshToken();
         SignInRoute().go(context);

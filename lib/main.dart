@@ -34,6 +34,9 @@ class MyApp extends ConsumerWidget {
         supportedLocales: L10n.supportedLocales,
         locale: const Locale('ja', 'JP'),
         routerConfig: router,
+        builder: (BuildContext innerContext, Widget? child) {
+          return ErrorListenerWidget(child: child!);
+        },
       ),
     );
   }

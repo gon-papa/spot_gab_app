@@ -5,8 +5,7 @@ class AuthRepository extends BaseRepository {
   final _helper = ProviderContainer().read(runApiProvider);
   final ref = ProviderContainer();
 
-  Future<Response<SignUpResponse>?>? sign_up(
-    BuildContext context,
+  Future<Result<SignUpResponse?>> sign_up(
     SignUpRequest signUpRequest,
   ) async {
     final response = await _helper.run(onSuccess: () async {
@@ -16,19 +15,13 @@ class AuthRepository extends BaseRepository {
         xLanguage: "ja",
         xUserAgent: "spot-gab-app",
       );
-      return response;
-    }, onError: (error, message) {
-      showErrorDialog(context: context, message: message);
+      return response.data;
     });
 
-    if (response is Response<SignUpResponse>) {
-      return response; // 正常系
-    }
-    return null; // 異常系
+    return response;
   }
 
-  Future<Response<SignInResponse>?>? signIn({
-    required BuildContext context,
+  Future<Result<SignInResponse?>> signIn({
     required String email,
     required String password,
   }) async {
@@ -37,21 +30,30 @@ class AuthRepository extends BaseRepository {
       final response = await authApi.signIn(
         username: email,
         password: password,
+        headers: {
+          "x-language": "ja",
+          "x-user-agent": "spot-gab-app",
+        },
       );
-      return response;
-    }, onError: (error, message) {
-      showErrorDialog(context: context, message: message);
+      return response.data;
     });
 
-    if (response is Response<SignInResponse>) {
-      return response; // 正常系
+    final token = response.data?.accessToken;
+    final refreshToken = response.data?.refreshToken;
+
+    if (response.isSuccess && token != null && refreshToken != null) {
+      await ref
+          .read(secure_token_provider)
+          .saveToken(response.data!.accessToken);
+      await ref
+          .read(secure_token_provider)
+          .saveRefreshToken(response.data!.refreshToken);
+      return response;
     }
-    return null; // 異常系
+    throw ApiException(DEFAULT_ERROR, result: response);
   }
 
-  Future<Response<JsonResponse>?>? signOut({
-    required BuildContext context,
-  }) async {
+  Future<Result<JsonResponse?>> signOut() async {
     final response = await _helper.run(onSuccess: () async {
       final token = await ref.read(secure_token_provider).getToken();
       final authApi = getClient(token: token).getAuthApi();
@@ -59,19 +61,31 @@ class AuthRepository extends BaseRepository {
         xLanguage: "ja",
         xUserAgent: "spot-gab-app",
       );
-      return response;
-    }, onError: (error, message) {
-      showErrorDialog(context: context, message: message);
+      return response.data;
     });
 
-    if (response is Response<JsonResponse>) {
-      return response; // 正常系
-    }
-    return null; // 異常系
+    return response;
   }
 
-  Future<Response<EmailExistsResponse>?>? emailExists(
-    BuildContext context,
+  Future<Result<SignUpResponse?>> refreshToken({
+    required String refreshToken,
+  }) async {
+    final response = await _helper.run(onSuccess: () async {
+      final authApi = getClient().getAuthApi();
+      final response = await authApi.refreshToken(
+        xLanguage: "ja",
+        xUserAgent: "spot-gab-app",
+        refreshTokenRequest: RefreshTokenRequest(
+          (b) => b.refreshToken = refreshToken,
+        ),
+      );
+      return response.data;
+    });
+
+    return response;
+  }
+
+  Future<Result<EmailExistsResponse?>>? emailExists(
     String email,
   ) async {
     final response = await _helper.run(onSuccess: () async {
@@ -81,28 +95,13 @@ class AuthRepository extends BaseRepository {
         xLanguage: "ja",
         xUserAgent: "spot-gab-app",
       );
-      return response;
-    }, onError: (error, message) {
-      showErrorDialog(context: context, message: message);
+      return response.data;
     });
 
-    if (response is Response<EmailExistsResponse>) {
-      if (response.data?.data?.exists == true) {
-        if (context.mounted) {
-          showErrorDialog(
-              context: context,
-              message: L10n.of(context)?.emailExsitError ?? "");
-        }
-        return null; // 異常系
-      }
-
-      return response; // 正常系
-    }
-    return null; // 異常系
+    return response;
   }
 
-  Future<Response<IdAccountExistsResponse>?>? idAccountExists(
-    BuildContext context,
+  Future<Result<IdAccountExistsResponse?>> idAccountExists(
     String idAccount,
   ) async {
     final response = await _helper.run(onSuccess: () async {
@@ -113,25 +112,10 @@ class AuthRepository extends BaseRepository {
         xLanguage: "ja",
         xUserAgent: "spot-gab-app",
       );
-      return response;
-    }, onError: (error, message) {
-      showErrorDialog(context: context, message: message);
+      return response.data;
     });
 
-    if (response is Response<IdAccountExistsResponse>) {
-      if (response.data?.data?.exists == true) {
-        if (context.mounted) {
-          showErrorDialog(
-            context: context,
-            message: L10n.of(context)?.idAccountExsitError ?? "",
-          );
-        }
-        return null; // 異常系
-      }
-
-      return response; // 正常系
-    }
-    return null; // 異常系
+    return response;
   }
 }
 
