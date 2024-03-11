@@ -69,6 +69,10 @@
   "@idAccountExsitError": {
     "description": "レスポンスエラー時のダイアログメッセージ"
   },
+  "expiredAuthentication": "認証の期限が切れました。再度ログインしてください",
+  "@expiredAuthentication": {
+    "description": "レスポンスエラー時のダイアログメッセージ"
+  },
   "registerBasicInfoTitle": "基本情報の入力",
   "@registerBasicInfoTitle": {
     "description": "新規登録の基本情報入力ページのタイトル"

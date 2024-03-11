@@ -16,5 +16,9 @@
     "idAccountExsitError": "このアカウントIDは使用できません",
     "@idAccountExsitError": {
         "description": "レスポンスエラー時のダイアログメッセージ"
+    },
+    "expiredAuthentication": "認証の期限が切れました。再度ログインしてください",
+    "@expiredAuthentication": {
+        "description": "レスポンスエラー時のダイアログメッセージ"
     }
 }
