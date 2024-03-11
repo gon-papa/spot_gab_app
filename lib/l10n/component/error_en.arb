@@ -15,5 +15,9 @@
     "idAccountExsitError": "This account ID is not available",
     "@idAccountExsitError": {
         "description": "Dialog message when a response error occurs"
+    },
+    "expiredAuthentication": "Your session has expired. Please log in again",
+    "@expiredAuthentication": {
+        "description": "Dialog message for response error"
     }
 }

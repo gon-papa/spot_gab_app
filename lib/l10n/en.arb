@@ -69,6 +69,10 @@
   "@idAccountExsitError": {
     "description": "Dialog message when a response error occurs"
   },
+  "expiredAuthentication": "Your session has expired. Please log in again",
+  "@expiredAuthentication": {
+    "description": "Dialog message for response error"
+  },
   "registerBasicInfoTitle": "Enter Basic Information",
   "@registerBasicInfoTitle": {
     "description": "Title of the basic information entry page for new registration"
