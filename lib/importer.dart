@@ -14,6 +14,7 @@ export 'package:dio/dio.dart';
 export 'package:logger/logger.dart';
 
 // 独自widget
+export 'package:spot_gab_app/util/exception/api_exception.dart';
 export 'package:spot_gab_app/page/util_widget/button/primary_button.dart';
 export 'package:spot_gab_app/page/util_widget/button/secondary_button.dart';
 export 'package:spot_gab_app/page/util_widget/floating_action_button/floating_action_button.dart';

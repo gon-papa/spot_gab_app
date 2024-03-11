@@ -10,31 +10,17 @@ class RunApi {
   final ref = ProviderContainer();
 
   // 全てのAPIリクエストを実行する際に共通で行う処理をまとめた関数
-  Future<Object?> run<T>({
+  Future<Result<T>> run<T>({
     required Future<T> Function() onSuccess,
     OnError? onError,
     StateController<bool>? isInProgressController,
   }) async {
-    final defaultError = ref.read(errorListnerProviders).defaultError;
     try {
       _updateLoadingState(isInProgressController, true);
-      final result = await onSuccess();
-      return result;
-    } on DioException catch (error) {
-      logger.e(error);
-      if (error.response?.data['detail'] != null) {
-        _handleDioException(onError, error);
-        logger.e(error);
-        return null;
-      } else {
-        onError?.call(error, defaultError);
-        logger.e(error);
-        return null;
-      }
-    } on Exception catch (error) {
-      logger.e(error);
-      onError?.call(error, defaultError);
-      return null;
+      final response = await onSuccess();
+      return Result(data: response);
+    } catch (error) {
+      return _handleError(error, onSuccess, onError);
     } finally {
       _updateLoadingState(isInProgressController, false);
     }
@@ -47,27 +33,57 @@ class RunApi {
     }
   }
 
-  void _handleDioException(OnError? onError, DioException error) async {
+  Future<Result<T>> _handleError<T>(
+    dynamic error,
+    Future<T> Function() onSuccess,
+    OnError? onError,
+  ) async {
     logger.e(error);
-    // TODO:401ならリフレッシュトークンを使って再ログインを試みる
-    if (error.response?.statusCode == 401) {
-      final refreshToken = ref.read(secure_token_provider).getRefreshToken();
-      if (refreshToken == null) {
-        // リフレッシュトークンがない場合はログアウト
-        ref.read(authRepositoryProvider).signOut();
-        return;
+
+    if (error is DioException) {
+      if (error.response?.statusCode == 401) {
+        final success = await _attemptTokenRefresh();
+        if (success) {
+          return await run(onSuccess: onSuccess, onError: onError);
+        } else {
+          throw ApiException(EXPIRED_AUTHENTICATION);
+        }
+      } else if (error.response?.data['detail'] != null) {
+        String errors = '';
+        for (var detail in error.response?.data['detail']) {
+          errors += '${detail['msg']}\n';
+        }
+        throw ApiException(errors);
       }
-      // final response = await ref.read(authRepositoryProvider).refreshToken(
-      // refreshToken: refreshToken,
-      // );
-      // if(res.status !== 200) {
-      // logout();
-      // }
-      // 再度、リクエストを実行
-      // return run<T>(onSuccess: onSuccess, onError: onError);
-    } else {
-      onError?.call(error, error.response?.data['detail'][0]['msg']);
     }
+    onError?.call(error, DEFAULT_ERROR);
+    throw ApiException(DEFAULT_ERROR);
+  }
+
+  Future<bool> _attemptTokenRefresh() async {
+    try {
+      final authRepository = ref.read(authRepositoryProvider);
+      final refreshToken =
+          await ref.read(secure_token_provider).getRefreshToken();
+      if (refreshToken == null) throw ApiException(EXPIRED_AUTHENTICATION);
+
+      final response =
+          await authRepository.refreshToken(refreshToken: refreshToken);
+
+      final resToken = response.data?.data?.user?.token;
+      final resRefreshToken = response.data?.data?.user?.refreshToken;
+
+      if (response.isSuccess && resToken != null && resRefreshToken != null) {
+        await ref.read(secure_token_provider).saveToken(resToken.toString());
+        await ref.read(secure_token_provider).saveRefreshToken(resRefreshToken);
+        return true;
+      }
+    } catch (e) {
+      logger.e('Token refresh failed: $e');
+      return false;
+    }
+
+    return false;
   }
 }
 

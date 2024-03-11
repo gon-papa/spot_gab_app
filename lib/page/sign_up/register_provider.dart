@@ -32,20 +32,24 @@ class RegisterProviders {
 
   static final basicInfoSubmitProvider = Provider(
     (ref) => (BuildContext context, String email) async {
-      final formState = ref.watch(basicInfoGlobalKeyProvider).currentState;
-      if (formState != null && formState.validate()) {
-        final authRepository = ref.read(authRepositoryProvider);
-        final emailExistsResponse = await authRepository.emailExists(email);
-        if (emailExistsResponse != null &&
-            emailExistsResponse.data?.data?.exists == false) {
-          RegisterIdAccountRoute().push(context);
-          return true;
-        } else {
-          debugPrint("email exists");
-          ref
-              .read(errorListnerProviders)
-              .notifyError(ref, L10n.of(context)?.emailExsitError ?? "error");
+      try {
+        final formState = ref.watch(basicInfoGlobalKeyProvider).currentState;
+        if (formState != null && formState.validate()) {
+          final authRepository = ref.read(authRepositoryProvider);
+          final emailExistsResponse = await authRepository.emailExists(email);
+          if (emailExistsResponse != null &&
+              emailExistsResponse.data?.data?.exists == false) {
+            RegisterIdAccountRoute().push(context);
+            return true;
+          } else {
+            ref.read(errorMessageHandle)(
+              L10n.of(context)?.emailExsitError ?? '',
+              context,
+            );
+          }
         }
+      } on Exception catch (error) {
+        ref.read(errorMessageHandle)(error.toString(), context);
       }
       return false;
     },
@@ -53,62 +57,52 @@ class RegisterProviders {
 
   static final idAccountSubmitProvider = Provider(
     (ref) => (BuildContext context, String idAccount) async {
-      final formState = ref.watch(idAccountGlobalKeyProvider).currentState;
-      if (formState != null && formState.validate()) {
-        final AuthRepository authRepository = ref.read(authRepositoryProvider);
-        final bool isIdAccountExists = await _isIdAccountExists(
-          context: context,
-          ref: ref,
-          idAccount: idAccount,
-          repository: authRepository,
-        );
+      try {
+        final formState = ref.watch(idAccountGlobalKeyProvider).currentState;
+        if (formState != null && formState.validate()) {
+          final AuthRepository authRepository =
+              ref.read(authRepositoryProvider);
+          final isIdAccountExists =
+              await authRepository.idAccountExists(idAccount);
 
-        if (isIdAccountExists) {
-          final response = await authRepository.sign_up(
-            _createRequest(
-              email: ref.read(emailProvider).text,
-              password: ref.read(passwordProvider).text,
-              birthDate: ref.read(birthdayProvider).text,
-              accountName: ref.read(accountNameProvider).text,
-              idAccount: ref.read(idAccountProvider).text,
-            ),
-          );
-          final user = response?.data?.data?.user;
-          if (user != null && user.token != null) {
-            final userProvider = ref.read(userNotifierProvider.notifier);
-            _save_user(user: user, userProvider: userProvider);
-            _saveTokens(
-              token: user.token!,
-              refreshToken: user.refreshToken,
-              storage: ref.read(secure_token_provider),
+          final isExists = isIdAccountExists.data?.data?.exists;
+          if (isIdAccountExists.isSuccess && isExists != null && !isExists) {
+            final response = await authRepository.sign_up(
+              _createRequest(
+                email: ref.read(emailProvider).text,
+                password: ref.read(passwordProvider).text,
+                birthDate: ref.read(birthdayProvider).text,
+                accountName: ref.read(accountNameProvider).text,
+                idAccount: ref.read(idAccountProvider).text,
+              ),
             );
-            _clearTextEditingController(ref);
+            final user = response.data?.data?.user;
+            if (user != null && user.token != null) {
+              final userProvider = ref.read(userNotifierProvider.notifier);
+              _save_user(user: user, userProvider: userProvider);
+              _saveTokens(
+                token: user.token!,
+                refreshToken: user.refreshToken,
+                storage: ref.read(secure_token_provider),
+              );
+              _clearTextEditingController(ref);
 
-            RegisterCompleteRoute().go(context);
+              RegisterCompleteRoute().go(context);
+            }
+            return true;
+          } else {
+            ref.read(errorMessageHandle)(
+              L10n.of(context)?.idAccountExsitError ?? '',
+              context,
+            );
           }
-          return true;
         }
+      } catch (error) {
+        ref.read(errorMessageHandle)(error.toString(), context);
       }
       return false;
     },
   );
-
-  static Future<bool> _isIdAccountExists(
-      {required BuildContext context,
-      required ProviderRef ref,
-      required String idAccount,
-      required AuthRepository repository}) async {
-    final response = await repository.idAccountExists(idAccount);
-    if (response != null && response.data?.data?.exists == false) {
-      return true;
-    } else {
-      ref
-          .read(errorListnerProviders)
-          .notifyError(ref, L10n.of(context)?.idAccountExsitError ?? "");
-    }
-
-    return false;
-  }
 
   static void _save_user({
     required SignUpUser user,
