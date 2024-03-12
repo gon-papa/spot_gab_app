@@ -40,9 +40,21 @@
   "@contactSupportButton": {
     "description": "Help string"
   },
+  "passwordResetTitle": "Password Reset",
+  "@passwordResetTitle": {
+    "description": "Password reset title"
+  },
+  "passwordResetDescription": "Please enter your registered email address. We will send you a URL to reset your password.",
+  "@passwordResetDescription": {
+    "description": "Password reset description"
+  },
   "signInFormTitle": "Sign in to SpotGab",
   "@shareMomentTitle": {
     "description": "Subtitle of the app"
+  },
+  "forgotPasswordMessage": "Forgot your password? Click here",
+  "@forgotPasswordMessage": {
+    "description": "Forgot your password? Click here"
   },
   "shareMomentTitle": "Share the Moment",
   "createAccount": "Create New Account",

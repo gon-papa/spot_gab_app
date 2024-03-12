@@ -35,6 +35,8 @@ class _Body extends StatelessWidget {
         _PasswordInput(),
         VerticalMargin(height: 30),
         SupportSection(),
+        VerticalMargin(height: 15),
+        _ResetPasswordSupport(),
       ],
     );
   }
@@ -90,6 +92,23 @@ class _PasswordInput extends ConsumerWidget {
           )),
       keyboardType: TextInputType.visiblePassword,
       validator: ref.watch(signUpValidation).passwordValidator.call(context),
+    );
+  }
+}
+
+class _ResetPasswordSupport extends ConsumerWidget {
+  const _ResetPasswordSupport({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return GestureDetector(
+      onTap: () {
+        PasswordResetRoute().go(context);
+      },
+      child: Text(
+        L10n.of(context)?.forgotPasswordMessage ?? '',
+        style: TextStyle(color: Colors.blue, fontSize: 12.sp),
+      ),
     );
   }
 }

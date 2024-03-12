@@ -40,9 +40,21 @@
   "@contactSupportButton": {
     "description": "ヘルプ文字列"
   },
+  "passwordResetTitle": "パスワード再設定",
+  "@passwordResetTitle": {
+    "description": "パスワード再設定タイトル"
+  },
+  "passwordResetDescription": "登録したメールアドレスを入力してください。パスワード再設定用のURLを送信します。",
+  "@passwordResetDescription": {
+    "description": "パスワード再設定説明"
+  },
   "signInFormTitle": "SpotGabにサインイン",
   "@shareMomentTitle": {
     "description": "アプリのサブタイトル"
+  },
+  "forgotPasswordMessage": "パスワードを忘れた方はこちら",
+  "@forgotPasswordMessage": {
+    "description": "パスワードを忘れた方はこちら"
   },
   "shareMomentTitle": "今を共有しよう",
   "createAccount": "新しいアカウントを作成する",
