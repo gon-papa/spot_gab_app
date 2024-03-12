@@ -34,6 +34,11 @@ final globalKeyProvider = Provider((_) => GlobalKey<NavigatorState>());
       routes: [
         TypedGoRoute<SignInFormRoute>(
           path: 'sign_in_form',
+          routes: [
+            TypedGoRoute<PasswordResetRoute>(
+              path: 'password_reset',
+            ),
+          ],
         ),
         TypedGoRoute<RegisterBasicInfoRoute>(
           path: 'register_basic_info',
@@ -91,6 +96,15 @@ class SignInFormRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const SignInForm();
+  }
+}
+
+class PasswordResetRoute extends GoRouteData {
+  const PasswordResetRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const PasswordReset();
   }
 }
 

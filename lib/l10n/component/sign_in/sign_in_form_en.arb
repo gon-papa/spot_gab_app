@@ -3,5 +3,9 @@
     "signInFormTitle": "Sign in to SpotGab",
     "@shareMomentTitle": {
         "description": "Sign-in form title"
+    },
+    "forgotPasswordMessage": "Forgot your password? Click here",
+    "@forgotPasswordMessage": {
+        "description": "Forgot your password? Click here"
     }
 }

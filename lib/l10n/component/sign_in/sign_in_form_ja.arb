@@ -3,5 +3,9 @@
     "signInFormTitle": "SpotGabにサインイン",
     "@shareMomentTitle": {
         "description": "サインインフォームタイトル"
+    },
+    "forgotPasswordMessage": "パスワードを忘れた方はこちら",
+    "@forgotPasswordMessage": {
+        "description": "パスワードを忘れた方はこちら"
     }
 }

@@ -39,3 +39,5 @@ export 'package:spot_gab_app/page/main/home/home.dart';
 export 'package:spot_gab_app/page/sign_in/sign_in.dart';
 export 'package:spot_gab_app/page/sign_in/sign_in_out_provider.dart';
 export 'package:spot_gab_app/page/sign_up/register_complete.dart';
+export 'package:spot_gab_app/page/sign_in/password_reset.dart';
+export 'package:spot_gab_app/page/sign_in/password_reset_provider.dart';

@@ -49,12 +49,16 @@ class SignOutProviders {
   static final signOutSubmitProvider = Provider((ref) => ({
         required BuildContext context,
       }) async {
-        final AuthRepository authRepository = ref.read(authRepositoryProvider);
-        final se = ref.watch(secure_token_provider);
-        await authRepository.signOut();
-        await se.deleteToken();
-        await se.deleteRefreshToken();
-        SignInRoute().go(context);
+        try {
+          final AuthRepository authRepository =
+              ref.read(authRepositoryProvider);
+          await authRepository.signOut();
+        } finally {
+          final se = ref.watch(secure_token_provider);
+          await se.deleteToken();
+          await se.deleteRefreshToken();
+          SignInRoute().go(context);
+        }
       });
 }
 
