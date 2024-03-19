@@ -117,6 +117,22 @@ class AuthRepository extends BaseRepository {
 
     return response;
   }
+
+  Future<Result<JsonResponse?>> passwordReset(
+    String email,
+  ) async {
+    final response = await _helper.run(onSuccess: () async {
+      final authApi = getClient().getAuthApi();
+      final response = await authApi.resetPassword(
+        resetPasswordRequest: ResetPasswordRequest(((b) => b.email = email)),
+        xLanguage: "ja",
+        xUserAgent: "spot-gab-app",
+      );
+      return response.data;
+    });
+
+    return response;
+  }
 }
 
 final authRepositoryProvider = Provider.autoDispose<AuthRepository>(
