@@ -1,4 +1,5 @@
 import 'package:spot_gab_app/importer.dart';
+import 'package:spot_gab_app/page/sign_in/password_reset_send_email.dart';
 
 part 'route.g.dart';
 
@@ -35,9 +36,11 @@ final globalKeyProvider = Provider((_) => GlobalKey<NavigatorState>());
         TypedGoRoute<SignInFormRoute>(
           path: 'sign_in_form',
           routes: [
-            TypedGoRoute<PasswordResetRoute>(
-              path: 'password_reset',
-            ),
+            TypedGoRoute<PasswordResetRoute>(path: 'password_reset', routes: [
+              TypedGoRoute<PasswordResetSendEmailRoute>(
+                path: 'password_reset_send_email',
+              ),
+            ]),
           ],
         ),
         TypedGoRoute<RegisterBasicInfoRoute>(
@@ -105,6 +108,15 @@ class PasswordResetRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const PasswordReset();
+  }
+}
+
+class PasswordResetSendEmailRoute extends GoRouteData {
+  const PasswordResetSendEmailRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const PasswordResetSendEmail();
   }
 }
 

@@ -48,6 +48,14 @@
   "@passwordResetDescription": {
     "description": "パスワード再設定説明"
   },
+  "passwordResetSendEmailTitle": "メールを送信しました",
+  "@passwordResetSendEmailTitle": {
+    "description": "パスワード再設定メール送信タイトル"
+  },
+  "passwordResetSendEmailDescription": "パスワード再設定用のURLを記載したメールを送信しました。メールをご確認ください。\nメールが届かない場合は、迷惑メールフォルダをご確認ください。\nパスワード変更には有効期限があります。お早めにご対応ください",
+  "@passwordResetSendEmailDescription": {
+    "description": "パスワード再設定メール送信説明"
+  },
   "signInFormTitle": "SpotGabにサインイン",
   "@shareMomentTitle": {
     "description": "アプリのサブタイトル"

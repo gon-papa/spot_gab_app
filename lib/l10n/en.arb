@@ -48,6 +48,14 @@
   "@passwordResetDescription": {
     "description": "Password reset description"
   },
+  "passwordResetSendEmailTitle": "Email Sent",
+  "@passwordResetSendEmailTitle": {
+    "description": "Password reset email sent title"
+  },
+  "passwordResetSendEmailDescription": "An email with a URL to reset your password has been sent. Please check your email.\nIf you do not receive the email, please check your spam folder.\nThere is an expiration time for password changes. Please respond promptly.",
+  "@passwordResetSendEmailDescription": {
+    "description": "Password reset email sent description"
+  },
   "signInFormTitle": "Sign in to SpotGab",
   "@shareMomentTitle": {
     "description": "Subtitle of the app"
