@@ -33,6 +33,12 @@ RouteBase get $rootShellRoute => ShellRouteData.$route(
                 GoRouteData.$route(
                   path: 'password_reset',
                   factory: $PasswordResetRouteExtension._fromState,
+                  routes: [
+                    GoRouteData.$route(
+                      path: 'password_reset_send_email',
+                      factory: $PasswordResetSendEmailRouteExtension._fromState,
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -133,6 +139,24 @@ extension $PasswordResetRouteExtension on PasswordResetRoute {
 
   String get location => GoRouteData.$location(
         '/sign_in/sign_in_form/password_reset',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $PasswordResetSendEmailRouteExtension on PasswordResetSendEmailRoute {
+  static PasswordResetSendEmailRoute _fromState(GoRouterState state) =>
+      const PasswordResetSendEmailRoute();
+
+  String get location => GoRouteData.$location(
+        '/sign_in/sign_in_form/password_reset/password_reset_send_email',
       );
 
   void go(BuildContext context) => context.go(location);

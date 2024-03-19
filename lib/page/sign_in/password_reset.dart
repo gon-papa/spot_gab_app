@@ -12,7 +12,7 @@ class PasswordReset extends ConsumerWidget {
       title: L10n.of(context)?.passwordResetTitle ?? '',
       formKey: ref.watch(_Providers.globalKeyProvider),
       onPressed: () async {
-        ref.read(_Providers.submitProvider);
+        ref.read(_Providers.submitProvider)(context: context);
       },
     );
   }

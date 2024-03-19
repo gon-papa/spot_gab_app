@@ -21,18 +21,21 @@ class SignInProviders {
         required String password,
       }) async {
         try {
-          final AuthRepository authRepository =
-              ref.read(authRepositoryProvider);
-          final response = await authRepository.signIn(
-            email: email,
-            password: password,
-          );
+          final formState = ref.read(globalKeyProvider).currentState;
+          if (formState != null && formState.validate()) {
+            final AuthRepository authRepository =
+                ref.read(authRepositoryProvider);
+            final response = await authRepository.signIn(
+              email: email,
+              password: password,
+            );
 
-          if (response.isSuccess && response.data != null) {
-            _clearTextEditingController(ref);
-            HomeRoute().go(context);
-          } else {
-            ref.read(errorMessageHandle)(response.error, context);
+            if (response.isSuccess && response.data != null) {
+              _clearTextEditingController(ref);
+              HomeRoute().go(context);
+            } else {
+              ref.read(errorMessageHandle)(response.error, context);
+            }
           }
         } on Exception catch (error) {
           ref.read(errorMessageHandle)(error.toString(), context);

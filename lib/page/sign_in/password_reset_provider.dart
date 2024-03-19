@@ -13,14 +13,19 @@ class PasswordResetProviders {
         required BuildContext context,
       }) async {
         final formState = ref.watch(globalKeyProvider).currentState;
-        if (formState != null && formState.validate()) {}
-        // final AuthRepository authRepository = ref.read(authRepositoryProvider);
-        // final se = ref.watch(secure_token_provider);
-        // await authRepository.signOut();
-        // await se.deleteToken();
-        // await se.deleteRefreshToken();
-        // SignInRoute().go(context);
-        return false;
+        if (formState != null && formState.validate()) {
+          try {
+            final AuthRepository authRepository =
+                ref.read(authRepositoryProvider);
+            await authRepository.passwordReset(
+              ref.read(emailProvider).text,
+            );
+            ref.read(emailProvider).clear();
+            PasswordResetSendEmailRoute().go(context);
+          } on Exception catch (error) {
+            ref.read(errorMessageHandle)(error.toString(), context);
+          }
+        }
       });
 }
 
