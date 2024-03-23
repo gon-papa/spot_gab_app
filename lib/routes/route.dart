@@ -29,7 +29,12 @@ final globalKeyProvider = Provider((_) => GlobalKey<NavigatorState>());
 @TypedShellRoute<RootShellRoute>(
   routes: [
     TypedGoRoute<RootRoute>(path: '/'),
-    TypedGoRoute<HomeRoute>(path: '/home'),
+    TypedShellRoute<MainRouteData>(
+      routes: [
+        TypedGoRoute<HomeRoute>(path: '/home'),
+        TypedGoRoute<MyPageRoute>(path: '/mypage'),
+      ],
+    ),
     TypedGoRoute<SignInRoute>(
       path: '/sign_in',
       routes: [
@@ -75,13 +80,38 @@ class RootRoute extends GoRouteData {
   Widget build(BuildContext context, GoRouterState state) => const SizedBox();
 }
 
+class MainRouteData extends ShellRouteData {
+  const MainRouteData();
+
+  static final $navigatorKey = shellNavigatorKey;
+
+  @override
+  Widget builder(BuildContext context, GoRouterState state, Widget navigator) {
+    return MainScaffold(
+      body: navigator,
+      fullPath: state.fullPath,
+    );
+  }
+}
+
 class HomeRoute extends GoRouteData {
   const HomeRoute();
 
+  static final $parentNavigatorKey = shellNavigatorKey;
+
   @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const Home();
-  }
+  Page<void> buildPage(BuildContext context, GoRouterState state) =>
+      noAnimationPage(const Home());
+}
+
+class MyPageRoute extends GoRouteData {
+  const MyPageRoute();
+
+  static final $parentNavigatorKey = shellNavigatorKey;
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) =>
+      noAnimationPage(const MyPage());
 }
 
 class SignInRoute extends GoRouteData {
@@ -145,6 +175,28 @@ class RegisterCompleteRoute extends GoRouteData {
   Widget build(BuildContext context, GoRouterState state) {
     return const RegisterComplete();
   }
+}
+
+CustomTransitionPage<void> noAnimationPage(Widget page) {
+  return CustomTransitionPage<void>(
+    child: page,
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      return FadeTransition(
+        opacity: animation,
+        child: SlideTransition(
+          position: animation.drive(
+            Tween<Offset>(
+              begin: const Offset(1, 0),
+              end: Offset.zero,
+            ).chain(
+              CurveTween(curve: Curves.easeIn),
+            ),
+          ),
+          child: child,
+        ),
+      );
+    },
+  );
 }
 
 final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();

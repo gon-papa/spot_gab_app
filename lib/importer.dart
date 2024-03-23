@@ -12,6 +12,7 @@ export 'package:spot_gab_app/gen/openapi/lib/openapi.dart';
 export 'package:flutter/gestures.dart';
 export 'package:dio/dio.dart';
 export 'package:logger/logger.dart';
+export 'package:google_maps_flutter/google_maps_flutter.dart';
 
 // 独自widget
 export 'package:spot_gab_app/util/exception/api_exception.dart';
@@ -36,8 +37,10 @@ export 'package:spot_gab_app/util/error_listener.dart';
 export 'package:spot_gab_app/util/run_api.dart';
 export 'package:go_router/go_router.dart';
 export 'package:spot_gab_app/page/main/home/home.dart';
+export 'package:spot_gab_app/page/main/mypage/mypage.dart';
 export 'package:spot_gab_app/page/sign_in/sign_in.dart';
 export 'package:spot_gab_app/page/sign_in/sign_in_out_provider.dart';
 export 'package:spot_gab_app/page/sign_up/register_complete.dart';
 export 'package:spot_gab_app/page/sign_in/password_reset.dart';
 export 'package:spot_gab_app/page/sign_in/password_reset_provider.dart';
+export 'package:spot_gab_app/page/main/widget/main_scaffold.dart';
