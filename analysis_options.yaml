@@ -28,8 +28,6 @@
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
 
-include: package:pedantic_mono/analysis_options.yaml
-
 linter:
   rules:
     sort_pub_dependencies: false

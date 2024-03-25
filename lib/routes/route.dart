@@ -19,6 +19,7 @@ final routerProvider = Provider(
           }
           return const SignInRoute().location;
         }
+        return null;
       },
     );
   },

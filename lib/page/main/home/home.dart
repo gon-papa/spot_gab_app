@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter_svg/svg.dart';
 import 'package:spot_gab_app/importer.dart';
 
 typedef _Providers = HomeProviders;
