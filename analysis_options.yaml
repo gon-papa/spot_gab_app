@@ -57,3 +57,5 @@ analyzer:
   errors:
     todo: ignore
     fixme: ignore
+  plugins:
+    - custom_lint
