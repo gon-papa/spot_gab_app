@@ -13,6 +13,7 @@ class MyApp extends ConsumerWidget {
   }
 
   // iOSのアニメーションをAndroidでも使えるようにする
+  // ignore: unused_field
   static const Map<TargetPlatform, PageTransitionsBuilder> _defaultBuilders =
       <TargetPlatform, PageTransitionsBuilder>{
     TargetPlatform.android: CupertinoPageTransitionsBuilder(),

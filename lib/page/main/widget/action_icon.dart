@@ -1,4 +1,3 @@
-import 'package:flutter_svg/svg.dart';
 import 'package:spot_gab_app/importer.dart';
 
 class ActionIcon extends StatelessWidget {
