@@ -1,6 +1,5 @@
 // パッケージ
 export 'package:flutter/material.dart';
-export 'package:flutter_riverpod/flutter_riverpod.dart';
 export 'package:freezed_annotation/freezed_annotation.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:spot_gab_app/routes/route.dart';
@@ -13,6 +12,10 @@ export 'package:flutter/gestures.dart';
 export 'package:dio/dio.dart';
 export 'package:logger/logger.dart';
 export 'package:google_maps_flutter/google_maps_flutter.dart';
+export 'package:hooks_riverpod/hooks_riverpod.dart';
+export 'package:flutter_hooks/flutter_hooks.dart';
+export 'package:geolocator/geolocator.dart' hide ServiceStatus;
+export 'package:permission_handler/permission_handler.dart';
 
 // 独自widget
 export 'package:spot_gab_app/util/exception/api_exception.dart';
@@ -44,3 +47,8 @@ export 'package:spot_gab_app/page/sign_up/register_complete.dart';
 export 'package:spot_gab_app/page/sign_in/password_reset.dart';
 export 'package:spot_gab_app/page/sign_in/password_reset_provider.dart';
 export 'package:spot_gab_app/page/main/widget/main_scaffold.dart';
+export 'package:spot_gab_app/exception/base_exception.dart';
+export 'package:spot_gab_app/exception/location_exception.dart';
+export 'package:spot_gab_app/repository/location_repository.dart';
+export 'package:spot_gab_app/page/main/home/home_provider.dart';
+export 'package:spot_gab_app/page/main/widget/action_icon.dart';

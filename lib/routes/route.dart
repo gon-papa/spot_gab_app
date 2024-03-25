@@ -101,7 +101,7 @@ class HomeRoute extends GoRouteData {
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) =>
-      noAnimationPage(const Home());
+      noAnimationPage(Home());
 }
 
 class MyPageRoute extends GoRouteData {
