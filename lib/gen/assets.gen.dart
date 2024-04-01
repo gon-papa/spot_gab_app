@@ -28,9 +28,13 @@ class $AssetsIconsGen {
   /// File path: assets/icons/share_icon.svg
   SvgGenImage get shareIcon => const SvgGenImage('assets/icons/share_icon.svg');
 
+  /// File path: assets/icons/user_marker.svg
+  SvgGenImage get userMarker =>
+      const SvgGenImage('assets/icons/user_marker.svg');
+
   /// List of all assets
   List<SvgGenImage> get values =>
-      [bookmarkIcon, commentIcon, heartIcon, shareIcon];
+      [bookmarkIcon, commentIcon, heartIcon, shareIcon, userMarker];
 }
 
 class $AssetsImagesGen {

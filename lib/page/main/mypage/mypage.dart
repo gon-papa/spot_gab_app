@@ -7,7 +7,20 @@ class MyPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       key: ref.watch(mainScaffoldKeyProvider),
-      body: Text('MyPage'),
+      body: SafeArea(
+        child: Row(
+          children: [
+            Center(
+              // child: UserMarker(),
+              child: Text("UserMarker"),
+            ),
+            Center(
+              // child: UserMarker(),
+              child: Text("UserMarker"),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
