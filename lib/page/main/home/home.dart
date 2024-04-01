@@ -1,8 +1,7 @@
-import 'dart:async';
-
 import 'package:spot_gab_app/importer.dart';
 
 typedef _Providers = HomeProviders;
+typedef _MarkerProviders = GabMarkerProvider;
 
 class Home extends HookConsumerWidget {
   Home({Key? key}) : super(key: key);
@@ -22,7 +21,7 @@ class Home extends HookConsumerWidget {
     }
 
     if (asyncMyPosition.hasData) {
-      return SuccessView();
+      return _Body();
     }
 
     if (asyncMyPosition.hasError || asyncMyPosition.error == null) {
@@ -32,30 +31,8 @@ class Home extends HookConsumerWidget {
   }
 }
 
-class WaitingView extends StatelessWidget {
-  const WaitingView({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: CircularProgressIndicator(),
-    );
-  }
-}
-
-class HasErrorView extends StatelessWidget {
-  const HasErrorView({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('エラーが発生しました。'),
-    );
-  }
-}
-
-class SuccessView extends ConsumerWidget {
-  SuccessView({Key? key}) : super(key: key);
+class _Body extends ConsumerWidget {
+  _Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -78,6 +55,11 @@ class SuccessView extends ConsumerWidget {
               right: 0,
               child: _CardList(),
             ),
+            Positioned(
+              right: 10.w,
+              bottom: 130.h,
+              child: _LocationButton(),
+            ),
           ],
         ),
       ),
@@ -85,14 +67,13 @@ class SuccessView extends ConsumerWidget {
   }
 }
 
-class _GoogleMapView extends ConsumerWidget {
-  final Completer<GoogleMapController> _controller = Completer();
+class _GoogleMapView extends HookConsumerWidget {
   _GoogleMapView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final position = ref.watch(_Providers.myPositionProvider.notifier).state;
-    return GoogleMap(
+    return WidgetMarkerGoogleMap(
       initialCameraPosition: CameraPosition(
         target: LatLng(
           position?.latitude ?? 0.0,
@@ -101,10 +82,75 @@ class _GoogleMapView extends ConsumerWidget {
         zoom: 15,
       ),
       onMapCreated: (GoogleMapController controller) {
-        _controller.complete(controller);
+        ref.read(_Providers.googleMapControllerProvider.notifier).state =
+            controller;
       },
-      myLocationEnabled: true,
-      myLocationButtonEnabled: true,
+      myLocationEnabled: false,
+      myLocationButtonEnabled: false,
+      widgetMarkers: [
+        WidgetMarker(
+          position: LatLng(
+            position?.latitude ?? 0.0,
+            position?.longitude ?? 0.0,
+          ),
+          markerId: "myPosition",
+          widget: UserMarker(
+            userImage: Image.network("https://via.placeholder.com/150"),
+            onTap: () {},
+            color: Colors.blue,
+          ),
+        ),
+        WidgetMarker(
+          position: LatLng(37.78593862779881, -122.40096497312153),
+          markerId: "1",
+          widget: UserMarker(
+            onTap: () {},
+            userImage: Image.network("https://via.placeholder.com/150"),
+            color: Colors.red,
+          ),
+        ),
+        WidgetMarker(
+          position: LatLng(37.784474463803726, -122.40341109377674),
+          markerId: "2",
+          widget: UserMarker(
+            onTap: () {},
+            userImage: null,
+            color: Colors.green,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _LocationButton extends ConsumerWidget {
+  _LocationButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final mapController = ref.watch(_Providers.googleMapControllerProvider);
+    final myPosition = ref.watch(_Providers.myPositionProvider.notifier);
+    return FloatingActionButton(
+      onPressed: () {
+        if (myPosition.state != null && mapController != null) {
+          mapController.animateCamera(CameraUpdate.newLatLng(
+            LatLng(myPosition.state!.latitude, myPosition.state!.longitude),
+          ));
+          ref.watch(SignOutProviders.signOutSubmitProvider)(context: context);
+        } else {
+          ref.read(errorMessageHandle)("現在地情報が取得できませんでした", context);
+        }
+      },
+      child: Icon(Icons.my_location),
+      backgroundColor: Theme.of(context).colorScheme.background,
+      foregroundColor: Theme.of(context).colorScheme.onBackground,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30),
+        side: BorderSide(
+          color: Theme.of(context).colorScheme.onBackground,
+          width: 0.1,
+        ),
+      ),
     );
   }
 }
@@ -141,9 +187,11 @@ class _SearchBar extends StatelessWidget {
               ),
             ),
           ),
-          CircleAvatar(
-              // backgroundImage: NetworkImage('ユーザーアイコンのURL'),
-              ),
+          UserIcon(
+            userImage: Image.network("https://via.placeholder.com/150"),
+            onTap: () {},
+            size: 45,
+          ),
         ],
       ),
     );
@@ -194,9 +242,10 @@ class _Card extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CircleAvatar(
-              backgroundImage: NetworkImage(userImageUrl),
-              radius: 25,
+            UserIcon(
+              userImage: Image.network(userImageUrl),
+              onTap: () {},
+              size: 60,
             ),
             SizedBox(width: 5.w),
             Expanded(
@@ -240,7 +289,6 @@ class _Card extends StatelessWidget {
                     ),
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       ActionIcon(
@@ -249,22 +297,26 @@ class _Card extends StatelessWidget {
                         text: '$commentCount',
                         size: 10,
                       ),
+                      Spacer(),
                       ActionIcon(
                         icon: Assets.icons.bookmarkIcon,
                         onTap: () {},
                         size: 10,
                       ),
+                      Spacer(),
                       ActionIcon(
                         icon: Assets.icons.heartIcon,
                         onTap: () {},
                         text: '$commentCount',
                         size: 10,
                       ),
+                      Spacer(),
                       ActionIcon(
                         icon: Assets.icons.shareIcon,
                         onTap: () {},
                         size: 10,
                       ),
+                      SizedBox(width: 15.w),
                     ],
                   ),
                 ],
