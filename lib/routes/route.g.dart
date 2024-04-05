@@ -18,9 +18,21 @@ RouteBase get $rootShellRoute => ShellRouteData.$route(
           path: '/',
           factory: $RootRouteExtension._fromState,
         ),
-        GoRouteData.$route(
-          path: '/home',
-          factory: $HomeRouteExtension._fromState,
+        ShellRouteData.$route(
+          navigatorKey: MainRouteData.$navigatorKey,
+          factory: $MainRouteDataExtension._fromState,
+          routes: [
+            GoRouteData.$route(
+              path: '/home',
+              parentNavigatorKey: HomeRoute.$parentNavigatorKey,
+              factory: $HomeRouteExtension._fromState,
+            ),
+            GoRouteData.$route(
+              path: '/mypage',
+              parentNavigatorKey: MyPageRoute.$parentNavigatorKey,
+              factory: $MyPageRouteExtension._fromState,
+            ),
+          ],
         ),
         GoRouteData.$route(
           path: '/sign_in',
@@ -81,11 +93,32 @@ extension $RootRouteExtension on RootRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
+extension $MainRouteDataExtension on MainRouteData {
+  static MainRouteData _fromState(GoRouterState state) => const MainRouteData();
+}
+
 extension $HomeRouteExtension on HomeRoute {
   static HomeRoute _fromState(GoRouterState state) => const HomeRoute();
 
   String get location => GoRouteData.$location(
         '/home',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $MyPageRouteExtension on MyPageRoute {
+  static MyPageRoute _fromState(GoRouterState state) => const MyPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/mypage',
       );
 
   void go(BuildContext context) => context.go(location);
