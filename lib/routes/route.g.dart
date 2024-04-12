@@ -18,6 +18,10 @@ RouteBase get $rootShellRoute => ShellRouteData.$route(
           path: '/',
           factory: $RootRouteExtension._fromState,
         ),
+        GoRouteData.$route(
+          path: '/web_view',
+          factory: $WebViewRouteExtension._fromState,
+        ),
         ShellRouteData.$route(
           navigatorKey: MainRouteData.$navigatorKey,
           factory: $MainRouteDataExtension._fromState,
@@ -28,11 +32,15 @@ RouteBase get $rootShellRoute => ShellRouteData.$route(
               factory: $HomeRouteExtension._fromState,
             ),
             GoRouteData.$route(
-              path: '/mypage',
+              path: '/my_page',
               parentNavigatorKey: MyPageRoute.$parentNavigatorKey,
               factory: $MyPageRouteExtension._fromState,
             ),
           ],
+        ),
+        GoRouteData.$route(
+          path: '/my_page/edit',
+          factory: $MyPageEditRouteExtension._fromState,
         ),
         GoRouteData.$route(
           path: '/sign_in',
@@ -93,6 +101,28 @@ extension $RootRouteExtension on RootRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
+extension $WebViewRouteExtension on WebViewRoute {
+  static WebViewRoute _fromState(GoRouterState state) => WebViewRoute(
+        url: state.uri.queryParameters['url']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/web_view',
+        queryParams: {
+          'url': url,
+        },
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
 extension $MainRouteDataExtension on MainRouteData {
   static MainRouteData _fromState(GoRouterState state) => const MainRouteData();
 }
@@ -115,10 +145,28 @@ extension $HomeRouteExtension on HomeRoute {
 }
 
 extension $MyPageRouteExtension on MyPageRoute {
-  static MyPageRoute _fromState(GoRouterState state) => const MyPageRoute();
+  static MyPageRoute _fromState(GoRouterState state) => MyPageRoute();
 
   String get location => GoRouteData.$location(
-        '/mypage',
+        '/my_page',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $MyPageEditRouteExtension on MyPageEditRoute {
+  static MyPageEditRoute _fromState(GoRouterState state) =>
+      const MyPageEditRoute();
+
+  String get location => GoRouteData.$location(
+        '/my_page/edit',
       );
 
   void go(BuildContext context) => context.go(location);

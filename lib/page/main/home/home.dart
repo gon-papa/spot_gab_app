@@ -73,6 +73,7 @@ class _GoogleMapView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final position = ref.watch(_Providers.myPositionProvider.notifier).state;
+    final user = ref.watch(userNotifierProvider);
     return WidgetMarkerGoogleMap(
       initialCameraPosition: CameraPosition(
         target: LatLng(
@@ -93,9 +94,9 @@ class _GoogleMapView extends HookConsumerWidget {
             position?.latitude ?? 0.0,
             position?.longitude ?? 0.0,
           ),
-          markerId: "myPosition",
+          markerId: user?.uuid ?? "myPosition",
           widget: UserMarker(
-            userImage: Image.network("https://via.placeholder.com/150"),
+            imagePath: user?.imagePath,
             onTap: () {},
             color: Colors.blue,
           ),
@@ -105,7 +106,7 @@ class _GoogleMapView extends HookConsumerWidget {
           markerId: "1",
           widget: UserMarker(
             onTap: () {},
-            userImage: Image.network("https://via.placeholder.com/150"),
+            imagePath: null,
             color: Colors.red,
           ),
         ),
@@ -114,7 +115,7 @@ class _GoogleMapView extends HookConsumerWidget {
           markerId: "2",
           widget: UserMarker(
             onTap: () {},
-            userImage: null,
+            imagePath: null,
             color: Colors.green,
           ),
         ),
@@ -155,9 +156,10 @@ class _LocationButton extends ConsumerWidget {
   }
 }
 
-class _SearchBar extends StatelessWidget {
+class _SearchBar extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.watch(userNotifierProvider);
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 2),
       margin: EdgeInsets.all(15),
@@ -188,7 +190,7 @@ class _SearchBar extends StatelessWidget {
             ),
           ),
           UserIcon(
-            userImage: Image.network("https://via.placeholder.com/150"),
+            imagePath: user?.imagePath,
             onTap: () {},
             size: 45,
           ),
@@ -221,8 +223,7 @@ class _CardList extends StatelessWidget {
   }
 }
 
-class _Card extends StatelessWidget {
-  // 仮のデータを使用
+class _Card extends ConsumerWidget {
   final String userName = "Maximmilian";
   final String userId = "@maxjacobson";
   final String postTime = "3min";
@@ -231,7 +232,9 @@ class _Card extends StatelessWidget {
   final int commentCount = 25; // コメント数
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // 仮のデータを使用
+    final user = ref.watch(userNotifierProvider);
     return Card(
       surfaceTintColor: Colors.white,
       shape: RoundedRectangleBorder(
@@ -243,7 +246,7 @@ class _Card extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             UserIcon(
-              userImage: Image.network(userImageUrl),
+              imagePath: user?.imagePath,
               onTap: () {},
               size: 60,
             ),
@@ -257,7 +260,7 @@ class _Card extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        userName,
+                        user?.accountName ?? '',
                         style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w700,
@@ -266,7 +269,7 @@ class _Card extends StatelessWidget {
                       SizedBox(width: 3.w),
                       Expanded(
                         child: Text(
-                          '$userId $postTime',
+                          '${user?.idAccount ?? ' '} $postTime',
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: TextStyle(

@@ -15,6 +15,7 @@ final routerProvider = Provider(
           final isSignIn =
               await ref.read(userNotifierProvider.notifier).isSignIn();
           if (isSignIn) {
+            await ref.read(userNotifierProvider.notifier).me(ref, context);
             return const HomeRoute().location;
           }
           return const SignInRoute().location;
@@ -30,12 +31,16 @@ final globalKeyProvider = Provider((_) => GlobalKey<NavigatorState>());
 @TypedShellRoute<RootShellRoute>(
   routes: [
     TypedGoRoute<RootRoute>(path: '/'),
+    TypedGoRoute<WebViewRoute>(path: '/web_view'),
     TypedShellRoute<MainRouteData>(
       routes: [
         TypedGoRoute<HomeRoute>(path: '/home'),
-        TypedGoRoute<MyPageRoute>(path: '/mypage'),
+        TypedGoRoute<MyPageRoute>(
+          path: '/my_page',
+        ),
       ],
     ),
+    TypedGoRoute<MyPageEditRoute>(path: '/my_page/edit'),
     TypedGoRoute<SignInRoute>(
       path: '/sign_in',
       routes: [
@@ -81,6 +86,16 @@ class RootRoute extends GoRouteData {
   Widget build(BuildContext context, GoRouterState state) => const SizedBox();
 }
 
+class WebViewRoute extends GoRouteData {
+  final String url;
+  const WebViewRoute({required this.url});
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return WebViewPage(url: url);
+  }
+}
+
 class MainRouteData extends ShellRouteData {
   const MainRouteData();
 
@@ -106,13 +121,22 @@ class HomeRoute extends GoRouteData {
 }
 
 class MyPageRoute extends GoRouteData {
-  const MyPageRoute();
+  MyPageRoute();
 
   static final $parentNavigatorKey = shellNavigatorKey;
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) =>
-      noAnimationPage(const MyPage());
+      noAnimationPage(MyPage());
+}
+
+class MyPageEditRoute extends GoRouteData {
+  const MyPageEditRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const MyPageEdit();
+  }
 }
 
 class SignInRoute extends GoRouteData {

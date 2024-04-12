@@ -21,9 +21,12 @@ mixin _$User {
   String get accountName => throw _privateConstructorUsedError;
   String get idAccount => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
-  String get birthDate => throw _privateConstructorUsedError;
-  String get otherUserInvitationCode => throw _privateConstructorUsedError;
-  bool get isEmailVerified => throw _privateConstructorUsedError;
+  Date get birthDate => throw _privateConstructorUsedError;
+  String? get otherUserInvitationCode => throw _privateConstructorUsedError;
+  bool get emailVerified => throw _privateConstructorUsedError;
+  String? get profile => throw _privateConstructorUsedError;
+  String? get imagePath => throw _privateConstructorUsedError;
+  String? get link => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
@@ -40,9 +43,12 @@ abstract class $UserCopyWith<$Res> {
       String accountName,
       String idAccount,
       String email,
-      String birthDate,
-      String otherUserInvitationCode,
-      bool isEmailVerified});
+      Date birthDate,
+      String? otherUserInvitationCode,
+      bool emailVerified,
+      String? profile,
+      String? imagePath,
+      String? link});
 }
 
 /// @nodoc
@@ -64,8 +70,11 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? idAccount = null,
     Object? email = null,
     Object? birthDate = null,
-    Object? otherUserInvitationCode = null,
-    Object? isEmailVerified = null,
+    Object? otherUserInvitationCode = freezed,
+    Object? emailVerified = null,
+    Object? profile = freezed,
+    Object? imagePath = freezed,
+    Object? link = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -91,15 +100,27 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       birthDate: null == birthDate
           ? _value.birthDate
           : birthDate // ignore: cast_nullable_to_non_nullable
-              as String,
-      otherUserInvitationCode: null == otherUserInvitationCode
+              as Date,
+      otherUserInvitationCode: freezed == otherUserInvitationCode
           ? _value.otherUserInvitationCode
           : otherUserInvitationCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      isEmailVerified: null == isEmailVerified
-          ? _value.isEmailVerified
-          : isEmailVerified // ignore: cast_nullable_to_non_nullable
+              as String?,
+      emailVerified: null == emailVerified
+          ? _value.emailVerified
+          : emailVerified // ignore: cast_nullable_to_non_nullable
               as bool,
+      profile: freezed == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imagePath: freezed == imagePath
+          ? _value.imagePath
+          : imagePath // ignore: cast_nullable_to_non_nullable
+              as String?,
+      link: freezed == link
+          ? _value.link
+          : link // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -117,9 +138,12 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String accountName,
       String idAccount,
       String email,
-      String birthDate,
-      String otherUserInvitationCode,
-      bool isEmailVerified});
+      Date birthDate,
+      String? otherUserInvitationCode,
+      bool emailVerified,
+      String? profile,
+      String? imagePath,
+      String? link});
 }
 
 /// @nodoc
@@ -138,8 +162,11 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? idAccount = null,
     Object? email = null,
     Object? birthDate = null,
-    Object? otherUserInvitationCode = null,
-    Object? isEmailVerified = null,
+    Object? otherUserInvitationCode = freezed,
+    Object? emailVerified = null,
+    Object? profile = freezed,
+    Object? imagePath = freezed,
+    Object? link = freezed,
   }) {
     return _then(_$UserImpl(
       id: null == id
@@ -165,15 +192,27 @@ class __$$UserImplCopyWithImpl<$Res>
       birthDate: null == birthDate
           ? _value.birthDate
           : birthDate // ignore: cast_nullable_to_non_nullable
-              as String,
-      otherUserInvitationCode: null == otherUserInvitationCode
+              as Date,
+      otherUserInvitationCode: freezed == otherUserInvitationCode
           ? _value.otherUserInvitationCode
           : otherUserInvitationCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      isEmailVerified: null == isEmailVerified
-          ? _value.isEmailVerified
-          : isEmailVerified // ignore: cast_nullable_to_non_nullable
+              as String?,
+      emailVerified: null == emailVerified
+          ? _value.emailVerified
+          : emailVerified // ignore: cast_nullable_to_non_nullable
               as bool,
+      profile: freezed == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imagePath: freezed == imagePath
+          ? _value.imagePath
+          : imagePath // ignore: cast_nullable_to_non_nullable
+              as String?,
+      link: freezed == link
+          ? _value.link
+          : link // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -188,8 +227,11 @@ class _$UserImpl implements _User {
       required this.idAccount,
       required this.email,
       required this.birthDate,
-      required this.otherUserInvitationCode,
-      required this.isEmailVerified});
+      this.otherUserInvitationCode = null,
+      required this.emailVerified,
+      this.profile = null,
+      this.imagePath = null,
+      this.link = null});
 
   @override
   final int id;
@@ -202,15 +244,25 @@ class _$UserImpl implements _User {
   @override
   final String email;
   @override
-  final String birthDate;
+  final Date birthDate;
   @override
-  final String otherUserInvitationCode;
+  @JsonKey()
+  final String? otherUserInvitationCode;
   @override
-  final bool isEmailVerified;
+  final bool emailVerified;
+  @override
+  @JsonKey()
+  final String? profile;
+  @override
+  @JsonKey()
+  final String? imagePath;
+  @override
+  @JsonKey()
+  final String? link;
 
   @override
   String toString() {
-    return 'User(id: $id, uuid: $uuid, accountName: $accountName, idAccount: $idAccount, email: $email, birthDate: $birthDate, otherUserInvitationCode: $otherUserInvitationCode, isEmailVerified: $isEmailVerified)';
+    return 'User(id: $id, uuid: $uuid, accountName: $accountName, idAccount: $idAccount, email: $email, birthDate: $birthDate, otherUserInvitationCode: $otherUserInvitationCode, emailVerified: $emailVerified, profile: $profile, imagePath: $imagePath, link: $link)';
   }
 
   @override
@@ -230,13 +282,28 @@ class _$UserImpl implements _User {
             (identical(
                     other.otherUserInvitationCode, otherUserInvitationCode) ||
                 other.otherUserInvitationCode == otherUserInvitationCode) &&
-            (identical(other.isEmailVerified, isEmailVerified) ||
-                other.isEmailVerified == isEmailVerified));
+            (identical(other.emailVerified, emailVerified) ||
+                other.emailVerified == emailVerified) &&
+            (identical(other.profile, profile) || other.profile == profile) &&
+            (identical(other.imagePath, imagePath) ||
+                other.imagePath == imagePath) &&
+            (identical(other.link, link) || other.link == link));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, uuid, accountName, idAccount,
-      email, birthDate, otherUserInvitationCode, isEmailVerified);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      uuid,
+      accountName,
+      idAccount,
+      email,
+      birthDate,
+      otherUserInvitationCode,
+      emailVerified,
+      profile,
+      imagePath,
+      link);
 
   @JsonKey(ignore: true)
   @override
@@ -252,9 +319,12 @@ abstract class _User implements User {
       required final String accountName,
       required final String idAccount,
       required final String email,
-      required final String birthDate,
-      required final String otherUserInvitationCode,
-      required final bool isEmailVerified}) = _$UserImpl;
+      required final Date birthDate,
+      final String? otherUserInvitationCode,
+      required final bool emailVerified,
+      final String? profile,
+      final String? imagePath,
+      final String? link}) = _$UserImpl;
 
   @override
   int get id;
@@ -267,11 +337,17 @@ abstract class _User implements User {
   @override
   String get email;
   @override
-  String get birthDate;
+  Date get birthDate;
   @override
-  String get otherUserInvitationCode;
+  String? get otherUserInvitationCode;
   @override
-  bool get isEmailVerified;
+  bool get emailVerified;
+  @override
+  String? get profile;
+  @override
+  String? get imagePath;
+  @override
+  String? get link;
   @override
   @JsonKey(ignore: true)
   _$$UserImplCopyWith<_$UserImpl> get copyWith =>

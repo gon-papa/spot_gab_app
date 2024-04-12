@@ -4,44 +4,51 @@ class UserNotifier extends StateNotifier<User?> {
   UserNotifier() : super(null);
 
   // ユーザー情報を設定するメソッド
-  User setUser(User user) {
+  User? setUser(User user) {
     state = user;
-    return state!;
+    return state;
+  }
+
+  // AuthenticatedUserをUserに変換
+  User convertAuthenticatedUserToUser(AuthenticatedUser user) {
+    return User(
+      id: user.id,
+      uuid: user.uuid,
+      accountName: user.accountName,
+      idAccount: user.idAccount,
+      email: user.email,
+      birthDate: user.birthDate,
+      otherUserInvitationCode:
+          user.otherUserInvitationCode?.anyOf.values[0].toString(),
+      emailVerified: user.emailVerified,
+      profile: user.profile?.anyOf.values[0].toString(),
+      imagePath: user.imagePath?.anyOf.values[0].toString(),
+      link: user.link?.anyOf.values[0].toString(),
+    );
   }
 
   SecureTokenRepository get secure_token_repository => SecureTokenRepository();
-
-  // ユーザー情報を更新するメソッド
-  bool updateUser({
-    int? id,
-    String? uuid,
-    String? accountName,
-    String? idAccount,
-    String? email,
-    String? birthDate,
-    String? otherUserInvitationCode,
-    bool? isEmailVerified,
-  }) {
-    if (state != null) {
-      state = state?.copyWith(
-        id: id ?? state!.id,
-        uuid: uuid ?? state!.uuid,
-        accountName: accountName ?? state!.accountName,
-        idAccount: idAccount ?? state!.idAccount,
-        email: email ?? state!.email,
-        birthDate: birthDate ?? state!.birthDate,
-        otherUserInvitationCode:
-            otherUserInvitationCode ?? state!.otherUserInvitationCode,
-        isEmailVerified: isEmailVerified ?? state!.isEmailVerified,
-      );
-      return true;
-    }
-    return false;
-  }
+  User? get currentState => state;
 
   Future<bool> isSignIn() async {
     final isToken = await secure_token_repository.getToken();
     return isToken != null;
+  }
+
+  Future<User?> me(ref, context) async {
+    try {
+      final response = await UserRepository().getMe();
+      if (response.isSuccess && response.data != null) {
+        final user = response.data?.data?.user;
+        if (user != null) {
+          return setUser(convertAuthenticatedUserToUser(user));
+        }
+        throw Exception('ユーザー情報が取得できませんでした');
+      }
+    } catch (e) {
+      ref.read(errorMessageHandle)(e.toString(), context);
+    }
+    return null;
   }
 }
 

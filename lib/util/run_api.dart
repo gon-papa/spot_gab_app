@@ -74,7 +74,9 @@ class RunApi {
       final resRefreshToken = response.data?.data?.user?.refreshToken;
 
       if (response.isSuccess && resToken != null && resRefreshToken != null) {
-        await ref.read(secure_token_provider).saveToken(resToken.toString());
+        await ref
+            .read(secure_token_provider)
+            .saveToken(resToken.anyOf.values[0].toString());
         await ref.read(secure_token_provider).saveRefreshToken(resRefreshToken);
         return true;
       }
