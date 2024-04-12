@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spot_gab_app/importer.dart';
+import 'package:now_go_app/importer.dart';
 
 typedef _Providers = MyPageProviders;
 

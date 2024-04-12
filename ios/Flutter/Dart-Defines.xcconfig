@@ -1,5 +1,5 @@
 flavor=develop
-appName=SpotGab develop
+appName=NowGo develop
 appIdSuffix=.develop
 api_url=http://localhost:8000
-user_agent=spot-gab-app
+user_agent=now-go-app

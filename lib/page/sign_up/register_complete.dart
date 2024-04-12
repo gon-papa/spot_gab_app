@@ -1,4 +1,4 @@
-import 'package:spot_gab_app/importer.dart';
+import 'package:now_go_app/importer.dart';
 
 class RegisterComplete extends ConsumerWidget {
   const RegisterComplete({Key? key}) : super(key: key);

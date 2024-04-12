@@ -1,4 +1,4 @@
-import 'package:spot_gab_app/importer.dart';
+import 'package:now_go_app/importer.dart';
 
 Future<void> main() async {
   MyApp.run();
@@ -30,7 +30,7 @@ class MyApp extends ConsumerWidget {
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
         themeMode: ThemeMode.system, // 一旦システム設定に従う
-        title: 'SpotGab',
+        title: 'NowGo',
         localizationsDelegates: L10n.localizationsDelegates,
         supportedLocales: L10n.supportedLocales,
         locale: const Locale('ja', 'JP'),

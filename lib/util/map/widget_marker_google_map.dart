@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:spot_gab_app/importer.dart';
+import 'package:now_go_app/importer.dart';
 
 class WidgetMarkerGoogleMap extends StatefulWidget {
   const WidgetMarkerGoogleMap({

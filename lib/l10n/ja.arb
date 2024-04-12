@@ -56,7 +56,7 @@
   "@passwordResetSendEmailDescription": {
     "description": "パスワード再設定メール送信説明"
   },
-  "signInFormTitle": "SpotGabにサインイン",
+  "signInFormTitle": "NowGoにサインイン",
   "@shareMomentTitle": {
     "description": "アプリのサブタイトル"
   },
