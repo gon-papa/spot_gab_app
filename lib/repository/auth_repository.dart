@@ -42,12 +42,8 @@ class AuthRepository extends BaseRepository {
     final refreshToken = response.data?.refreshToken;
 
     if (response.isSuccess && token != null && refreshToken != null) {
-      await ref
-          .read(secure_token_provider)
-          .saveToken(response.data!.accessToken);
-      await ref
-          .read(secure_token_provider)
-          .saveRefreshToken(response.data!.refreshToken);
+      await ref.read(secure_token_provider).saveToken(token);
+      await ref.read(secure_token_provider).saveRefreshToken(refreshToken);
       return response;
     }
     throw ApiException(DEFAULT_ERROR, result: response);

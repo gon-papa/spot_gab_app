@@ -105,20 +105,10 @@ class RegisterProviders {
   );
 
   static void _save_user({
-    required SignUpUser user,
+    required AuthenticatedUser user,
     required UserNotifier userProvider,
   }) {
-    final usr = User(
-        id: user.id,
-        uuid: user.uuid,
-        accountName: user.accountName,
-        idAccount: user.idAccount,
-        email: user.email,
-        birthDate: user.birthDate.toString(),
-        otherUserInvitationCode: user.otherUserInvitationCode.toString(),
-        isEmailVerified: user.emailVerified);
-
-    userProvider.setUser(usr);
+    userProvider.setUser(userProvider.convertAuthenticatedUserToUser(user));
   }
 
   static SignUpRequest _createRequest({
@@ -143,7 +133,7 @@ class RegisterProviders {
     required String refreshToken,
     required SecureTokenRepository storage,
   }) async {
-    await storage.saveToken(token.toString());
+    await storage.saveToken(token.anyOf.values[0].toString());
     await storage.saveRefreshToken(refreshToken);
   }
 

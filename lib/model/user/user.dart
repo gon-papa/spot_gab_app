@@ -10,8 +10,11 @@ class User with _$User {
     required String accountName,
     required String idAccount,
     required String email,
-    required String birthDate,
-    required String otherUserInvitationCode,
-    required bool isEmailVerified,
+    required Date birthDate,
+    @Default(null) String? otherUserInvitationCode,
+    required bool emailVerified,
+    @Default(null) String? profile,
+    @Default(null) String? imagePath,
+    @Default(null) String? link,
   }) = _User;
 }

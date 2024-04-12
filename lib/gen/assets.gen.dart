@@ -25,6 +25,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/heart_icon.svg
   SvgGenImage get heartIcon => const SvgGenImage('assets/icons/heart_icon.svg');
 
+  /// File path: assets/icons/link_icon.svg
+  SvgGenImage get linkIcon => const SvgGenImage('assets/icons/link_icon.svg');
+
   /// File path: assets/icons/share_icon.svg
   SvgGenImage get shareIcon => const SvgGenImage('assets/icons/share_icon.svg');
 
@@ -34,11 +37,19 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<SvgGenImage> get values =>
-      [bookmarkIcon, commentIcon, heartIcon, shareIcon, userMarker];
+      [bookmarkIcon, commentIcon, heartIcon, linkIcon, shareIcon, userMarker];
 }
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
+
+  /// File path: assets/images/default_user_header.png
+  AssetGenImage get defaultUserHeader =>
+      const AssetGenImage('assets/images/default_user_header.png');
+
+  /// File path: assets/images/default_user_icon.png
+  AssetGenImage get defaultUserIcon =>
+      const AssetGenImage('assets/images/default_user_icon.png');
 
   /// File path: assets/images/setting_icon.png
   AssetGenImage get settingIcon =>
@@ -57,8 +68,14 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/spot_gab_splash_icon.png');
 
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [settingIcon, spotGabIcon, spotGabIconOnly, spotGabSplashIcon];
+  List<AssetGenImage> get values => [
+        defaultUserHeader,
+        defaultUserIcon,
+        settingIcon,
+        spotGabIcon,
+        spotGabIconOnly,
+        spotGabSplashIcon
+      ];
 }
 
 class Assets {

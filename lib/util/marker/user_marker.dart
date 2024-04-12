@@ -1,19 +1,19 @@
 import 'package:spot_gab_app/importer.dart';
 
 class UserMarker extends StatelessWidget {
-  final Image? userImage;
+  final String? imagePath;
   final Function onTap;
   final Color color;
 
   UserMarker({
-    required this.userImage,
+    required this.imagePath,
     required this.onTap,
     this.color = Colors.blue,
   });
 
-  Widget _userImageWidget(Image? image) {
+  Widget _userImageWidget(String? imagePath) {
     return UserIcon(
-      userImage: image,
+      imagePath: imagePath,
       onTap: () => {},
       size: 140,
     );
@@ -31,7 +31,7 @@ class UserMarker extends StatelessWidget {
   }
 
   Widget _combinedWidget(
-    Image? userImage,
+    String? iamgePath,
     Color color,
   ) {
     return SizedBox(
@@ -47,7 +47,7 @@ class UserMarker extends StatelessWidget {
           Positioned(
             top: 90,
             left: 85,
-            child: _userImageWidget(userImage),
+            child: _userImageWidget(imagePath),
           ),
         ],
       ),
@@ -56,6 +56,6 @@ class UserMarker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _combinedWidget(userImage, color);
+    return _combinedWidget(imagePath, color);
   }
 }

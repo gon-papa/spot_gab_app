@@ -21,17 +21,18 @@ class MainScaffold extends ConsumerWidget {
   }
 }
 
-class _BottomNavigationBar extends StatelessWidget {
+class _BottomNavigationBar extends ConsumerWidget {
   const _BottomNavigationBar();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.read(userNotifierProvider.notifier).currentState;
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 10, 0, 20),
       child: Row(
         children: [
           _BottomNavigationItem.home(),
-          _BottomNavigationItem.mypage(),
+          _BottomNavigationItem.mypage(uuid: user?.uuid ?? ''),
         ],
       ),
     );
@@ -51,10 +52,11 @@ class _BottomNavigationItem extends ConsumerWidget {
         path: const HomeRoute().location,
       );
 
-  factory _BottomNavigationItem.mypage() => _BottomNavigationItem(
+  factory _BottomNavigationItem.mypage({required String uuid}) =>
+      _BottomNavigationItem(
         label: 'myPage',
         icon: Icons.person,
-        path: const MyPageRoute().location,
+        path: MyPageRoute().location,
       );
 
   final String label;
@@ -64,6 +66,9 @@ class _BottomNavigationItem extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentPath = ref.watch(_currentPathProvider);
+    // クエリ文字列対策
+    final basePath = Uri.parse(path).path;
+
     return Expanded(
       child: TextButton(
         onPressed: () {
@@ -74,12 +79,12 @@ class _BottomNavigationItem extends ConsumerWidget {
           children: [
             Icon(
               icon,
-              color: currentPath == path ? Colors.blue : Colors.grey,
+              color: currentPath == basePath ? Colors.blue : Colors.grey,
             ),
             Text(
               label,
               style: TextStyle(
-                color: currentPath == path ? Colors.blue : Colors.grey,
+                color: currentPath == basePath ? Colors.blue : Colors.grey,
                 fontSize: 10,
               ),
             ),
