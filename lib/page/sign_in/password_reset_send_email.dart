@@ -1,4 +1,4 @@
-import 'package:spot_gab_app/importer.dart';
+import 'package:now_go_app/importer.dart';
 
 class PasswordResetSendEmail extends StatelessWidget {
   const PasswordResetSendEmail({Key? key}) : super(key: key);

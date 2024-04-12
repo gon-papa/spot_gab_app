@@ -1,4 +1,4 @@
-import 'package:spot_gab_app/importer.dart'; // このimport文は、あなたのプロジェクトに依存します。
+import 'package:now_go_app/importer.dart'; // このimport文は、あなたのプロジェクトに依存します。
 
 class ErrorListenerWidget extends ConsumerWidget {
   const ErrorListenerWidget({Key? key, required this.child}) : super(key: key);

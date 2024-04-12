@@ -1,4 +1,4 @@
-import 'package:spot_gab_app/importer.dart';
+import 'package:now_go_app/importer.dart';
 
 class HasErrorView extends StatelessWidget {
   const HasErrorView({Key? key}) : super(key: key);

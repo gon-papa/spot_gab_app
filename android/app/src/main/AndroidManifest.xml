@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.spot_gab_app">
+    package="com.example.now_go_app">
    <application
         android:label="${label}"
         android:name="${applicationName}"

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:spot_gab_app/importer.dart';
+import 'package:now_go_app/importer.dart';
 
 class MyPageEditProviders {
   // プレビュー画像を保持するProvider(新しい画像>ユーザー画像>デフォルト画像の順で表示)
