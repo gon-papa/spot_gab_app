@@ -1,4 +1,4 @@
-import 'package:spot_gab_app/importer.dart';
+import 'package:now_go_app/importer.dart';
 
 class AuthRepository extends BaseRepository {
   AuthRepository() : super();
@@ -13,7 +13,7 @@ class AuthRepository extends BaseRepository {
       final response = await authApi.signUp(
         signUpRequest: signUpRequest,
         xLanguage: "ja",
-        xUserAgent: "spot-gab-app",
+        xUserAgent: const String.fromEnvironment("user_agent"),
       );
       return response.data;
     });
@@ -32,7 +32,7 @@ class AuthRepository extends BaseRepository {
         password: password,
         headers: {
           "x-language": "ja",
-          "x-user-agent": "spot-gab-app",
+          "x-user-agent": const String.fromEnvironment("user_agent")
         },
       );
       return response.data;
@@ -55,7 +55,7 @@ class AuthRepository extends BaseRepository {
       final authApi = getClient(token: token).getAuthApi();
       final response = await authApi.signOut(
         xLanguage: "ja",
-        xUserAgent: "spot-gab-app",
+        xUserAgent: const String.fromEnvironment("user_agent"),
       );
       return response.data;
     });
@@ -70,7 +70,7 @@ class AuthRepository extends BaseRepository {
       final authApi = getClient().getAuthApi();
       final response = await authApi.refreshToken(
         xLanguage: "ja",
-        xUserAgent: "spot-gab-app",
+        xUserAgent: const String.fromEnvironment("user_agent"),
         refreshTokenRequest: RefreshTokenRequest(
           (b) => b.refreshToken = refreshToken,
         ),
@@ -89,7 +89,7 @@ class AuthRepository extends BaseRepository {
       final response = await authApi.emailExists(
         emailExistsRequest: EmailExistsRequest(((b) => b.email = email)),
         xLanguage: "ja",
-        xUserAgent: "spot-gab-app",
+        xUserAgent: const String.fromEnvironment("user_agent"),
       );
       return response.data;
     });
@@ -106,7 +106,7 @@ class AuthRepository extends BaseRepository {
         idAccountExistsRequest:
             IdAccountExistsRequest(((b) => b.idAccount = '@$idAccount')),
         xLanguage: "ja",
-        xUserAgent: "spot-gab-app",
+        xUserAgent: const String.fromEnvironment("user_agent"),
       );
       return response.data;
     });
@@ -122,7 +122,7 @@ class AuthRepository extends BaseRepository {
       final response = await authApi.resetPassword(
         resetPasswordRequest: ResetPasswordRequest(((b) => b.email = email)),
         xLanguage: "ja",
-        xUserAgent: "spot-gab-app",
+        xUserAgent: const String.fromEnvironment("user_agent"),
       );
       return response.data;
     });

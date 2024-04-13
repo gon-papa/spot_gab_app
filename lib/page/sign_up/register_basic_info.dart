@@ -1,4 +1,5 @@
-import 'package:spot_gab_app/importer.dart';
+import 'package:flutter/material.dart';
+import 'package:now_go_app/importer.dart';
 
 typedef _Providers = RegisterProviders;
 
@@ -106,6 +107,18 @@ class _BirthdayInput extends ConsumerWidget {
             initialDate: DateTime.now(),
             firstDate: DateTime(1900),
             lastDate: DateTime.now(),
+            builder: (context, child) => Theme(
+              data: ThemeData.light().copyWith(
+                colorScheme: ColorScheme.light(
+                  onPrimary: Colors.white,
+                  surface: Colors.white,
+                  onSurface: Colors.black,
+                  surfaceTint: Colors.transparent,
+                ),
+                dialogBackgroundColor: Colors.white,
+              ),
+              child: child!,
+            ),
           ).then(
             (value) {
               if (value != null) {

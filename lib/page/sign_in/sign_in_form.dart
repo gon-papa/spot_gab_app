@@ -1,4 +1,4 @@
-import 'package:spot_gab_app/importer.dart';
+import 'package:now_go_app/importer.dart';
 
 typedef _Providers = SignInProviders;
 
@@ -47,7 +47,7 @@ class _LogoImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Assets.images.spotGabIconOnly.image(
+    return Assets.images.nowGoLogo.image(
       width: 60.w,
       height: 60.h,
     );

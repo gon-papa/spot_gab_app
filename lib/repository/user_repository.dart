@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:spot_gab_app/importer.dart';
+import 'package:now_go_app/importer.dart';
 import 'package:http_parser/http_parser.dart';
 
 class UserRepository extends BaseRepository {
@@ -15,7 +15,7 @@ class UserRepository extends BaseRepository {
       final userApi = getClient(token: token).getUserApi();
       final response = await userApi.getMe(
         xLanguage: "ja",
-        xUserAgent: "spot-gab-app",
+        xUserAgent: const String.fromEnvironment("user_agent"),
       );
       return response.data;
     });
@@ -35,7 +35,7 @@ class UserRepository extends BaseRepository {
 
       final response = await userApi.saveUserProfile(
         xLanguage: "ja",
-        xUserAgent: "spot-gab-app",
+        xUserAgent: const String.fromEnvironment("user_agent"),
         accountName: accountName,
         link: link,
         profile: profile,

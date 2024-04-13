@@ -1,4 +1,4 @@
-import 'package:spot_gab_app/importer.dart';
+import 'package:now_go_app/importer.dart';
 
 typedef _Providers = HomeProviders;
 typedef _MarkerProviders = GabMarkerProvider;
@@ -11,8 +11,9 @@ class Home extends HookConsumerWidget {
     final asyncMyPosition = useFuture(
       // キャッシュ
       useMemoized(
-          () => ref.read(_Providers.getMyPositionProvider)(context: context),
-          []),
+        () => ref.read(_Providers.getMyPositionProvider)(context: context),
+        [],
+      ),
       initialData: null,
     );
 
@@ -25,6 +26,7 @@ class Home extends HookConsumerWidget {
     }
 
     if (asyncMyPosition.hasError || asyncMyPosition.error == null) {
+      print(asyncMyPosition.error);
       return const HasErrorView();
     }
     return const SizedBox();
@@ -176,7 +178,7 @@ class _SearchBar extends ConsumerWidget {
       ),
       child: Row(
         children: <Widget>[
-          Assets.images.spotGabIcon.image(
+          Assets.images.nowGoLogo.image(
             width: 25.w,
             height: 25.h,
           ),

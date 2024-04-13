@@ -56,7 +56,7 @@
   "@passwordResetSendEmailDescription": {
     "description": "Password reset email sent description"
   },
-  "signInFormTitle": "Sign in to SpotGab",
+  "signInFormTitle": "Sign in to NowGO",
   "@shareMomentTitle": {
     "description": "Subtitle of the app"
   },

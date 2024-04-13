@@ -1,5 +1,5 @@
-import 'package:spot_gab_app/importer.dart';
-import 'package:spot_gab_app/page/sign_in/password_reset_send_email.dart';
+import 'package:now_go_app/importer.dart';
+import 'package:now_go_app/page/sign_in/password_reset_send_email.dart';
 
 part 'route.g.dart';
 
