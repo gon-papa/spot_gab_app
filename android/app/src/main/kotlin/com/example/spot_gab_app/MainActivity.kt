@@ -1,4 +1,4 @@
-package com.example.spot_gab_app
+package com.example.now_go_app
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,4 +1,4 @@
-import 'package:spot_gab_app/importer.dart';
+import 'package:now_go_app/importer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class UserIcon extends ConsumerWidget {

@@ -1,4 +1,4 @@
-# spot_gab_app
+# now_go
 
 A new Flutter project.
 

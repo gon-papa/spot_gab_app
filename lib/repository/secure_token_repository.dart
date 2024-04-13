@@ -1,5 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:spot_gab_app/importer.dart';
+import 'package:now_go_app/importer.dart';
 
 class SecureTokenRepository extends BaseRepository {
   SecureTokenRepository() : super();

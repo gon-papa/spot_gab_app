@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "spot_gab_app",
+            "name": "now_go_app",
             "request": "launch",
             "type": "dart",
             "flutterMode": "debug",
@@ -14,7 +14,7 @@
             ]
         },
         {
-            "name": "spot_gab_app (profile mode)",
+            "name": "now_go_app (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile",
@@ -23,7 +23,7 @@
             ]
         },
         {
-            "name": "spot_gab_app (release mode)",
+            "name": "now_go_app (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release",

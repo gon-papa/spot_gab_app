@@ -1,4 +1,4 @@
-import 'package:spot_gab_app/importer.dart';
+import 'package:now_go_app/importer.dart';
 
 class PasswordResetSendEmail extends StatelessWidget {
   const PasswordResetSendEmail({Key? key}) : super(key: key);
@@ -44,9 +44,9 @@ class _LogoImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Assets.images.spotGabIcon.image(
-      width: 100.w,
-      height: 100.h,
+    return Assets.images.nowGoLogo.image(
+      width: 60.w,
+      height: 60.h,
     );
   }
 }
