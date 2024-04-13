@@ -28,6 +28,10 @@ class $AssetsIconsGen {
   /// File path: assets/icons/link_icon.svg
   SvgGenImage get linkIcon => const SvgGenImage('assets/icons/link_icon.svg');
 
+  /// File path: assets/icons/now_go_logo.svg
+  SvgGenImage get nowGoLogo =>
+      const SvgGenImage('assets/icons/now_go_logo.svg');
+
   /// File path: assets/icons/share_icon.svg
   SvgGenImage get shareIcon => const SvgGenImage('assets/icons/share_icon.svg');
 
@@ -36,8 +40,15 @@ class $AssetsIconsGen {
       const SvgGenImage('assets/icons/user_marker.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values =>
-      [bookmarkIcon, commentIcon, heartIcon, linkIcon, shareIcon, userMarker];
+  List<SvgGenImage> get values => [
+        bookmarkIcon,
+        commentIcon,
+        heartIcon,
+        linkIcon,
+        nowGoLogo,
+        shareIcon,
+        userMarker
+      ];
 }
 
 class $AssetsImagesGen {
@@ -51,30 +62,25 @@ class $AssetsImagesGen {
   AssetGenImage get defaultUserIcon =>
       const AssetGenImage('assets/images/default_user_icon.png');
 
+  /// File path: assets/images/now_go_logo.png
+  AssetGenImage get nowGoLogo =>
+      const AssetGenImage('assets/images/now_go_logo.png');
+
+  /// File path: assets/images/now_go_square_logo.svg
+  SvgGenImage get nowGoSquareLogo =>
+      const SvgGenImage('assets/images/now_go_square_logo.svg');
+
   /// File path: assets/images/setting_icon.png
   AssetGenImage get settingIcon =>
       const AssetGenImage('assets/images/setting_icon.png');
 
-  /// File path: assets/images/spot_gab_icon.png
-  AssetGenImage get spotGabIcon =>
-      const AssetGenImage('assets/images/spot_gab_icon.png');
-
-  /// File path: assets/images/spot_gab_icon_only.png
-  AssetGenImage get spotGabIconOnly =>
-      const AssetGenImage('assets/images/spot_gab_icon_only.png');
-
-  /// File path: assets/images/spot_gab_splash_icon.png
-  AssetGenImage get spotGabSplashIcon =>
-      const AssetGenImage('assets/images/spot_gab_splash_icon.png');
-
   /// List of all assets
-  List<AssetGenImage> get values => [
+  List<dynamic> get values => [
         defaultUserHeader,
         defaultUserIcon,
-        settingIcon,
-        spotGabIcon,
-        spotGabIconOnly,
-        spotGabSplashIcon
+        nowGoLogo,
+        nowGoSquareLogo,
+        settingIcon
       ];
 }
 

@@ -44,9 +44,9 @@ class _LogoImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Assets.images.spotGabIcon.image(
-      width: 100.w,
-      height: 100.h,
+    return Assets.images.nowGoLogo.image(
+      width: 80.w,
+      height: 80.h,
     );
   }
 }
