@@ -10,6 +10,7 @@ class SignIn extends ConsumerWidget {
         children: [
           _Margin(height: 120),
           _LogoImage(),
+          _Margin(height: 10),
           _SubTitle(),
           _Margin(height: 80),
           _SignInButton(),
@@ -50,9 +51,9 @@ class _LogoImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Assets.images.spotGabIcon.image(
-      width: 150.w,
-      height: 150.h,
+    return Assets.images.nowGoSquareLogo.svg(
+      width: 100.w,
+      height: 100.h,
     );
   }
 }
@@ -62,11 +63,32 @@ class _SubTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      L10n.of(context)?.shareMomentTitle ?? '',
-      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          'なうGO',
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+                fontSize: 13.sp,
+              ),
+        ),
+        Text(
+          'NowGO',
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+                fontSize: 40.sp,
+                height: 0.6.h,
+              ),
+        ),
+        Text(
+          L10n.of(context)?.shareMomentTitle ?? '',
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+                fontSize: 13.sp,
+              ),
+        ),
+      ],
     );
   }
 }

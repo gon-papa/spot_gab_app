@@ -64,8 +64,8 @@ flutter_gen:
     flutter_svg: true
 
 flutter_native_splash:
-  color: "#ffffff"  # スプラッシュスクリーンの背景色を指定します。
-  image: assets/images/spot_gab_splash_icon.png  # スプラッシュスクリーンに使用する画像のパス（プロジェクト内の適切なパスを指定）
+  color: "#000000"  # スプラッシュスクリーンの背景色を指定します。
+  image: assets/images/now_go_logo.png  # スプラッシュスクリーンに使用する画像のパス（プロジェクト内の適切なパスを指定）
   android: true  # Android向けのスプラッシュスクリーンを有効にするかどうか
   ios: true  # iOS向けのスプラッシュスクリーンを有効にするかどうか
   fullscreen: true #スプラッシュスクリーンを画面全体にしたい時はtrueを指定します。
