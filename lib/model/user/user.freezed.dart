@@ -17,6 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$User {
   int get id => throw _privateConstructorUsedError;
+  int? get file_id => throw _privateConstructorUsedError;
+  Files? get image => throw _privateConstructorUsedError;
   String get uuid => throw _privateConstructorUsedError;
   String get accountName => throw _privateConstructorUsedError;
   String get idAccount => throw _privateConstructorUsedError;
@@ -25,7 +27,6 @@ mixin _$User {
   String? get otherUserInvitationCode => throw _privateConstructorUsedError;
   bool get emailVerified => throw _privateConstructorUsedError;
   String? get profile => throw _privateConstructorUsedError;
-  String? get imagePath => throw _privateConstructorUsedError;
   String? get link => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -39,6 +40,8 @@ abstract class $UserCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
+      int? file_id,
+      Files? image,
       String uuid,
       String accountName,
       String idAccount,
@@ -47,7 +50,6 @@ abstract class $UserCopyWith<$Res> {
       String? otherUserInvitationCode,
       bool emailVerified,
       String? profile,
-      String? imagePath,
       String? link});
 }
 
@@ -65,6 +67,8 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @override
   $Res call({
     Object? id = null,
+    Object? file_id = freezed,
+    Object? image = freezed,
     Object? uuid = null,
     Object? accountName = null,
     Object? idAccount = null,
@@ -73,7 +77,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
     Object? otherUserInvitationCode = freezed,
     Object? emailVerified = null,
     Object? profile = freezed,
-    Object? imagePath = freezed,
     Object? link = freezed,
   }) {
     return _then(_value.copyWith(
@@ -81,6 +84,14 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      file_id: freezed == file_id
+          ? _value.file_id
+          : file_id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as Files?,
       uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
@@ -112,10 +123,6 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
       profile: freezed == profile
           ? _value.profile
           : profile // ignore: cast_nullable_to_non_nullable
-              as String?,
-      imagePath: freezed == imagePath
-          ? _value.imagePath
-          : imagePath // ignore: cast_nullable_to_non_nullable
               as String?,
       link: freezed == link
           ? _value.link
@@ -134,6 +141,8 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @useResult
   $Res call(
       {int id,
+      int? file_id,
+      Files? image,
       String uuid,
       String accountName,
       String idAccount,
@@ -142,7 +151,6 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? otherUserInvitationCode,
       bool emailVerified,
       String? profile,
-      String? imagePath,
       String? link});
 }
 
@@ -157,6 +165,8 @@ class __$$UserImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? file_id = freezed,
+    Object? image = freezed,
     Object? uuid = null,
     Object? accountName = null,
     Object? idAccount = null,
@@ -165,7 +175,6 @@ class __$$UserImplCopyWithImpl<$Res>
     Object? otherUserInvitationCode = freezed,
     Object? emailVerified = null,
     Object? profile = freezed,
-    Object? imagePath = freezed,
     Object? link = freezed,
   }) {
     return _then(_$UserImpl(
@@ -173,6 +182,14 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
+      file_id: freezed == file_id
+          ? _value.file_id
+          : file_id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      image: freezed == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as Files?,
       uuid: null == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
@@ -205,10 +222,6 @@ class __$$UserImplCopyWithImpl<$Res>
           ? _value.profile
           : profile // ignore: cast_nullable_to_non_nullable
               as String?,
-      imagePath: freezed == imagePath
-          ? _value.imagePath
-          : imagePath // ignore: cast_nullable_to_non_nullable
-              as String?,
       link: freezed == link
           ? _value.link
           : link // ignore: cast_nullable_to_non_nullable
@@ -222,6 +235,8 @@ class __$$UserImplCopyWithImpl<$Res>
 class _$UserImpl implements _User {
   const _$UserImpl(
       {required this.id,
+      this.file_id = null,
+      this.image = null,
       required this.uuid,
       required this.accountName,
       required this.idAccount,
@@ -230,11 +245,16 @@ class _$UserImpl implements _User {
       this.otherUserInvitationCode = null,
       required this.emailVerified,
       this.profile = null,
-      this.imagePath = null,
       this.link = null});
 
   @override
   final int id;
+  @override
+  @JsonKey()
+  final int? file_id;
+  @override
+  @JsonKey()
+  final Files? image;
   @override
   final String uuid;
   @override
@@ -255,14 +275,11 @@ class _$UserImpl implements _User {
   final String? profile;
   @override
   @JsonKey()
-  final String? imagePath;
-  @override
-  @JsonKey()
   final String? link;
 
   @override
   String toString() {
-    return 'User(id: $id, uuid: $uuid, accountName: $accountName, idAccount: $idAccount, email: $email, birthDate: $birthDate, otherUserInvitationCode: $otherUserInvitationCode, emailVerified: $emailVerified, profile: $profile, imagePath: $imagePath, link: $link)';
+    return 'User(id: $id, file_id: $file_id, image: $image, uuid: $uuid, accountName: $accountName, idAccount: $idAccount, email: $email, birthDate: $birthDate, otherUserInvitationCode: $otherUserInvitationCode, emailVerified: $emailVerified, profile: $profile, link: $link)';
   }
 
   @override
@@ -271,6 +288,8 @@ class _$UserImpl implements _User {
         (other.runtimeType == runtimeType &&
             other is _$UserImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.file_id, file_id) || other.file_id == file_id) &&
+            (identical(other.image, image) || other.image == image) &&
             (identical(other.uuid, uuid) || other.uuid == uuid) &&
             (identical(other.accountName, accountName) ||
                 other.accountName == accountName) &&
@@ -285,8 +304,6 @@ class _$UserImpl implements _User {
             (identical(other.emailVerified, emailVerified) ||
                 other.emailVerified == emailVerified) &&
             (identical(other.profile, profile) || other.profile == profile) &&
-            (identical(other.imagePath, imagePath) ||
-                other.imagePath == imagePath) &&
             (identical(other.link, link) || other.link == link));
   }
 
@@ -294,6 +311,8 @@ class _$UserImpl implements _User {
   int get hashCode => Object.hash(
       runtimeType,
       id,
+      file_id,
+      image,
       uuid,
       accountName,
       idAccount,
@@ -302,7 +321,6 @@ class _$UserImpl implements _User {
       otherUserInvitationCode,
       emailVerified,
       profile,
-      imagePath,
       link);
 
   @JsonKey(ignore: true)
@@ -315,6 +333,8 @@ class _$UserImpl implements _User {
 abstract class _User implements User {
   const factory _User(
       {required final int id,
+      final int? file_id,
+      final Files? image,
       required final String uuid,
       required final String accountName,
       required final String idAccount,
@@ -323,11 +343,14 @@ abstract class _User implements User {
       final String? otherUserInvitationCode,
       required final bool emailVerified,
       final String? profile,
-      final String? imagePath,
       final String? link}) = _$UserImpl;
 
   @override
   int get id;
+  @override
+  int? get file_id;
+  @override
+  Files? get image;
   @override
   String get uuid;
   @override
@@ -344,8 +367,6 @@ abstract class _User implements User {
   bool get emailVerified;
   @override
   String? get profile;
-  @override
-  String? get imagePath;
   @override
   String? get link;
   @override

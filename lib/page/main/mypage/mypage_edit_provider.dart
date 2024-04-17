@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:now_go_app/importer.dart';
+import 'package:now_go_app/repository/image_repository.dart';
 
 class MyPageEditProviders {
   // プレビュー画像を保持するProvider(新しい画像>ユーザー画像>デフォルト画像の順で表示)
@@ -13,9 +14,9 @@ class MyPageEditProviders {
           File(newImage.path),
           fit: BoxFit.cover,
         );
-      } else if (user?.imagePath != null && user!.imagePath!.isNotEmpty) {
+      } else if (user?.image?.path != null && user!.image!.path.isNotEmpty) {
         return Image.network(
-          user!.imagePath!,
+          user!.image!.path,
           fit: BoxFit.cover,
         );
       } else {
@@ -47,6 +48,13 @@ class MyPageEditProviders {
     (ref, profile) => TextEditingController(text: profile),
   );
 
+  static void _clearTextEditingController(ProviderRef ref) {
+    ref.read(accountNameController(null));
+    ref.read(linkController(null));
+    ref.read(profileController(null));
+    ref.read(newImageProvider.notifier).state = null;
+  }
+
   static final myPageEditSubmitProvider = Provider(
     (ref) => ({
       required BuildContext context,
@@ -58,11 +66,32 @@ class MyPageEditProviders {
       try {
         final formState = ref.read(myPageEditGlobalKeyProvider).currentState;
         if (formState != null && formState.validate()) {
+          Files? images = null;
+          if (newImage != null) {
+            final imageResponse = await ref
+                .read(fileRepositoryProvider)
+                .uploadImage(images: [newImage]);
+
+            if (imageResponse.isSuccess) {
+              images = Files(
+                (b) => b
+                  ..uuid = imageResponse.data?.data?.first.uuid
+                  ..name = imageResponse.data?.data?.first.name
+                  ..path = imageResponse.data?.data?.first.path
+                  ..isUsed = true,
+              );
+            } else {
+              ref.read(errorMessageHandle)(
+                  imageResponse.error ?? "画像のアップロードに失敗しました", context);
+              return;
+            }
+          }
+
           final response = await ref.read(userRepositoryProvider).updateMe(
                 accountName: accountName,
                 link: link,
                 profile: profile,
-                image: newImage,
+                image: images,
               );
 
           if (response.isSuccess) {
@@ -79,4 +108,4 @@ class MyPageEditProviders {
 }
 
 final myPageEditProvider =
-    Provider<MyPageEditProviders>((ref) => MyPageEditProviders());
+    Provider.autoDispose<MyPageEditProviders>((ref) => MyPageEditProviders());
