@@ -16,12 +16,14 @@ class ErrorListenerWidget extends ConsumerWidget {
           context: navigatorKey.currentState?.context ?? context,
           barrierDismissible: false,
           builder: (BuildContext dialogContext) {
-            return Dialog(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0)),
-              elevation: 0,
-              backgroundColor: Colors.transparent,
-              child: _buildDialogContent(dialogContext, ref, message),
+            return SingleChildScrollView(
+              child: Dialog(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0)),
+                elevation: 0,
+                backgroundColor: Colors.transparent,
+                child: _buildDialogContent(dialogContext, ref, message),
+              ),
             );
           },
         );

@@ -98,7 +98,7 @@ class _GoogleMapView extends HookConsumerWidget {
           ),
           markerId: user?.uuid ?? "myPosition",
           widget: UserMarker(
-            imagePath: user?.imagePath,
+            imagePath: user?.image?.path,
             onTap: () {},
             color: Colors.blue,
           ),
@@ -192,9 +192,10 @@ class _SearchBar extends ConsumerWidget {
             ),
           ),
           UserIcon(
-            imagePath: user?.imagePath,
+            imagePath: user?.image?.path,
             onTap: () {},
             size: 45,
+            color: Colors.grey,
           ),
         ],
       ),
@@ -248,9 +249,10 @@ class _Card extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             UserIcon(
-              imagePath: user?.imagePath,
+              imagePath: user?.image?.path,
               onTap: () {},
               size: 60,
+              color: Colors.grey,
             ),
             SizedBox(width: 5.w),
             Expanded(

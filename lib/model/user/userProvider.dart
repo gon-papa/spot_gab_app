@@ -13,6 +13,8 @@ class UserNotifier extends StateNotifier<User?> {
   User convertAuthenticatedUserToUser(AuthenticatedUser user) {
     return User(
       id: user.id,
+      file_id: user.imageId?.anyOf.values[0] as int?,
+      image: user.file?.anyOf.values[0] as Files?,
       uuid: user.uuid,
       accountName: user.accountName,
       idAccount: user.idAccount,
@@ -22,7 +24,6 @@ class UserNotifier extends StateNotifier<User?> {
           user.otherUserInvitationCode?.anyOf.values[0].toString(),
       emailVerified: user.emailVerified,
       profile: user.profile?.anyOf.values[0].toString(),
-      imagePath: user.imagePath?.anyOf.values[0].toString(),
       link: user.link?.anyOf.values[0].toString(),
     );
   }
