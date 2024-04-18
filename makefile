@@ -20,15 +20,17 @@ openapi: ## Generate openapi
 
 schema: ## Generate schema
 	make openapi
-	rm -rf lib/gen/openapi
+	rm -rf lib/openapi
 	docker run --rm -v ${PWD}:/local \
 	openapitools/openapi-generator-cli:latest generate \
 	-i /local/openapi.json \
 	-g dart-dio \
-	-o /local/lib/gen/openapi
-	cd lib/gen/openapi/ && \
+	-o /local/lib/openapi
+	cd lib/openapi/ && \
 	fvm flutter pub get && \
-	fvm flutter pub run build_runner build --delete-conflicting-outputs
+	fvm flutter pub run build_runner build --delete-conflicting-outputs && \
+	cd ../ && \
+	fvm flutter pub get
 
 merge_arb:
 	@echo "Merging ARB files..."
