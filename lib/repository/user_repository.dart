@@ -7,7 +7,7 @@ class UserRepository extends BaseRepository {
   final _helper = ProviderContainer().read(runApiProvider);
   final ref = ProviderContainer();
 
-  Future<Result<UserResponse?>> getMe() async {
+  Future<Result<MeResponse?>> getMe() async {
     final response = await _helper.run(onSuccess: () async {
       final token = await ref.read(secure_token_provider).getToken();
       print(token);
