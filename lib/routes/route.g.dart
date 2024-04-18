@@ -43,6 +43,10 @@ RouteBase get $rootShellRoute => ShellRouteData.$route(
           factory: $MyPageEditRouteExtension._fromState,
         ),
         GoRouteData.$route(
+          path: '/post',
+          factory: $PostRouteExtension._fromState,
+        ),
+        GoRouteData.$route(
           path: '/sign_in',
           factory: $SignInRouteExtension._fromState,
           routes: [
@@ -167,6 +171,23 @@ extension $MyPageEditRouteExtension on MyPageEditRoute {
 
   String get location => GoRouteData.$location(
         '/my_page/edit',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $PostRouteExtension on PostRoute {
+  static PostRoute _fromState(GoRouterState state) => const PostRoute();
+
+  String get location => GoRouteData.$location(
+        '/post',
       );
 
   void go(BuildContext context) => context.go(location);

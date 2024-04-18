@@ -14,9 +14,31 @@ class MainScaffold extends ConsumerWidget {
     return Scaffold(
       bottomNavigationBar: ProviderScope(
         overrides: [_currentPathProvider.overrideWithValue(fullPath)],
-        child: const _BottomNavigationBar(),
+        child: BottomAppBar(
+          padding: EdgeInsets.symmetric(vertical: 0),
+          height: 40.h,
+          surfaceTintColor: Theme.of(context).colorScheme.surface,
+          child: const _BottomNavigationBar(),
+        ),
       ),
       body: body,
+      floatingActionButton: SizedBox(
+        width: 50.w,
+        height: 50.w,
+        child: FloatingActionButton(
+          heroTag: 'post',
+          elevation: 5,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(100)),
+          ),
+          backgroundColor: Theme.of(context).extension<MyColors>()!.nowGoColor,
+          onPressed: () {
+            PostRoute().push(context);
+          },
+          child: const Icon(Icons.add_box, size: 35),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
@@ -27,14 +49,11 @@ class _BottomNavigationBar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final user = ref.read(userNotifierProvider.notifier).currentState;
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 10, 0, 20),
-      child: Row(
-        children: [
-          _BottomNavigationItem.home(),
-          _BottomNavigationItem.mypage(uuid: user?.uuid ?? ''),
-        ],
-      ),
+    return Row(
+      children: [
+        _BottomNavigationItem.home(),
+        _BottomNavigationItem.mypage(uuid: user?.uuid ?? ''),
+      ],
     );
   }
 }
@@ -79,13 +98,18 @@ class _BottomNavigationItem extends ConsumerWidget {
           children: [
             Icon(
               icon,
-              color: currentPath == basePath ? Colors.blue : Colors.grey,
+              size: 25,
+              color: currentPath == basePath
+                  ? Theme.of(context).extension<MyColors>()!.nowGoColor
+                  : Colors.grey,
             ),
             Text(
               label,
               style: TextStyle(
-                color: currentPath == basePath ? Colors.blue : Colors.grey,
-                fontSize: 10,
+                color: currentPath == basePath
+                    ? Theme.of(context).extension<MyColors>()!.nowGoColor
+                    : Colors.grey,
+                fontSize: 10.sp,
               ),
             ),
           ],

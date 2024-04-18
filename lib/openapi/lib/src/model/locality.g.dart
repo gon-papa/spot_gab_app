@@ -1,0 +1,92 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'locality.dart';
+
+// **************************************************************************
+// BuiltValueGenerator
+// **************************************************************************
+
+class _$Locality extends Locality {
+  @override
+  final AnyOf anyOf;
+
+  factory _$Locality([void Function(LocalityBuilder)? updates]) =>
+      (new LocalityBuilder()..update(updates))._build();
+
+  _$Locality._({required this.anyOf}) : super._() {
+    BuiltValueNullFieldError.checkNotNull(anyOf, r'Locality', 'anyOf');
+  }
+
+  @override
+  Locality rebuild(void Function(LocalityBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  LocalityBuilder toBuilder() => new LocalityBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is Locality && anyOf == other.anyOf;
+  }
+
+  @override
+  int get hashCode {
+    var _$hash = 0;
+    _$hash = $jc(_$hash, anyOf.hashCode);
+    _$hash = $jf(_$hash);
+    return _$hash;
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper(r'Locality')..add('anyOf', anyOf))
+        .toString();
+  }
+}
+
+class LocalityBuilder implements Builder<Locality, LocalityBuilder> {
+  _$Locality? _$v;
+
+  AnyOf? _anyOf;
+  AnyOf? get anyOf => _$this._anyOf;
+  set anyOf(AnyOf? anyOf) => _$this._anyOf = anyOf;
+
+  LocalityBuilder() {
+    Locality._defaults(this);
+  }
+
+  LocalityBuilder get _$this {
+    final $v = _$v;
+    if ($v != null) {
+      _anyOf = $v.anyOf;
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(Locality other) {
+    ArgumentError.checkNotNull(other, 'other');
+    _$v = other as _$Locality;
+  }
+
+  @override
+  void update(void Function(LocalityBuilder)? updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  Locality build() => _build();
+
+  _$Locality _build() {
+    final _$result = _$v ??
+        new _$Locality._(
+            anyOf: BuiltValueNullFieldError.checkNotNull(
+                anyOf, r'Locality', 'anyOf'));
+    replace(_$result);
+    return _$result;
+  }
+}
+
+// ignore_for_file: deprecated_member_use_from_same_package,type=lint

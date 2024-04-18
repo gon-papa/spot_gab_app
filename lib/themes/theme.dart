@@ -17,6 +17,12 @@ class AppTheme {
         onError: Colors.white,
       ),
       scaffoldBackgroundColor: Colors.white,
+      // カスタムカラーを追加
+      extensions: <ThemeExtension<dynamic>>[
+        MyColors(
+          nowGoColor: const Color(0xFF5151C6),
+        ),
+      ],
       appBarTheme: const AppBarTheme(
         color: Colors.white,
         iconTheme: IconThemeData(color: Color(0xFF3C4043)),
@@ -85,7 +91,27 @@ class AppTheme {
           color: const Color(0xFF3C4043),
         ),
       ),
-      // その他のカスタムテーマ設定をここに追加
     );
+  }
+}
+
+class MyColors extends ThemeExtension<MyColors> {
+  final Color nowGoColor;
+
+  const MyColors({required this.nowGoColor});
+
+  @override
+  MyColors copyWith({Color? accentColor}) {
+    return MyColors(nowGoColor: accentColor ?? this.nowGoColor);
+  }
+
+  @override
+  MyColors lerp(ThemeExtension<MyColors>? other, double t) {
+    if (other is MyColors) {
+      return MyColors(
+        nowGoColor: Color.lerp(nowGoColor, other.nowGoColor, t)!,
+      );
+    }
+    return this;
   }
 }
