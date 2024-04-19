@@ -39,7 +39,6 @@ dependencies:
   webview_flutter: ^4.7.0
   geolocator: ^11.0.0
   flutter_image_compress: ^2.2.0
-  keyboard_actions: ^4.2.0
 
 dev_dependencies:
   flutter_test:

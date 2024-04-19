@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:now_go_app/importer.dart';
 
 class PostProviders {
@@ -16,6 +18,13 @@ class PostProviders {
   static final postLocationSelectProvider = StateProvider<LocationPostOption>(
     (ref) => LocationPostOption.currentLocation,
   );
+
+  static final newImageProvider = StateProvider.autoDispose<List<File>>(
+    (ref) => <File>[],
+  );
+
+  // image_picker選択後のずれ込み防止監視更新用Provider
+  static final sizedBoxOnProviser = StateProvider.autoDispose((ref) => 0);
 }
 
 final postProvider =

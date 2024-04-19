@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:now_go_app/importer.dart';
 
 typedef _Providers = PostProviders;
@@ -15,24 +17,14 @@ class Post extends ConsumerWidget {
       });
     });
 
-    return _Scaffold(
-      body: const _Body(),
-    );
-  }
-}
-
-class _Scaffold extends StatelessWidget {
-  const _Scaffold({Key? key, required this.body}) : super(key: key);
-
-  final Widget body;
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         leading: IconButton(
           icon: const Icon(Icons.close),
           onPressed: () {
+            ref.read(_Providers.postController).clear();
             context.pop();
           },
         ),
@@ -41,7 +33,7 @@ class _Scaffold extends StatelessWidget {
           HorizontalMargin(width: 10),
         ],
       ),
-      body: body,
+      body: _Body(),
     );
   }
 }
@@ -54,12 +46,12 @@ class _Body extends ConsumerWidget {
     return Form(
       key: ref.watch(_Providers.formKeyProvider),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           _PostTextFiled(),
-          Spacer(),
-          _LocationToolBar(),
-          _ImageToolBar(),
+          _KeyBoardToolBars(),
+          // image_picker選択後のずれ込み防止
+          if (ref.watch(_Providers.sizedBoxOnProviser) != 0)
+            SizedBox(height: 25)
         ],
       ),
     );
@@ -73,23 +65,91 @@ class _PostTextFiled extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final controller = ref.watch(_Providers.postController);
     final focusNode = ref.watch(_Providers.focusNodeProvider);
+    final images = ref.watch(_Providers.newImageProvider);
+    double gridHeight;
+    if (images.length == 1) {
+      gridHeight = 200; // 1枚の場合の高さ
+    } else if (images.length <= 4) {
+      gridHeight = 400; // 2〜4枚の場合の高さ（2行表示）
+    } else {
+      gridHeight = 600; // それ以上の場合（適宜調整）
+    }
 
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: 20,
-        right: 20,
-      ),
-      child: TextFormField(
-        controller: controller,
-        focusNode: focusNode,
-        maxLines: null,
-        keyboardType: TextInputType.multiline,
-        maxLength: 1000,
-        decoration: InputDecoration(
-          hintText: "何か投稿してみましょう",
-          border: InputBorder.none,
+    return Expanded(
+      child: Container(
+        width: double.infinity,
+        color: Colors.white,
+        child: ListView(
+          padding: const EdgeInsets.all(10),
+          children: [
+            TextFormField(
+              controller: controller,
+              focusNode: focusNode,
+              maxLines: null,
+              keyboardType: TextInputType.multiline,
+              maxLength: 1000,
+              decoration: InputDecoration(
+                hintText: "何か投稿してみましょう",
+                border: InputBorder.none,
+              ),
+            ),
+            if (images.isNotEmpty) // 画像がある場合のみ表示
+              _PostFieldImagePreview(),
+          ],
         ),
       ),
+    );
+  }
+}
+
+class _PostFieldImagePreview extends ConsumerWidget {
+  const _PostFieldImagePreview({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final images = ref.watch(_Providers.newImageProvider);
+    int crossAxisCount = images.length >= 3 ? 2 : images.length;
+
+    return SizedBox(
+      height: 400, // 固定高さ
+      child: GridView.builder(
+        physics: NeverScrollableScrollPhysics(), // スクロールを無効にする
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: crossAxisCount,
+          childAspectRatio: (images.length == 1)
+              ? 1.0
+              : (images.length == 2)
+                  ? 1.5
+                  : 1,
+          mainAxisSpacing: 8, // 縦方向のスペース
+          crossAxisSpacing: 8, // 横方向のスペース
+        ),
+        itemCount: images.length,
+        itemBuilder: (context, index) {
+          return ClipRRect(
+            borderRadius: BorderRadius.circular(8), // 角を丸める
+            child: Image.file(
+              images[index],
+              fit: BoxFit.cover, // 画像を枠にフィットさせる
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _KeyBoardToolBars extends ConsumerWidget {
+  const _KeyBoardToolBars({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        _LocationToolBar(),
+        _ImageToolBar(),
+      ],
     );
   }
 }
@@ -148,6 +208,7 @@ class _ImageToolBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final newImage = ref.watch(_Providers.newImageProvider);
     return Container(
       decoration: BoxDecoration(
         border: Border(
@@ -158,44 +219,136 @@ class _ImageToolBar extends ConsumerWidget {
         ),
       ),
       height: 90,
-      child: ListView(
+      child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        children: [
-          const HorizontalMargin(width: 10),
-          UnconstrainedBox(
-            child: _ImageUploadButton(),
-          ),
-        ],
+        itemCount: newImage.length + 2, // 元の要素数 + 2 (マージンとアップロードボタン)
+        itemBuilder: (context, index) {
+          if (index == 0) {
+            return const HorizontalMargin(width: 10);
+          } else if (index == 1) {
+            return UnconstrainedBox(
+              child: _ImageUploadButton(),
+            );
+          } else {
+            // indexから2を引くことで、正しいリストのインデックスを得る
+            final imageIndex = index - 2;
+            return UnconstrainedBox(
+              child: _PreviewImage(
+                image: newImage[imageIndex],
+                index: imageIndex, // ここでインデックスを渡す
+              ),
+            );
+          }
+        },
       ),
     );
   }
 }
 
-class _ImageUploadButton extends ConsumerWidget {
-  const _ImageUploadButton({Key? key}) : super(key: key);
+class _PreviewImage extends ConsumerWidget {
+  final File image;
+  final int index;
+  const _PreviewImage({
+    Key? key,
+    required this.image,
+    required this.index,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ElevatedButton(
-      onPressed: () {},
-      style: ElevatedButton.styleFrom(
-        surfaceTintColor: Colors.transparent,
-        shadowColor: Colors.transparent,
-        backgroundColor: Colors.transparent,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-          side: BorderSide(
-            color: Theme.of(context).extension<MyColors>()!.nowGoColor,
+    return Stack(
+      alignment: Alignment.topRight,
+      children: [
+        Container(
+          width: 50.w,
+          height: 50.w,
+          padding: const EdgeInsets.all(0),
+          margin: const EdgeInsets.only(right: 10),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: FileImage(image),
+              fit: BoxFit.cover,
+            ),
+            border: Border.all(
+              color: Theme.of(context).extension<MyColors>()!.nowGoColor,
+            ),
+            borderRadius: BorderRadius.circular(10),
           ),
         ),
-        padding: const EdgeInsets.all(0),
-        fixedSize: Size(50.w, 50.w),
-      ),
-      child: Center(
-        child: Icon(
-          Icons.add_photo_alternate,
-          size: 35,
-          color: Theme.of(context).extension<MyColors>()!.nowGoColor,
+        Padding(
+          padding: const EdgeInsets.only(right: 10),
+          child: GestureDetector(
+            onTap: () {
+              final newImageNotifier =
+                  ref.read(_Providers.newImageProvider.notifier);
+              List<File> updatedImages = List.from(newImageNotifier.state);
+              updatedImages.removeAt(index);
+              newImageNotifier.state = updatedImages;
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.5),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Icons.close,
+                size: 20,
+                color: Theme.of(context).extension<MyColors>()!.nowGoColor,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _ImageUploadButton extends ConsumerWidget {
+  _ImageUploadButton({Key? key}) : super(key: key);
+  final ImagePicker _picker = ImagePicker();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final imageCount =
+        ref.watch(_Providers.newImageProvider.notifier).state.length;
+    return Padding(
+      padding: const EdgeInsets.only(right: 10),
+      child: ElevatedButton(
+        onPressed: imageCount < 4
+            ? () async {
+                ref.read(_Providers.sizedBoxOnProviser.notifier).state++;
+                final XFile? file =
+                    await _picker.pickImage(source: ImageSource.gallery);
+                if (file != null) {
+                  ref.read(imageCompressProvider)(file, (compressedFile) {
+                    final newImage =
+                        ref.read(_Providers.newImageProvider.notifier);
+                    List<File> updatedImages = List<File>.from(newImage.state);
+                    updatedImages.add(File(compressedFile!.path));
+                    newImage.state = updatedImages;
+                  });
+                }
+              }
+            : null,
+        style: ElevatedButton.styleFrom(
+          surfaceTintColor: Colors.transparent,
+          shadowColor: Colors.transparent,
+          backgroundColor: Colors.transparent,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+            side: BorderSide(
+              color: Theme.of(context).extension<MyColors>()!.nowGoColor,
+            ),
+          ),
+          padding: const EdgeInsets.all(0),
+          fixedSize: Size(50.w, 50.w),
+        ),
+        child: Center(
+          child: Icon(
+            Icons.add_photo_alternate,
+            size: 35,
+            color: Theme.of(context).extension<MyColors>()!.nowGoColor,
+          ),
         ),
       ),
     );
@@ -210,7 +363,8 @@ class _SubmitPostButton extends ConsumerWidget {
     final postController = ref.watch(_Providers.postController);
     final postLocationSelect = ref.watch(_Providers.postLocationSelectProvider);
 
-    if (postController.text.isEmpty) {
+    // 改行と空文字を防ぐ
+    if (postController.text.trim().isEmpty) {
       return const _PostButton(
         disable: true,
       );
@@ -235,7 +389,7 @@ class _PostButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return MainButton(
       onPressed: disable ? null : () {},
-      width: 60,
+      width: 70,
       height: 10,
       text: "投稿",
       fontSize: 12,
