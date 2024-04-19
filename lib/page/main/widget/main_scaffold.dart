@@ -52,6 +52,7 @@ class _BottomNavigationBar extends ConsumerWidget {
     return Row(
       children: [
         _BottomNavigationItem.home(),
+        HorizontalMargin(width: 20),
         _BottomNavigationItem.mypage(uuid: user?.uuid ?? ''),
       ],
     );

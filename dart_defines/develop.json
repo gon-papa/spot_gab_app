@@ -4,5 +4,4 @@
     "appIdSuffix": ".develop",
     "api_url": "http://localhost:8000",
     "user_agent": "now-go-app"
-    
 }

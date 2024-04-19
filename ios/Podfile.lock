@@ -1,5 +1,10 @@
 PODS:
   - Flutter (1.0.0)
+  - flutter_image_compress_common (1.0.0):
+    - Flutter
+    - Mantle
+    - SDWebImage
+    - SDWebImageWebPCoder
   - flutter_native_splash (0.0.1):
     - Flutter
   - flutter_secure_storage (3.3.1):
@@ -19,11 +24,32 @@ PODS:
     - TOCropViewController (~> 2.6.1)
   - image_picker_ios (0.0.1):
     - Flutter
+  - libwebp (1.3.2):
+    - libwebp/demux (= 1.3.2)
+    - libwebp/mux (= 1.3.2)
+    - libwebp/sharpyuv (= 1.3.2)
+    - libwebp/webp (= 1.3.2)
+  - libwebp/demux (1.3.2):
+    - libwebp/webp
+  - libwebp/mux (1.3.2):
+    - libwebp/demux
+  - libwebp/sharpyuv (1.3.2)
+  - libwebp/webp (1.3.2):
+    - libwebp/sharpyuv
+  - Mantle (2.2.0):
+    - Mantle/extobjc (= 2.2.0)
+  - Mantle/extobjc (2.2.0)
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
   - permission_handler_apple (9.3.0):
     - Flutter
+  - SDWebImage (5.19.1):
+    - SDWebImage/Core (= 5.19.1)
+  - SDWebImage/Core (5.19.1)
+  - SDWebImageWebPCoder (0.14.6):
+    - libwebp (~> 1.0)
+    - SDWebImage/Core (~> 5.17)
   - sqflite (0.0.3):
     - Flutter
     - FlutterMacOS
@@ -33,6 +59,7 @@ PODS:
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
+  - flutter_image_compress_common (from `.symlinks/plugins/flutter_image_compress_common/ios`)
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - geolocator_apple (from `.symlinks/plugins/geolocator_apple/ios`)
@@ -47,11 +74,17 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - GoogleMaps
+    - libwebp
+    - Mantle
+    - SDWebImage
+    - SDWebImageWebPCoder
     - TOCropViewController
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
+  flutter_image_compress_common:
+    :path: ".symlinks/plugins/flutter_image_compress_common/ios"
   flutter_native_splash:
     :path: ".symlinks/plugins/flutter_native_splash/ios"
   flutter_secure_storage:
@@ -75,6 +108,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  flutter_image_compress_common: ec1d45c362c9d30a3f6a0426c297f47c52007e3e
   flutter_native_splash: edf599c81f74d093a4daf8e17bd7a018854bc778
   flutter_secure_storage: 7953c38a04c3fdbb00571bcd87d8e3b5ceb9daec
   geolocator_apple: 6cbaf322953988e009e5ecb481f07efece75c450
@@ -82,8 +116,12 @@ SPEC CHECKSUMS:
   GoogleMaps: 8939898920281c649150e0af74aa291c60f2e77d
   image_cropper: 60c2789d1f1a78c873235d4319ca0c34a69f2d98
   image_picker_ios: b545a5f16c0fa88e3ecbbce3ed4de45567a8ec18
+  libwebp: 1786c9f4ff8a279e4dac1e8f385004d5fc253009
+  Mantle: c5aa8794a29a022dfbbfc9799af95f477a69b62d
   path_provider_foundation: 3784922295ac71e43754bd15e0653ccfd36a147c
   permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2
+  SDWebImage: 40b0b4053e36c660a764958bff99eed16610acbb
+  SDWebImageWebPCoder: e38c0a70396191361d60c092933e22c20d5b1380
   sqflite: 673a0e54cc04b7d6dba8d24fb8095b31c3a99eec
   TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
   webview_flutter_wkwebview: be0f0d33777f1bfd0c9fdcb594786704dbf65f36
