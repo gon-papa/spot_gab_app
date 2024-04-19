@@ -33,7 +33,7 @@ class Post extends ConsumerWidget {
           HorizontalMargin(width: 10),
         ],
       ),
-      body: _Body(),
+      body: const _Body(),
     );
   }
 }
@@ -47,8 +47,8 @@ class _Body extends ConsumerWidget {
       key: ref.watch(_Providers.formKeyProvider),
       child: Column(
         children: <Widget>[
-          _PostTextFiled(),
-          _KeyBoardToolBars(),
+          const _PostTextFiled(),
+          const _KeyBoardToolBars(),
           // image_picker選択後のずれ込み防止
           if (ref.watch(_Providers.sizedBoxOnProviser) != 0)
             SizedBox(height: 25)
@@ -66,14 +66,6 @@ class _PostTextFiled extends ConsumerWidget {
     final controller = ref.watch(_Providers.postController);
     final focusNode = ref.watch(_Providers.focusNodeProvider);
     final images = ref.watch(_Providers.newImageProvider);
-    double gridHeight;
-    if (images.length == 1) {
-      gridHeight = 200; // 1枚の場合の高さ
-    } else if (images.length <= 4) {
-      gridHeight = 400; // 2〜4枚の場合の高さ（2行表示）
-    } else {
-      gridHeight = 600; // それ以上の場合（適宜調整）
-    }
 
     return Expanded(
       child: Container(
@@ -88,13 +80,13 @@ class _PostTextFiled extends ConsumerWidget {
               maxLines: null,
               keyboardType: TextInputType.multiline,
               maxLength: 1000,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: "何か投稿してみましょう",
                 border: InputBorder.none,
               ),
             ),
             if (images.isNotEmpty) // 画像がある場合のみ表示
-              _PostFieldImagePreview(),
+              const _PostFieldImagePreview(),
           ],
         ),
       ),
@@ -139,16 +131,16 @@ class _PostFieldImagePreview extends ConsumerWidget {
   }
 }
 
-class _KeyBoardToolBars extends ConsumerWidget {
+class _KeyBoardToolBars extends StatelessWidget {
   const _KeyBoardToolBars({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        _LocationToolBar(),
-        _ImageToolBar(),
+        const _LocationToolBar(),
+        const _ImageToolBar(),
       ],
     );
   }
@@ -227,7 +219,7 @@ class _ImageToolBar extends ConsumerWidget {
             return const HorizontalMargin(width: 10);
           } else if (index == 1) {
             return UnconstrainedBox(
-              child: _ImageUploadButton(),
+              child: const _ImageUploadButton(),
             );
           } else {
             // indexから2を引くことで、正しいリストのインデックスを得る
@@ -304,11 +296,11 @@ class _PreviewImage extends ConsumerWidget {
 }
 
 class _ImageUploadButton extends ConsumerWidget {
-  _ImageUploadButton({Key? key}) : super(key: key);
-  final ImagePicker _picker = ImagePicker();
+  const _ImageUploadButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final ImagePicker _picker = ImagePicker();
     final imageCount =
         ref.watch(_Providers.newImageProvider.notifier).state.length;
     return Padding(
@@ -381,12 +373,12 @@ class _SubmitPostButton extends ConsumerWidget {
   }
 }
 
-class _PostButton extends ConsumerWidget {
+class _PostButton extends StatelessWidget {
   final bool disable;
   const _PostButton({Key? key, this.disable = false}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return MainButton(
       onPressed: disable ? null : () {},
       width: 70,
@@ -397,11 +389,11 @@ class _PostButton extends ConsumerWidget {
   }
 }
 
-class _SelectLocationButton extends ConsumerWidget {
+class _SelectLocationButton extends StatelessWidget {
   const _SelectLocationButton({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return MainButton(
       onPressed: () {},
       width: 100,
