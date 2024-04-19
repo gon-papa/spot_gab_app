@@ -24,7 +24,11 @@ class AppTheme {
         ),
       ],
       appBarTheme: const AppBarTheme(
-        color: Colors.white,
+        // color: Colors.white,
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.white,
+        surfaceTintColor: Colors.white,
+        shadowColor: Colors.transparent,
         iconTheme: IconThemeData(color: Color(0xFF3C4043)),
         titleTextStyle: TextStyle(
           color: Color(0xFF3C4043),
