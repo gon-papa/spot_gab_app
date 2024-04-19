@@ -20,30 +20,35 @@ class MyPageEdit extends HookConsumerWidget {
     }
 
     if (asyncUser.hasData) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('ユーザー情報編集'),
-          centerTitle: true,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              MyPageRoute().go(context);
-            },
+      return GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text('ユーザー情報編集'),
+            centerTitle: true,
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                MyPageRoute().go(context);
+              },
+            ),
           ),
-        ),
-        body: SafeArea(
-          top: false,
-          child: SingleChildScrollView(
-            child: Form(
-              key: ref.watch(_Providers.myPageEditGlobalKeyProvider),
-              child: Padding(
-                padding: EdgeInsets.only(left: 40.w, right: 40.w),
-                child: _Body(),
+          body: SafeArea(
+            top: false,
+            child: SingleChildScrollView(
+              child: Form(
+                key: ref.watch(_Providers.myPageEditGlobalKeyProvider),
+                child: Padding(
+                  padding: EdgeInsets.only(left: 40.w, right: 40.w),
+                  child: _Body(),
+                ),
               ),
             ),
           ),
+          bottomNavigationBar: _EditButton(),
         ),
-        bottomNavigationBar: _EditButton(),
       );
     }
 

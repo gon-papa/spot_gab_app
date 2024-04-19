@@ -4,6 +4,9 @@
 run: ## fulutter run
 	fvm flutter run --dart-define-from-file=dart_defines/develop.json
 
+run-d: ## fulutter run machine
+	fvm flutter run --release --dart-define-from-file=dart_defines/machine.json
+
 gen: ## Generate files
 	fvm flutter pub run build_runner build --delete-conflicting-outputs
 	make merge_arb

@@ -73,3 +73,5 @@ export 'package:now_go_app/page/validation/mypage/mypage_validation.dart';
 export 'package:now_go_app/page/main/web_view/web_view_page.dart';
 export 'package:now_go_app/page/post/post.dart';
 export 'package:now_go_app/page/post/post_provider.dart';
+export 'package:now_go_app/page/util_widget/button/main_button.dart';
+export 'package:now_go_app/util/image_compress.dart';
