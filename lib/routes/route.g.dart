@@ -45,6 +45,12 @@ RouteBase get $rootShellRoute => ShellRouteData.$route(
         GoRouteData.$route(
           path: '/post',
           factory: $PostRouteExtension._fromState,
+          routes: [
+            GoRouteData.$route(
+              path: 'location',
+              factory: $PostLocationRouteExtension._fromState,
+            ),
+          ],
         ),
         GoRouteData.$route(
           path: '/sign_in',
@@ -188,6 +194,24 @@ extension $PostRouteExtension on PostRoute {
 
   String get location => GoRouteData.$location(
         '/post',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $PostLocationRouteExtension on PostLocationRoute {
+  static PostLocationRoute _fromState(GoRouterState state) =>
+      const PostLocationRoute();
+
+  String get location => GoRouteData.$location(
+        '/post/location',
       );
 
   void go(BuildContext context) => context.go(location);

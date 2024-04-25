@@ -41,7 +41,12 @@ final globalKeyProvider = Provider((_) => GlobalKey<NavigatorState>());
       ],
     ),
     TypedGoRoute<MyPageEditRoute>(path: '/my_page/edit'),
-    TypedGoRoute<PostRoute>(path: '/post'),
+    TypedGoRoute<PostRoute>(
+      path: '/post',
+      routes: [
+        TypedGoRoute<PostLocationRoute>(path: 'location'),
+      ],
+    ),
     TypedGoRoute<SignInRoute>(
       path: '/sign_in',
       routes: [
@@ -145,7 +150,16 @@ class PostRoute extends GoRouteData {
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) =>
-      bottomSlideUpPage(Post());
+      bottomSlideUpPageAnimation(Post());
+}
+
+class PostLocationRoute extends GoRouteData {
+  const PostLocationRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const PostLocation();
+  }
 }
 
 class SignInRoute extends GoRouteData {
@@ -233,7 +247,7 @@ CustomTransitionPage<void> noAnimationPage(Widget page) {
   );
 }
 
-CustomTransitionPage<void> bottomSlideUpPage(Widget page) {
+CustomTransitionPage<void> bottomSlideUpPageAnimation(Widget page) {
   return CustomTransitionPage<void>(
     child: page,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
