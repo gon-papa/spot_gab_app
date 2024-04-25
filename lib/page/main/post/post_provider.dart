@@ -15,32 +15,19 @@ class PostProviders {
     (ref) => FocusNode(),
   );
 
-  static final postLocationSelectProvider = StateProvider<LocationPostOption>(
-    (ref) => LocationPostOption.currentLocation,
-  );
-
   static final newImageProvider = StateProvider.autoDispose<List<File>>(
     (ref) => <File>[],
   );
 
   // image_picker選択後のずれ込み防止監視更新用Provider
   static final sizedBoxOnProviser = StateProvider.autoDispose((ref) => 0);
+
+  static final googleMapControllerProvider =
+      StateProvider<GoogleMapController?>((ref) => null);
+
+  static final postPositionProvider =
+      StateProvider.autoDispose<LatLng>((ref) => LatLng(0, 0));
 }
 
 final postProvider =
     Provider.autoDispose<PostProviders>((ref) => PostProviders());
-
-enum LocationPostOption { currentLocation, otherLocation }
-
-extension LocationPostOptionExtension on LocationPostOption {
-  String get displayName {
-    switch (this) {
-      case LocationPostOption.currentLocation:
-        return '現在地で投稿';
-      case LocationPostOption.otherLocation:
-        return '場所を選択';
-      default:
-        return '';
-    }
-  }
-}

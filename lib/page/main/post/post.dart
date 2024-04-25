@@ -12,9 +12,7 @@ class Post extends ConsumerWidget {
     final focusNode = ref.watch(_Providers.focusNodeProvider);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Future.delayed(Duration(milliseconds: 100), () {
-        focusNode.requestFocus();
-      });
+      focusNode.requestFocus();
     });
 
     return Scaffold(
@@ -139,58 +137,8 @@ class _KeyBoardToolBars extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        const _LocationToolBar(),
         const _ImageToolBar(),
       ],
-    );
-  }
-}
-
-class _LocationToolBar extends ConsumerWidget {
-  const _LocationToolBar({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border(
-          top: BorderSide(
-            width: 0.3,
-            color: Theme.of(context).extension<MyColors>()!.nowGoColor,
-          ),
-        ),
-      ),
-      height: 50,
-      child: Row(
-        children: [
-          const HorizontalMargin(width: 10),
-          // ラジオボタン
-          Expanded(
-            child: RadioListTile(
-              contentPadding: EdgeInsets.zero,
-              title: Text(LocationPostOption.currentLocation.displayName),
-              value: LocationPostOption.currentLocation,
-              groupValue: ref.watch(_Providers.postLocationSelectProvider),
-              onChanged: (value) {
-                ref.read(_Providers.postLocationSelectProvider.notifier).state =
-                    value as LocationPostOption;
-              },
-            ),
-          ),
-          Expanded(
-            child: RadioListTile(
-              contentPadding: EdgeInsets.zero,
-              title: Text(LocationPostOption.otherLocation.displayName),
-              value: LocationPostOption.otherLocation,
-              groupValue: ref.watch(_Providers.postLocationSelectProvider),
-              onChanged: (value) {
-                ref.read(_Providers.postLocationSelectProvider.notifier).state =
-                    value as LocationPostOption;
-              },
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
@@ -301,12 +249,11 @@ class _ImageUploadButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final ImagePicker _picker = ImagePicker();
-    final imageCount =
-        ref.watch(_Providers.newImageProvider.notifier).state.length;
+    final imageCount = ref.watch(_Providers.newImageProvider);
     return Padding(
       padding: const EdgeInsets.only(right: 10),
       child: ElevatedButton(
-        onPressed: imageCount < 4
+        onPressed: imageCount.length < 4
             ? () async {
                 ref.read(_Providers.sizedBoxOnProviser.notifier).state++;
                 final XFile? file =
@@ -353,49 +300,33 @@ class _SubmitPostButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final postController = ref.watch(_Providers.postController);
-    final postLocationSelect = ref.watch(_Providers.postLocationSelectProvider);
 
     // 改行と空文字を防ぐ
     if (postController.text.trim().isEmpty) {
-      return const _PostButton(
+      return const _SelectLocationButton(
         disable: true,
       );
     }
 
-    if (postLocationSelect == LocationPostOption.currentLocation) {
-      return const _PostButton();
-    }
-    if (postLocationSelect == LocationPostOption.otherLocation) {
-      return const _SelectLocationButton();
-    }
-
-    return const SizedBox();
+    return const _SelectLocationButton();
   }
 }
 
-class _PostButton extends StatelessWidget {
+class _SelectLocationButton extends ConsumerWidget {
   final bool disable;
-  const _PostButton({Key? key, this.disable = false}) : super(key: key);
+  const _SelectLocationButton({Key? key, this.disable = false})
+      : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final focusNode = ref.read(_Providers.focusNodeProvider);
     return MainButton(
-      onPressed: disable ? null : () {},
-      width: 70,
-      height: 10,
-      text: "投稿",
-      fontSize: 12,
-    );
-  }
-}
-
-class _SelectLocationButton extends StatelessWidget {
-  const _SelectLocationButton({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MainButton(
-      onPressed: () {},
+      onPressed: disable
+          ? null
+          : () {
+              PostLocationRoute().push(context);
+              focusNode.unfocus();
+            },
       width: 100,
       height: 10,
       text: "場所を選択",

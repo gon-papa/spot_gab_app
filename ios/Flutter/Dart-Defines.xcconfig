@@ -1,5 +1,6 @@
-flavor=machine
-appName=NowGo machine
-appIdSuffix=.machine
-api_url=http://192.168.3.8:8000
+flavor=develop
+appName=NowGo develop
+appIdSuffix=.develop
+api_url=http://localhost:8000
 user_agent=now-go-app
+google_maps_api_key=AIzaSyCT7JMq-iDEcaPBSOe5soXLAwLnJ1iPRos

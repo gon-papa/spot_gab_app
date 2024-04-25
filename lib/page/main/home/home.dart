@@ -1,7 +1,8 @@
 import 'package:now_go_app/importer.dart';
+import 'package:now_go_app/page/main/geo_coding_provider.dart';
 
 typedef _Providers = HomeProviders;
-typedef _MarkerProviders = GabMarkerProvider;
+typedef _MapProviders = MapProviders;
 
 class Home extends HookConsumerWidget {
   Home({Key? key}) : super(key: key);
@@ -11,7 +12,7 @@ class Home extends HookConsumerWidget {
     final asyncMyPosition = useFuture(
       // キャッシュ
       useMemoized(
-        () => ref.read(_Providers.getMyPositionProvider)(context: context),
+        () => ref.read(_MapProviders.getMyPositionProvider)(context: context),
         [],
       ),
       initialData: null,
@@ -49,7 +50,19 @@ class _Body extends ConsumerWidget {
               top: 30.h,
               left: 0,
               right: 0,
-              child: _SearchBar(),
+              child: LocationSearchBar(
+                onFunction: (String address) async {
+                  final placemark = await ref
+                      .read(GeoCodingProviders.placemarkFromAddressProvider)(
+                    address: address,
+                  );
+                  ref.read(_MapProviders.myLatLngProvider.notifier).state =
+                      LatLng(
+                    placemark[0].latitude,
+                    placemark[0].longitude,
+                  );
+                },
+              ),
             ),
             Positioned(
               bottom: 20.h,
@@ -60,7 +73,9 @@ class _Body extends ConsumerWidget {
             Positioned(
               right: 10.w,
               bottom: 130.h,
-              child: _LocationButton(),
+              child: CurrentLocationButton(
+                controller: ref.watch(_Providers.googleMapControllerProvider),
+              ),
             ),
           ],
         ),
@@ -74,13 +89,13 @@ class _GoogleMapView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final position = ref.watch(_Providers.myPositionProvider.notifier).state;
+    final myLatLng = ref.watch(_MapProviders.myLatLngProvider.notifier).state;
     final user = ref.watch(userNotifierProvider);
     return WidgetMarkerGoogleMap(
       initialCameraPosition: CameraPosition(
         target: LatLng(
-          position?.latitude ?? 0.0,
-          position?.longitude ?? 0.0,
+          myLatLng.latitude,
+          myLatLng.longitude,
         ),
         zoom: 15,
       ),
@@ -93,8 +108,8 @@ class _GoogleMapView extends HookConsumerWidget {
       widgetMarkers: [
         WidgetMarker(
           position: LatLng(
-            position?.latitude ?? 0.0,
-            position?.longitude ?? 0.0,
+            myLatLng.latitude,
+            myLatLng.longitude,
           ),
           markerId: user?.uuid ?? "myPosition",
           widget: UserMarker(
@@ -122,83 +137,6 @@ class _GoogleMapView extends HookConsumerWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class _LocationButton extends ConsumerWidget {
-  _LocationButton({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final mapController = ref.watch(_Providers.googleMapControllerProvider);
-    final myPosition = ref.watch(_Providers.myPositionProvider.notifier);
-    return FloatingActionButton(
-      onPressed: () {
-        if (myPosition.state != null && mapController != null) {
-          mapController.animateCamera(CameraUpdate.newLatLng(
-            LatLng(myPosition.state!.latitude, myPosition.state!.longitude),
-          ));
-          ref.watch(SignOutProviders.signOutSubmitProvider)(context: context);
-        } else {
-          ref.read(errorMessageHandle)("現在地情報が取得できませんでした", context);
-        }
-      },
-      child: Icon(Icons.my_location),
-      backgroundColor: Theme.of(context).colorScheme.background,
-      foregroundColor: Theme.of(context).colorScheme.onBackground,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30),
-        side: BorderSide(
-          color: Theme.of(context).colorScheme.onBackground,
-          width: 0.1,
-        ),
-      ),
-    );
-  }
-}
-
-class _SearchBar extends ConsumerWidget {
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(userNotifierProvider);
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 2),
-      margin: EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(30),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 2,
-            blurRadius: 5,
-          ),
-        ],
-      ),
-      child: Row(
-        children: <Widget>[
-          Assets.images.nowGoLogo.image(
-            width: 25.w,
-            height: 25.h,
-          ),
-          Expanded(
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: "キーワード検索",
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.symmetric(horizontal: 10),
-              ),
-            ),
-          ),
-          UserIcon(
-            imagePath: user?.image?.path,
-            onTap: () {},
-            size: 45,
-            color: Colors.grey,
-          ),
-        ],
-      ),
     );
   }
 }

@@ -120,7 +120,7 @@ class _BottomNavigationItem extends ConsumerWidget {
   }
 }
 
-final mainScaffoldKeyProvider = Provider((ref) {
+final mainScaffoldKeyProvider = Provider.autoDispose((ref) {
   return GlobalKey<ScaffoldState>();
 });
 

@@ -2,5 +2,6 @@
     "flavor": "sample",
     "appName": "NowGo sample",
     "appIdSuffix": ".sample",
-    "api_url": ""
+    "api_url": "",
+    "google_maps_api_key": ""
 }
