@@ -11,7 +11,7 @@ void main() {
     //
     // 投稿します。
     //
-    //Future<JsonResponse> post(String xLanguage, String xUserAgent, String body, num lat, num lng, String point, String geoHash, { Country country, AdministrativeArea administrativeArea, SubAdministrativeArea subAdministrativeArea, Locality locality, SubLocality subLocality, PostalCode postalCode, Name name, Street street, IsoCountryCode isoCountryCode, Thoroughfare thoroughfare, SubThoroughfare subThoroughfare }) async
+    //Future<JsonResponse> post(String xLanguage, String xUserAgent, PostRequest postRequest) async
     test('test post', () async {
       // TODO
     });

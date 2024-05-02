@@ -10,7 +10,6 @@ class UserRepository extends BaseRepository {
   Future<Result<MeResponse?>> getMe() async {
     final response = await _helper.run(onSuccess: () async {
       final token = await ref.read(secure_token_provider).getToken();
-      print(token);
       final userApi = getClient(token: token).getUserApi();
       final response = await userApi.getMe(
         xLanguage: "ja",

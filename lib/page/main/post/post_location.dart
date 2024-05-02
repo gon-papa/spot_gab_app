@@ -1,3 +1,4 @@
+import 'package:dart_geohash/dart_geohash.dart';
 import 'package:now_go_app/importer.dart';
 import 'package:now_go_app/page/main/geo_coding_provider.dart';
 
@@ -161,7 +162,27 @@ class _SubmitButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MainButton(
-      onPressed: () {},
+      onPressed: () async {
+        final images = ref.read(_Providers.newImageProvider);
+        final postPosition = ref.watch(_Providers.postPositionProvider);
+        final post = ref.read(_Providers.postController).text;
+        final places = await ref.read(
+            GeoCodingProviders.addressFromLatLngProvider(postPosition).future);
+        final geoHash =
+            GeoHasher().encode(postPosition.longitude, postPosition.latitude);
+        final hashTags = ref.read(_Providers.hashTagProvider(
+          hashTagRegExp,
+        ));
+        ref.read(_Providers.postSubmitProvider)(
+          context: context,
+          post: post,
+          images: images,
+          postPosition: postPosition,
+          places: places,
+          geoHash: geoHash,
+          hashTags: hashTags,
+        );
+      },
       width: 300,
       height: 35,
       text: "投稿する",

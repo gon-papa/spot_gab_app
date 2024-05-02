@@ -15,10 +15,11 @@ class SearchAutoCompleteNotifier extends StateNotifier<List<String>> {
 
     if (_debounce?.isActive ?? false) _debounce?.cancel();
     _debounce = Timer(const Duration(milliseconds: 500), () async {
-      final flutterGooglePlacesSdk = ref.read(MapProviders.placeSdkProvider);
+      final flutterGooglePlacesSdk = FlutterGooglePlacesSdk(
+        const String.fromEnvironment("google_maps_api_key"),
+      );
       final predictions =
           await flutterGooglePlacesSdk.findAutocompletePredictions(text);
-      print(predictions.predictions.map((e) => e.fullText).toList());
       state = predictions.predictions.map((e) => e.fullText).toList();
     });
 

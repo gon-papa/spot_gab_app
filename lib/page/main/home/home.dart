@@ -56,11 +56,19 @@ class _Body extends ConsumerWidget {
                       .read(GeoCodingProviders.placemarkFromAddressProvider)(
                     address: address,
                   );
-                  ref.read(_MapProviders.myLatLngProvider.notifier).state =
-                      LatLng(
-                    placemark[0].latitude,
-                    placemark[0].longitude,
-                  );
+
+                  final controller =
+                      ref.watch(_Providers.googleMapControllerProvider);
+                  if (controller != null) {
+                    controller.animateCamera(
+                      CameraUpdate.newLatLng(
+                        LatLng(
+                          placemark.first.latitude,
+                          placemark.first.longitude,
+                        ),
+                      ),
+                    );
+                  }
                 },
               ),
             ),

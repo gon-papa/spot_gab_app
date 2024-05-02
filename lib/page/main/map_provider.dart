@@ -25,13 +25,6 @@ class MapProviders {
   static final myLatLngProvider = StateProvider<LatLng>((ref) {
     return LatLng(0, 0);
   });
-
-  // placeSdkProvider
-  static final placeSdkProvider = Provider(
-    (ref) => FlutterGooglePlacesSdk(
-      const String.fromEnvironment("google_maps_api_key"),
-    ),
-  );
 }
 
 final mapProvisers = Provider<MapProviders>((ref) => MapProviders());
