@@ -72,7 +72,7 @@ class _PostTextFiled extends ConsumerWidget {
         child: ListView(
           padding: const EdgeInsets.all(10),
           children: [
-            TextFormField(
+            DetectableTextField(
               controller: controller,
               focusNode: focusNode,
               maxLines: null,

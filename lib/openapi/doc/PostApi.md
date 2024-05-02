@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **post**
-> JsonResponse post(xLanguage, xUserAgent, body, lat, lng, point, geoHash, country, administrativeArea, subAdministrativeArea, locality, subLocality, postalCode, name, street, isoCountryCode, thoroughfare, subThoroughfare)
+> JsonResponse post(xLanguage, xUserAgent, postRequest)
 
 投稿
 
@@ -28,25 +28,10 @@ import 'package:openapi/api.dart';
 final api = Openapi().getPostApi();
 final String xLanguage = ja; // String | 言語[ja,en]
 final String xUserAgent = now-go-app; // String | カスタムUser-Agent
-final String body = body_example; // String | 
-final num lat = 8.14; // num | 
-final num lng = 8.14; // num | 
-final String point = point_example; // String | 
-final String geoHash = geoHash_example; // String | 
-final Country country = ; // Country | 
-final AdministrativeArea administrativeArea = ; // AdministrativeArea | 
-final SubAdministrativeArea subAdministrativeArea = ; // SubAdministrativeArea | 
-final Locality locality = ; // Locality | 
-final SubLocality subLocality = ; // SubLocality | 
-final PostalCode postalCode = ; // PostalCode | 
-final Name name = ; // Name | 
-final Street street = ; // Street | 
-final IsoCountryCode isoCountryCode = ; // IsoCountryCode | 
-final Thoroughfare thoroughfare = ; // Thoroughfare | 
-final SubThoroughfare subThoroughfare = ; // SubThoroughfare | 
+final PostRequest postRequest = ; // PostRequest | 
 
 try {
-    final response = api.post(xLanguage, xUserAgent, body, lat, lng, point, geoHash, country, administrativeArea, subAdministrativeArea, locality, subLocality, postalCode, name, street, isoCountryCode, thoroughfare, subThoroughfare);
+    final response = api.post(xLanguage, xUserAgent, postRequest);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling PostApi->post: $e\n');
@@ -59,22 +44,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **xLanguage** | **String**| 言語[ja,en] | 
  **xUserAgent** | **String**| カスタムUser-Agent | 
- **body** | **String**|  | 
- **lat** | **num**|  | 
- **lng** | **num**|  | 
- **point** | **String**|  | 
- **geoHash** | **String**|  | 
- **country** | [**Country**](Country.md)|  | [optional] 
- **administrativeArea** | [**AdministrativeArea**](AdministrativeArea.md)|  | [optional] 
- **subAdministrativeArea** | [**SubAdministrativeArea**](SubAdministrativeArea.md)|  | [optional] 
- **locality** | [**Locality**](Locality.md)|  | [optional] 
- **subLocality** | [**SubLocality**](SubLocality.md)|  | [optional] 
- **postalCode** | [**PostalCode**](PostalCode.md)|  | [optional] 
- **name** | [**Name**](Name.md)|  | [optional] 
- **street** | [**Street**](Street.md)|  | [optional] 
- **isoCountryCode** | [**IsoCountryCode**](IsoCountryCode.md)|  | [optional] 
- **thoroughfare** | [**Thoroughfare**](Thoroughfare.md)|  | [optional] 
- **subThoroughfare** | [**SubThoroughfare**](SubThoroughfare.md)|  | [optional] 
+ **postRequest** | [**PostRequest**](PostRequest.md)|  | 
 
 ### Return type
 
@@ -86,7 +56,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/x-www-form-urlencoded
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

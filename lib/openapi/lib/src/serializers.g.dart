@@ -7,12 +7,10 @@ part of 'serializers.dart';
 // **************************************************************************
 
 Serializers _$serializers = (new Serializers().toBuilder()
-      ..add(AdministrativeArea.serializer)
       ..add(AuthenticatedUser.serializer)
       ..add(AuthenticatedUserFile.serializer)
       ..add(ClientId.serializer)
       ..add(ClientSecret.serializer)
-      ..add(Country.serializer)
       ..add(CreatedAt.serializer)
       ..add(DeletedAt.serializer)
       ..add(EmailExistsRequest.serializer)
@@ -30,17 +28,14 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(ImageId.serializer)
       ..add(ImageResponse.serializer)
       ..add(ImageResponseItem.serializer)
-      ..add(IsoCountryCode.serializer)
       ..add(JsonResponse.serializer)
       ..add(Link.serializer)
-      ..add(Locality.serializer)
       ..add(Me.serializer)
       ..add(MeResponse.serializer)
       ..add(MeResponseItem.serializer)
       ..add(Message.serializer)
-      ..add(Name.serializer)
       ..add(OtherUserInvitationCode.serializer)
-      ..add(PostalCode.serializer)
+      ..add(PostRequest.serializer)
       ..add(Profile.serializer)
       ..add(RefreshTokenRequest.serializer)
       ..add(ResetPasswordRequest.serializer)
@@ -48,11 +43,6 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(SignUpRequest.serializer)
       ..add(SignUpResponse.serializer)
       ..add(SignUpResponseItem.serializer)
-      ..add(Street.serializer)
-      ..add(SubAdministrativeArea.serializer)
-      ..add(SubLocality.serializer)
-      ..add(SubThoroughfare.serializer)
-      ..add(Thoroughfare.serializer)
       ..add(Token.serializer)
       ..add(UpdatedAt.serializer)
       ..add(UserProfileRequest.serializer)
@@ -64,6 +54,12 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(ImageResponseItem)]),
           () => new ListBuilder<ImageResponseItem>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(String)]),
+          () => new ListBuilder<String>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(String)]),
+          () => new ListBuilder<String>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
           () => new ListBuilder<String>())
