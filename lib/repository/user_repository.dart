@@ -1,17 +1,15 @@
 import 'dart:io';
 
 import 'package:now_go_app/importer.dart';
-import 'package:http_parser/http_parser.dart';
 
 class UserRepository extends BaseRepository {
   UserRepository() : super();
   final _helper = ProviderContainer().read(runApiProvider);
   final ref = ProviderContainer();
 
-  Future<Result<UserResponse?>> getMe() async {
+  Future<Result<MeResponse?>> getMe() async {
     final response = await _helper.run(onSuccess: () async {
       final token = await ref.read(secure_token_provider).getToken();
-      print(token);
       final userApi = getClient(token: token).getUserApi();
       final response = await userApi.getMe(
         xLanguage: "ja",
@@ -27,7 +25,7 @@ class UserRepository extends BaseRepository {
     required String? accountName,
     required String? link,
     required String? profile,
-    required File? image,
+    required Files? image,
   }) async {
     final response = await _helper.run(onSuccess: () async {
       final token = await ref.read(secure_token_provider).getToken();
@@ -36,18 +34,13 @@ class UserRepository extends BaseRepository {
       final response = await userApi.saveUserProfile(
         xLanguage: "ja",
         xUserAgent: const String.fromEnvironment("user_agent"),
-        accountName: accountName,
-        link: link,
-        profile: profile,
-        image: image != null
-            ? await MultipartFile.fromFile(
-                image.path,
-                contentType: MediaType(
-                  'image',
-                  'jpeg',
-                ),
-              )
-            : null,
+        userProfileRequest: UserProfileRequest(
+          (b) => b
+            ..accountName = accountName
+            ..link = link
+            ..profile = profile
+            ..imageUuid = image?.uuid,
+        ),
       );
       return response.data;
     });

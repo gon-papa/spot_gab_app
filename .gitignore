@@ -32,7 +32,6 @@
 /build/
 
 # Web related
-lib/generated_plugin_registrant.dart
 
 # Symbolication related
 app.*.symbols
@@ -49,3 +48,4 @@ app.*.map.json
 
 lib/gen/openapi/
 openapi.json
+dart_defines/machine.json

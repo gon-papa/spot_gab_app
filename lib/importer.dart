@@ -7,7 +7,7 @@ export 'package:now_go_app/themes/theme.dart';
 export 'package:now_go_app/gen/assets.gen.dart';
 export 'package:flutter_gen/gen_l10n/app_localizations.dart';
 export 'package:intl/intl.dart' hide TextDirection;
-export 'package:now_go_app/gen/openapi/lib/openapi.dart';
+export 'package:now_go_app/openapi/lib/openapi.dart';
 export 'package:flutter/gestures.dart';
 export 'package:dio/dio.dart';
 export 'package:logger/logger.dart';
@@ -21,6 +21,12 @@ export 'package:flutter/rendering.dart';
 export 'package:image_picker/image_picker.dart';
 export 'package:image_cropper/image_cropper.dart';
 export 'package:webview_flutter/webview_flutter.dart' hide ProgressCallback;
+export 'package:geocoding/geocoding.dart';
+export 'package:flutter_google_places_sdk/flutter_google_places_sdk.dart'
+    hide LatLng, LatLngBounds;
+export 'package:detectable_text_field/detector/sample_regular_expressions.dart';
+export 'package:detectable_text_field/widgets/detectable_text_field.dart';
+export 'package:detectable_text_field/widgets/detectable_text_editing_controller.dart';
 
 // 独自widget
 export 'package:now_go_app/util/exception/api_exception.dart';
@@ -71,3 +77,12 @@ export 'package:now_go_app/model/user/user.dart';
 export 'package:now_go_app/util/crop.dart';
 export 'package:now_go_app/page/validation/mypage/mypage_validation.dart';
 export 'package:now_go_app/page/main/web_view/web_view_page.dart';
+export 'package:now_go_app/page/main/post/post.dart';
+export 'package:now_go_app/page/main/post/post_provider.dart';
+export 'package:now_go_app/page/util_widget/button/main_button.dart';
+export 'package:now_go_app/util/image_compress.dart';
+export 'package:now_go_app/page/main/post/post_location.dart';
+export 'package:now_go_app/page/main/widget/location_search_bar.dart';
+export 'package:now_go_app/page/main/widget/current_location_button.dart';
+export 'package:now_go_app/page/main/map_provider.dart';
+export 'package:now_go_app/repository/image_repository.dart';

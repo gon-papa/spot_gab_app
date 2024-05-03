@@ -4,6 +4,9 @@
 run: ## fulutter run
 	fvm flutter run --dart-define-from-file=dart_defines/develop.json
 
+run-d: ## fulutter run machine
+	fvm flutter run --release --dart-define-from-file=dart_defines/machine.json
+
 gen: ## Generate files
 	fvm flutter pub run build_runner build --delete-conflicting-outputs
 	make merge_arb
@@ -20,15 +23,17 @@ openapi: ## Generate openapi
 
 schema: ## Generate schema
 	make openapi
-	rm -rf lib/gen/openapi
+	rm -rf lib/openapi
 	docker run --rm -v ${PWD}:/local \
 	openapitools/openapi-generator-cli:latest generate \
 	-i /local/openapi.json \
 	-g dart-dio \
-	-o /local/lib/gen/openapi
-	cd lib/gen/openapi/ && \
+	-o /local/lib/openapi
+	cd lib/openapi/ && \
 	fvm flutter pub get && \
-	fvm flutter pub run build_runner build --delete-conflicting-outputs
+	fvm flutter pub run build_runner build --delete-conflicting-outputs && \
+	cd ../ && \
+	fvm flutter pub get
 
 merge_arb:
 	@echo "Merging ARB files..."

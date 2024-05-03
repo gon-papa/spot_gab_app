@@ -111,7 +111,7 @@ class _UserInfoHeader extends ConsumerWidget {
             );
           },
           child: UserIcon(
-            imagePath: user?.imagePath,
+            imagePath: user?.image?.path,
             onTap: null,
             size: 90,
             color: Colors.grey,

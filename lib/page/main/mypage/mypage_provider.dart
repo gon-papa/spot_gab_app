@@ -46,10 +46,10 @@ class MyPageProviders {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   UserIcon(
-                    imagePath: user?.imagePath,
+                    imagePath: user?.image?.path,
                     onTap: null,
                     size: 250,
-                    color: Colors.grey,
+                    color: Colors.white,
                   ),
                 ],
               ),

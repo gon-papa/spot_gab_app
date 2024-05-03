@@ -5,7 +5,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.15.0 <3.0.0"
+  sdk: '>=2.15.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -25,19 +25,24 @@ dependencies:
   dio: ^5.4.1 # API通信用openapiでも使用
   built_collection: ^5.1.1 # openapiのリストで使用
   openapi: 
-    path: lib/gen/openapi # openapiのコード生成
+    path: lib/openapi/ # openapiのコード生成
   flutter_secure_storage: ^4.2.1
   google_maps_flutter: ^2.2.8
-  geolocator: ^11.0.0
   hooks_riverpod: ^2.5.1
   flutter_hooks: ^0.20.5
   permission_handler: ^11.3.0
-  flutter_svg: ^2.0.10+1
   cached_network_image: ^3.3.1
   image_picker: ^1.0.7
   image_cropper: ^1.5.1
   mime: ^1.0.5
   webview_flutter: ^4.7.0
+  geolocator: ^11.0.0
+  flutter_image_compress: ^2.2.0
+  geocoding: ^3.0.0
+  flutter_svg: ^2.0.10+1
+  flutter_google_places_sdk: ^0.3.5
+  dart_geohash: ^2.1.0
+  detectable_text_field: ^3.0.2
 
 dev_dependencies:
   flutter_test:
@@ -48,8 +53,8 @@ dev_dependencies:
   build_runner: ^2.4.8
   flutter_gen_runner: ^5.4.0
   go_router_builder: ^2.4.1
-  custom_lint: ^0.6.4
   riverpod_lint: ^2.3.10
+  custom_lint: ^0.6.4
 
 flutter:
   uses-material-design: true

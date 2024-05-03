@@ -41,6 +41,12 @@ final globalKeyProvider = Provider((_) => GlobalKey<NavigatorState>());
       ],
     ),
     TypedGoRoute<MyPageEditRoute>(path: '/my_page/edit'),
+    TypedGoRoute<PostRoute>(
+      path: '/post',
+      routes: [
+        TypedGoRoute<PostLocationRoute>(path: 'location'),
+      ],
+    ),
     TypedGoRoute<SignInRoute>(
       path: '/sign_in',
       routes: [
@@ -139,6 +145,23 @@ class MyPageEditRoute extends GoRouteData {
   }
 }
 
+class PostRoute extends GoRouteData {
+  const PostRoute();
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) =>
+      bottomSlideUpPageAnimation(Post());
+}
+
+class PostLocationRoute extends GoRouteData {
+  const PostLocationRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const PostLocation();
+  }
+}
+
 class SignInRoute extends GoRouteData {
   const SignInRoute();
 
@@ -221,6 +244,29 @@ CustomTransitionPage<void> noAnimationPage(Widget page) {
         ),
       );
     },
+  );
+}
+
+CustomTransitionPage<void> bottomSlideUpPageAnimation(Widget page) {
+  return CustomTransitionPage<void>(
+    child: page,
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      return FadeTransition(
+        opacity: animation,
+        child: SlideTransition(
+          position: animation.drive(
+            Tween<Offset>(
+              begin: const Offset(0, 1), // 下からスライドする設定
+              end: Offset.zero,
+            ).chain(
+              CurveTween(curve: Curves.easeInOut),
+            ),
+          ),
+          child: child,
+        ),
+      );
+    },
+    transitionDuration: const Duration(milliseconds: 500),
   );
 }
 

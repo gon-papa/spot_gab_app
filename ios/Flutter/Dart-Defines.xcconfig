@@ -3,3 +3,4 @@ appName=NowGo develop
 appIdSuffix=.develop
 api_url=http://localhost:8000
 user_agent=now-go-app
+google_maps_api_key=AIzaSyCT7JMq-iDEcaPBSOe5soXLAwLnJ1iPRos

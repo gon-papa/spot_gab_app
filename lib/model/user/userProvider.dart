@@ -13,6 +13,8 @@ class UserNotifier extends StateNotifier<User?> {
   User convertAuthenticatedUserToUser(AuthenticatedUser user) {
     return User(
       id: user.id,
+      file_id: user.imageId?.anyOf.values[0] as int?,
+      image: user.file?.anyOf.values[0] as Files?,
       uuid: user.uuid,
       accountName: user.accountName,
       idAccount: user.idAccount,
@@ -22,7 +24,25 @@ class UserNotifier extends StateNotifier<User?> {
           user.otherUserInvitationCode?.anyOf.values[0].toString(),
       emailVerified: user.emailVerified,
       profile: user.profile?.anyOf.values[0].toString(),
-      imagePath: user.imagePath?.anyOf.values[0].toString(),
+      link: user.link?.anyOf.values[0].toString(),
+    );
+  }
+
+  // MeをUserに変換
+  User convertMeToUser(Me user) {
+    return User(
+      id: user.id,
+      file_id: user.imageId?.anyOf.values[0] as int?,
+      image: user.file?.anyOf.values[0] as Files?,
+      uuid: user.uuid,
+      accountName: user.accountName,
+      idAccount: user.idAccount,
+      email: user.email,
+      birthDate: user.birthDate,
+      otherUserInvitationCode:
+          user.otherUserInvitationCode?.anyOf.values[0].toString(),
+      emailVerified: user.emailVerified,
+      profile: user.profile?.anyOf.values[0].toString(),
       link: user.link?.anyOf.values[0].toString(),
     );
   }
@@ -41,7 +61,7 @@ class UserNotifier extends StateNotifier<User?> {
       if (response.isSuccess && response.data != null) {
         final user = response.data?.data?.user;
         if (user != null) {
-          return setUser(convertAuthenticatedUserToUser(user));
+          return setUser(convertMeToUser(user));
         }
         throw Exception('ユーザー情報が取得できませんでした');
       }

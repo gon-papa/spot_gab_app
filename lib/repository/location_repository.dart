@@ -35,6 +35,19 @@ class LocationRepository extends BaseRepository {
         break;
     }
   }
+
+  Future<List<Placemark>> getPlacemark(LatLng latLng) async {
+    await setLocaleIdentifier('jp');
+    return await placemarkFromCoordinates(
+      latLng.latitude,
+      latLng.longitude,
+    );
+  }
+
+  Future<List<Location>> getPlacemarkFromAddress(String address) async {
+    await setLocaleIdentifier('jp');
+    return locationFromAddress(address);
+  }
 }
 
 final locationRepositoryProvider =

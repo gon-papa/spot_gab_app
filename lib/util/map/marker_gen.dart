@@ -39,7 +39,7 @@ class _MarkerGeneratorState extends State<MarkerGenerator> {
   void initState() {
     super.initState();
     WidgetsBinding.instance
-        ?.addPersistentFrameCallback((_) => _onBuildCompleted());
+        .addPersistentFrameCallback((_) => _onBuildCompleted());
   }
 
   Future<void> _onBuildCompleted() async {
