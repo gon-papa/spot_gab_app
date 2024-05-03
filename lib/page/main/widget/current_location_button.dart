@@ -18,6 +18,8 @@ class CurrentLocationButton extends ConsumerWidget {
               LatLng(myLatLng.latitude, myLatLng.longitude),
             ),
           );
+          // TODO: サインアウトを後で消す
+          ref.read(SignOutProviders.signOutSubmitProvider)(context: context);
           if (onPressed != null) {
             onPressed!();
           }
