@@ -1,6 +1,6 @@
 import 'package:now_go_app/importer.dart';
 
-class UserMarker extends StatelessWidget {
+class UserMarker extends ConsumerWidget {
   final String? imagePath;
   final Function onTap;
   final Color color;
@@ -55,7 +55,7 @@ class UserMarker extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return _combinedWidget(imagePath, color);
   }
 }

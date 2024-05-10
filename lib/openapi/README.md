@@ -77,6 +77,7 @@ Class | Method | HTTP request | Description
 [*AuthApi*](doc/AuthApi.md) | [**signUp**](doc/AuthApi.md#signup) | **POST** /sign-up | サインアップ
 [*AuthApi*](doc/AuthApi.md) | [**verifyEmail**](doc/AuthApi.md#verifyemail) | **GET** /verify-email/{token}/{lang} | メールアドレスの確認
 [*FileApi*](doc/FileApi.md) | [**imageUpload**](doc/FileApi.md#imageupload) | **POST** /image/upload | ファイルアップロード
+[*PostApi*](doc/PostApi.md) | [**getPostList**](doc/PostApi.md#getpostlist) | **GET** /post | 投稿一覧
 [*PostApi*](doc/PostApi.md) | [**post**](doc/PostApi.md#post) | **POST** /post | 投稿
 [*UserApi*](doc/UserApi.md) | [**getMe**](doc/UserApi.md#getme) | **GET** /me | マイページ用ユーザー取得(自身と他人含む)
 [*UserApi*](doc/UserApi.md) | [**saveUserProfile**](doc/UserApi.md#saveuserprofile) | **POST** /user/profile | ユーザープロフィール保存
@@ -113,9 +114,14 @@ Class | Method | HTTP request | Description
  - [Message](doc/Message.md)
  - [OtherUserInvitationCode](doc/OtherUserInvitationCode.md)
  - [PostRequest](doc/PostRequest.md)
+ - [PostResponse](doc/PostResponse.md)
+ - [PostResponseItem](doc/PostResponseItem.md)
  - [Profile](doc/Profile.md)
  - [RefreshTokenRequest](doc/RefreshTokenRequest.md)
  - [ResetPasswordRequest](doc/ResetPasswordRequest.md)
+ - [ShowLocation](doc/ShowLocation.md)
+ - [ShowPostImage](doc/ShowPostImage.md)
+ - [ShowPosts](doc/ShowPosts.md)
  - [SignInResponse](doc/SignInResponse.md)
  - [SignUpRequest](doc/SignUpRequest.md)
  - [SignUpResponse](doc/SignUpResponse.md)
@@ -123,6 +129,7 @@ Class | Method | HTTP request | Description
  - [Token](doc/Token.md)
  - [UpdatedAt](doc/UpdatedAt.md)
  - [UserProfileRequest](doc/UserProfileRequest.md)
+ - [UserRead](doc/UserRead.md)
  - [ValidationError](doc/ValidationError.md)
  - [ValidationErrorLocInner](doc/ValidationErrorLocInner.md)
 

@@ -8,6 +8,27 @@ class PostRepository extends BaseRepository {
   final _helper = ProviderContainer().read(runApiProvider);
   final ref = ProviderContainer();
 
+  Future<Result<PostResponse?>> getPosts({
+    required String geo_hash,
+    required int size,
+    required int page,
+  }) async {
+    final response = await _helper.run(onSuccess: () async {
+      final token = await ref.read(secure_token_provider).getToken();
+      final postApi = getClient(token: token).getPostApi();
+      final response = await postApi.getPostList(
+        geoHash: geo_hash,
+        page: page,
+        size: size,
+        xLanguage: "ja",
+        xUserAgent: const String.fromEnvironment("user_agent"),
+      );
+      return response.data;
+    });
+
+    return response;
+  }
+
   Future<Result<JsonResponse?>> post({
     required String post,
     required List<String> images,

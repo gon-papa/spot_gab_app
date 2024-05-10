@@ -34,9 +34,14 @@ doc/Message.md
 doc/OtherUserInvitationCode.md
 doc/PostApi.md
 doc/PostRequest.md
+doc/PostResponse.md
+doc/PostResponseItem.md
 doc/Profile.md
 doc/RefreshTokenRequest.md
 doc/ResetPasswordRequest.md
+doc/ShowLocation.md
+doc/ShowPostImage.md
+doc/ShowPosts.md
 doc/SignInResponse.md
 doc/SignUpRequest.md
 doc/SignUpResponse.md
@@ -45,6 +50,7 @@ doc/Token.md
 doc/UpdatedAt.md
 doc/UserApi.md
 doc/UserProfileRequest.md
+doc/UserRead.md
 doc/ValidationError.md
 doc/ValidationErrorLocInner.md
 lib/openapi.dart
@@ -90,9 +96,14 @@ lib/src/model/me_response_item.dart
 lib/src/model/message.dart
 lib/src/model/other_user_invitation_code.dart
 lib/src/model/post_request.dart
+lib/src/model/post_response.dart
+lib/src/model/post_response_item.dart
 lib/src/model/profile.dart
 lib/src/model/refresh_token_request.dart
 lib/src/model/reset_password_request.dart
+lib/src/model/show_location.dart
+lib/src/model/show_post_image.dart
+lib/src/model/show_posts.dart
 lib/src/model/sign_in_response.dart
 lib/src/model/sign_up_request.dart
 lib/src/model/sign_up_response.dart
@@ -100,6 +111,7 @@ lib/src/model/sign_up_response_item.dart
 lib/src/model/token.dart
 lib/src/model/updated_at.dart
 lib/src/model/user_profile_request.dart
+lib/src/model/user_read.dart
 lib/src/model/validation_error.dart
 lib/src/model/validation_error_loc_inner.dart
 lib/src/serializers.dart
@@ -136,9 +148,14 @@ test/message_test.dart
 test/other_user_invitation_code_test.dart
 test/post_api_test.dart
 test/post_request_test.dart
+test/post_response_item_test.dart
+test/post_response_test.dart
 test/profile_test.dart
 test/refresh_token_request_test.dart
 test/reset_password_request_test.dart
+test/show_location_test.dart
+test/show_post_image_test.dart
+test/show_posts_test.dart
 test/sign_in_response_test.dart
 test/sign_up_request_test.dart
 test/sign_up_response_item_test.dart
@@ -147,5 +164,6 @@ test/token_test.dart
 test/updated_at_test.dart
 test/user_api_test.dart
 test/user_profile_request_test.dart
+test/user_read_test.dart
 test/validation_error_loc_inner_test.dart
 test/validation_error_test.dart

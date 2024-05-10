@@ -9,7 +9,7 @@ import 'package:built_value/serializer.dart';
 
 part 'post_request.g.dart';
 
-/// PostRequest
+/// Attributes: body : str     投稿本文 hashtags : List[str]     ハッシュタグ images : List[str]     画像 lat : str     緯度 lng : str     経度 point : str     位置情報 geo_hash : str     ジオハッシュ country : str     国 administrative_area : str     都道府県 sub_administrative_area : str     市区町村 locality : str     市区町村 sub_locality : str     町名 postal_code : str     郵便番号 name : str     地名 street : str     住所 iso_country_code : str     ISO国コード thoroughfare : str     通り sub_thoroughfare : str     番地
 ///
 /// Properties:
 /// * [body] - 投稿本文

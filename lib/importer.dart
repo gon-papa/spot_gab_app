@@ -86,3 +86,4 @@ export 'package:now_go_app/page/main/widget/location_search_bar.dart';
 export 'package:now_go_app/page/main/widget/current_location_button.dart';
 export 'package:now_go_app/page/main/map_provider.dart';
 export 'package:now_go_app/repository/image_repository.dart';
+export 'package:now_go_app/repository/post_repository.dart';

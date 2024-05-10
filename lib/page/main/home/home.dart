@@ -17,6 +17,14 @@ class Home extends HookConsumerWidget {
       ),
       initialData: null,
     );
+    useFuture(
+      // キャッシュ
+      useMemoized(
+        () => ref.read(_MapProviders.getPostsProvider)(context: context),
+        [],
+      ),
+      initialData: null,
+    );
 
     if (asyncMyPosition.connectionState == ConnectionState.waiting) {
       return const WaitingView();
@@ -97,6 +105,7 @@ class _GoogleMapView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    print(ref.watch(_MapProviders.widgetMarkerListProvider)(context: context));
     final myLatLng = ref.watch(_MapProviders.myLatLngProvider.notifier).state;
     final user = ref.watch(userNotifierProvider);
     return WidgetMarkerGoogleMap(
@@ -126,46 +135,31 @@ class _GoogleMapView extends HookConsumerWidget {
             color: Colors.blue,
           ),
         ),
-        WidgetMarker(
-          position: LatLng(37.78593862779881, -122.40096497312153),
-          markerId: "1",
-          widget: UserMarker(
-            onTap: () {},
-            imagePath: null,
-            color: Colors.red,
-          ),
-        ),
-        WidgetMarker(
-          position: LatLng(37.784474463803726, -122.40341109377674),
-          markerId: "2",
-          widget: UserMarker(
-            onTap: () {},
-            imagePath: null,
-            color: Colors.green,
-          ),
-        ),
+        ...ref.watch(_MapProviders.widgetMarkerListProvider)(context: context),
       ],
     );
   }
 }
 
-class _CardList extends StatelessWidget {
+class _CardList extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // 仮のデータリスト
-    final List<String> entries = <String>['A', 'B', 'C', 'D', 'E'];
+    final posts = ref.watch(_MapProviders.postsProvider);
 
     return Container(
       height: 100.h,
       child: PageView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: entries.length,
+        itemCount: posts.length,
         controller: PageController(
           viewportFraction: 0.9, // カードの幅
           initialPage: 0,
         ),
         itemBuilder: (BuildContext context, int index) {
-          return _Card();
+          return _Card(
+            post: posts[index],
+          );
         },
       ),
     );
@@ -173,17 +167,17 @@ class _CardList extends StatelessWidget {
 }
 
 class _Card extends ConsumerWidget {
-  final String userName = "Maximmilian";
-  final String userId = "@maxjacobson";
-  final String postTime = "3min";
-  final String postContent = "腹減ってんねんけど皆今なにしてるの?";
+  final post;
   final String userImageUrl = "https://via.placeholder.com/150"; // プレースホルダーのURL
   final int commentCount = 25; // コメント数
+  const _Card({
+    Key? key,
+    this.post,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // 仮のデータを使用
-    final user = ref.watch(userNotifierProvider);
     return Card(
       surfaceTintColor: Colors.white,
       shape: RoundedRectangleBorder(
@@ -195,7 +189,7 @@ class _Card extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             UserIcon(
-              imagePath: user?.image?.path,
+              imagePath: post.user.file.anyOf.values[0].path,
               onTap: () {},
               size: 60,
               color: Colors.grey,
@@ -210,7 +204,7 @@ class _Card extends ConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        user?.accountName ?? '',
+                        post.user?.accountName ?? '',
                         style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w700,
@@ -219,7 +213,7 @@ class _Card extends ConsumerWidget {
                       SizedBox(width: 3.w),
                       Expanded(
                         child: Text(
-                          '${user?.idAccount ?? ' '} $postTime',
+                          '${post.user?.idAccount ?? ' '} ${post.post.createdAt}',
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: TextStyle(
@@ -232,7 +226,7 @@ class _Card extends ConsumerWidget {
                   SizedBox(height: 10),
                   Expanded(
                     child: Text(
-                      postContent,
+                      post.post.body ?? '',
                       overflow: TextOverflow.ellipsis,
                       maxLines: 3,
                       style: TextStyle(

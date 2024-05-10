@@ -7,6 +7,15 @@ void main() {
   final instance = Openapi().getPostApi();
 
   group(PostApi, () {
+    // 投稿一覧
+    //
+    // 投稿一覧を取得します。
+    //
+    //Future<PostResponse> getPostList(String geoHash, String xLanguage, String xUserAgent, { String keyword, int page, int size }) async
+    test('test getPostList', () async {
+      // TODO
+    });
+
     // 投稿
     //
     // 投稿します。

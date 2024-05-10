@@ -36,9 +36,14 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(Message.serializer)
       ..add(OtherUserInvitationCode.serializer)
       ..add(PostRequest.serializer)
+      ..add(PostResponse.serializer)
+      ..add(PostResponseItem.serializer)
       ..add(Profile.serializer)
       ..add(RefreshTokenRequest.serializer)
       ..add(ResetPasswordRequest.serializer)
+      ..add(ShowLocation.serializer)
+      ..add(ShowPostImage.serializer)
+      ..add(ShowPosts.serializer)
       ..add(SignInResponse.serializer)
       ..add(SignUpRequest.serializer)
       ..add(SignUpResponse.serializer)
@@ -46,6 +51,7 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(Token.serializer)
       ..add(UpdatedAt.serializer)
       ..add(UserProfileRequest.serializer)
+      ..add(UserRead.serializer)
       ..add(ValidationError.serializer)
       ..add(ValidationErrorLocInner.serializer)
       ..addBuilderFactory(
@@ -54,6 +60,12 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(ImageResponseItem)]),
           () => new ListBuilder<ImageResponseItem>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(PostResponseItem)]),
+          () => new ListBuilder<PostResponseItem>())
+      ..addBuilderFactory(
+          const FullType(BuiltList, const [const FullType(ShowPostImage)]),
+          () => new ListBuilder<ShowPostImage>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(String)]),
           () => new ListBuilder<String>())

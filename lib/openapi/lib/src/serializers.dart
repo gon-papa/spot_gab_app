@@ -43,9 +43,14 @@ import 'package:openapi/src/model/me_response_item.dart';
 import 'package:openapi/src/model/message.dart';
 import 'package:openapi/src/model/other_user_invitation_code.dart';
 import 'package:openapi/src/model/post_request.dart';
+import 'package:openapi/src/model/post_response.dart';
+import 'package:openapi/src/model/post_response_item.dart';
 import 'package:openapi/src/model/profile.dart';
 import 'package:openapi/src/model/refresh_token_request.dart';
 import 'package:openapi/src/model/reset_password_request.dart';
+import 'package:openapi/src/model/show_location.dart';
+import 'package:openapi/src/model/show_post_image.dart';
+import 'package:openapi/src/model/show_posts.dart';
 import 'package:openapi/src/model/sign_in_response.dart';
 import 'package:openapi/src/model/sign_up_request.dart';
 import 'package:openapi/src/model/sign_up_response.dart';
@@ -53,6 +58,7 @@ import 'package:openapi/src/model/sign_up_response_item.dart';
 import 'package:openapi/src/model/token.dart';
 import 'package:openapi/src/model/updated_at.dart';
 import 'package:openapi/src/model/user_profile_request.dart';
+import 'package:openapi/src/model/user_read.dart';
 import 'package:openapi/src/model/validation_error.dart';
 import 'package:openapi/src/model/validation_error_loc_inner.dart';
 
@@ -88,9 +94,14 @@ part 'serializers.g.dart';
   Message,
   OtherUserInvitationCode,
   PostRequest,
+  PostResponse,
+  PostResponseItem,
   Profile,
   RefreshTokenRequest,
   ResetPasswordRequest,
+  ShowLocation,
+  ShowPostImage,
+  ShowPosts,
   SignInResponse,
   SignUpRequest,
   SignUpResponse,
@@ -98,6 +109,7 @@ part 'serializers.g.dart';
   Token,
   UpdatedAt,
   UserProfileRequest,
+  UserRead,
   ValidationError,
   ValidationErrorLocInner,
 ])
