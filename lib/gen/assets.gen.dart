@@ -70,6 +70,10 @@ class $AssetsImagesGen {
   SvgGenImage get nowGoSquareLogo =>
       const SvgGenImage('assets/images/now_go_square_logo.svg');
 
+  /// File path: assets/images/post_icon.png
+  AssetGenImage get postIcon =>
+      const AssetGenImage('assets/images/post_icon.png');
+
   /// File path: assets/images/setting_icon.png
   AssetGenImage get settingIcon =>
       const AssetGenImage('assets/images/setting_icon.png');
@@ -80,6 +84,7 @@ class $AssetsImagesGen {
         defaultUserIcon,
         nowGoLogo,
         nowGoSquareLogo,
+        postIcon,
         settingIcon
       ];
 }

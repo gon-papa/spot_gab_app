@@ -16,7 +16,7 @@ class MyPageEditProviders {
         );
       } else if (user?.image?.path != null && user!.image!.path.isNotEmpty) {
         return Image.network(
-          user!.image!.path,
+          user.image!.path,
           fit: BoxFit.cover,
         );
       } else {
