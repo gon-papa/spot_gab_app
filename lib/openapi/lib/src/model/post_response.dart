@@ -25,7 +25,7 @@ abstract class PostResponse implements Built<PostResponse, PostResponseBuilder> 
 
   /// 投稿情報リスト
   @BuiltValueField(wireName: r'data')
-  BuiltList<PostResponseItem> get data;
+  BuiltList<PostResponseItem>? get data;
 
   @BuiltValueField(wireName: r'message')
   Message? get message;
@@ -61,11 +61,13 @@ class _$PostResponseSerializer implements PrimitiveSerializer<PostResponse> {
         specifiedType: const FullType(int),
       );
     }
-    yield r'data';
-    yield serializers.serialize(
-      object.data,
-      specifiedType: const FullType(BuiltList, [FullType(PostResponseItem)]),
-    );
+    if (object.data != null) {
+      yield r'data';
+      yield serializers.serialize(
+        object.data,
+        specifiedType: const FullType(BuiltList, [FullType(PostResponseItem)]),
+      );
+    }
     if (object.message != null) {
       yield r'message';
       yield serializers.serialize(

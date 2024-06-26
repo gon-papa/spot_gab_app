@@ -10,17 +10,14 @@ class _$PostResponse extends PostResponse {
   @override
   final int? status;
   @override
-  final BuiltList<PostResponseItem> data;
+  final BuiltList<PostResponseItem>? data;
   @override
   final Message? message;
 
   factory _$PostResponse([void Function(PostResponseBuilder)? updates]) =>
       (new PostResponseBuilder()..update(updates))._build();
 
-  _$PostResponse._({this.status, required this.data, this.message})
-      : super._() {
-    BuiltValueNullFieldError.checkNotNull(data, r'PostResponse', 'data');
-  }
+  _$PostResponse._({this.status, this.data, this.message}) : super._();
 
   @override
   PostResponse rebuild(void Function(PostResponseBuilder) updates) =>
@@ -83,7 +80,7 @@ class PostResponseBuilder
     final $v = _$v;
     if ($v != null) {
       _status = $v.status;
-      _data = $v.data.toBuilder();
+      _data = $v.data?.toBuilder();
       _message = $v.message?.toBuilder();
       _$v = null;
     }
@@ -109,12 +106,12 @@ class PostResponseBuilder
     try {
       _$result = _$v ??
           new _$PostResponse._(
-              status: status, data: data.build(), message: _message?.build());
+              status: status, data: _data?.build(), message: _message?.build());
     } catch (_) {
       late String _$failedField;
       try {
         _$failedField = 'data';
-        data.build();
+        _data?.build();
         _$failedField = 'message';
         _message?.build();
       } catch (e) {

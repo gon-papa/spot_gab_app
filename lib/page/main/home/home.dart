@@ -1,49 +1,13 @@
 import 'package:now_go_app/importer.dart';
 import 'package:now_go_app/page/main/geo_coding_provider.dart';
+import 'package:now_go_app/page/main/home/map_post_provider.dart';
+import 'package:now_go_app/page/main/home/marker_provider.dart';
 
 typedef _Providers = HomeProviders;
 typedef _MapProviders = MapProviders;
 
 class Home extends HookConsumerWidget {
   Home({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final asyncMyPosition = useFuture(
-      // キャッシュ
-      useMemoized(
-        () => ref.read(_MapProviders.getMyPositionProvider)(context: context),
-        [],
-      ),
-      initialData: null,
-    );
-    useFuture(
-      // キャッシュ
-      useMemoized(
-        () => ref.read(_MapProviders.getPostsProvider)(context: context),
-        [],
-      ),
-      initialData: null,
-    );
-
-    if (asyncMyPosition.connectionState == ConnectionState.waiting) {
-      return const WaitingView();
-    }
-
-    if (asyncMyPosition.hasData) {
-      return _Body();
-    }
-
-    if (asyncMyPosition.hasError || asyncMyPosition.error == null) {
-      print(asyncMyPosition.error);
-      return const HasErrorView();
-    }
-    return const SizedBox();
-  }
-}
-
-class _Body extends ConsumerWidget {
-  _Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -105,38 +69,51 @@ class _GoogleMapView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    print(ref.watch(_MapProviders.widgetMarkerListProvider)(context: context));
+    ref.watch(_MapProviders.getMyPositionProvider)(context: context);
     final myLatLng = ref.watch(_MapProviders.myLatLngProvider.notifier).state;
     final user = ref.watch(userNotifierProvider);
-    return WidgetMarkerGoogleMap(
-      initialCameraPosition: CameraPosition(
-        target: LatLng(
+
+    List<WidgetMarker> myPositionMarker = [
+      WidgetMarker(
+        position: LatLng(
           myLatLng.latitude,
           myLatLng.longitude,
         ),
-        zoom: 15,
-      ),
-      onMapCreated: (GoogleMapController controller) {
-        ref.read(_Providers.googleMapControllerProvider.notifier).state =
-            controller;
-      },
-      myLocationEnabled: false,
-      myLocationButtonEnabled: false,
-      widgetMarkers: [
-        WidgetMarker(
-          position: LatLng(
-            myLatLng.latitude,
-            myLatLng.longitude,
-          ),
-          markerId: user?.uuid ?? "myPosition",
-          widget: UserMarker(
-            imagePath: user?.image?.path,
-            onTap: () {},
-            color: Colors.blue,
-          ),
+        markerId: user?.uuid ?? "myPosition",
+        widget: UserMarker(
+          imagePath: user?.image?.path,
+          onTap: () {},
+          color: Colors.blue,
         ),
-        ...ref.watch(_MapProviders.widgetMarkerListProvider)(context: context),
-      ],
+      ),
+    ];
+
+    final markers = ref.watch(mapMarkerNotifierProvider);
+    return markers.when(
+      data: (markerSet) {
+        return GoogleMap(
+          initialCameraPosition: CameraPosition(
+            target: LatLng(
+              myLatLng.latitude,
+              myLatLng.longitude,
+            ),
+            zoom: 15,
+          ),
+          onMapCreated: (GoogleMapController controller) {
+            ref.read(_Providers.googleMapControllerProvider.notifier).state =
+                controller;
+          },
+          myLocationEnabled: true,
+          myLocationButtonEnabled: false,
+          markers: markerSet,
+        );
+      },
+      loading: () => Center(
+        child: CircularProgressIndicator(),
+      ),
+      error: (error, stackTrace) => Center(
+        child: Text('エラーが発生しました'),
+      ),
     );
   }
 }

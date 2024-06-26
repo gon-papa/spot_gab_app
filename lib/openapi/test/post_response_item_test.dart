@@ -14,7 +14,7 @@ void main() {
     });
 
     // 画像情報
-    // BuiltList<ShowPostImage> postImages
+    // BuiltList<ShowPostImage> postImages (default value: ListBuilder())
     test('to test the property `postImages`', () async {
       // TODO
     });

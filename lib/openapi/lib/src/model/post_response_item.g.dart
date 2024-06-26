@@ -10,7 +10,7 @@ class _$PostResponseItem extends PostResponseItem {
   @override
   final ShowPosts post;
   @override
-  final BuiltList<ShowPostImage> postImages;
+  final BuiltList<ShowPostImage>? postImages;
   @override
   final UserRead user;
   @override
@@ -22,13 +22,11 @@ class _$PostResponseItem extends PostResponseItem {
 
   _$PostResponseItem._(
       {required this.post,
-      required this.postImages,
+      this.postImages,
       required this.user,
       required this.location})
       : super._() {
     BuiltValueNullFieldError.checkNotNull(post, r'PostResponseItem', 'post');
-    BuiltValueNullFieldError.checkNotNull(
-        postImages, r'PostResponseItem', 'postImages');
     BuiltValueNullFieldError.checkNotNull(user, r'PostResponseItem', 'user');
     BuiltValueNullFieldError.checkNotNull(
         location, r'PostResponseItem', 'location');
@@ -105,7 +103,7 @@ class PostResponseItemBuilder
     final $v = _$v;
     if ($v != null) {
       _post = $v.post.toBuilder();
-      _postImages = $v.postImages.toBuilder();
+      _postImages = $v.postImages?.toBuilder();
       _user = $v.user.toBuilder();
       _location = $v.location.toBuilder();
       _$v = null;
@@ -133,7 +131,7 @@ class PostResponseItemBuilder
       _$result = _$v ??
           new _$PostResponseItem._(
               post: post.build(),
-              postImages: postImages.build(),
+              postImages: _postImages?.build(),
               user: user.build(),
               location: location.build());
     } catch (_) {
@@ -142,7 +140,7 @@ class PostResponseItemBuilder
         _$failedField = 'post';
         post.build();
         _$failedField = 'postImages';
-        postImages.build();
+        _postImages?.build();
         _$failedField = 'user';
         user.build();
         _$failedField = 'location';

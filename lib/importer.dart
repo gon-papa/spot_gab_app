@@ -27,6 +27,8 @@ export 'package:flutter_google_places_sdk/flutter_google_places_sdk.dart'
 export 'package:detectable_text_field/detector/sample_regular_expressions.dart';
 export 'package:detectable_text_field/widgets/detectable_text_field.dart';
 export 'package:detectable_text_field/widgets/detectable_text_editing_controller.dart';
+// ignore: invalid_export_of_internal_element
+export 'package:riverpod_annotation/riverpod_annotation.dart';
 
 // 独自widget
 export 'package:now_go_app/util/exception/api_exception.dart';
@@ -87,3 +89,7 @@ export 'package:now_go_app/page/main/widget/current_location_button.dart';
 export 'package:now_go_app/page/main/map_provider.dart';
 export 'package:now_go_app/repository/image_repository.dart';
 export 'package:now_go_app/repository/post_repository.dart';
+export 'package:now_go_app/model/post/post.dart';
+export 'package:now_go_app/page/main/home/map_post_provider.dart';
+export 'package:now_go_app/page/main/home/marker_provider.dart';
+export 'package:now_go_app/util/marker/canvas_marker.dart';

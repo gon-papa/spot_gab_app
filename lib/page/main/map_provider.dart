@@ -44,13 +44,13 @@ class MapProviders {
         print(response.data?.data);
         if (response.isSuccess) {
           // PostModelに変換
-          response.data?.data.forEach((element) {
+          response.data?.data?.forEach((element) {
             ref.read(postsProvider.notifier).state.add(
                   PostModel(
                     post: element.post,
                     user: element.user,
                     location: element.location,
-                    postImages: element.postImages.toList(),
+                    postImages: element.postImages?.toList(),
                   ),
                 );
           });

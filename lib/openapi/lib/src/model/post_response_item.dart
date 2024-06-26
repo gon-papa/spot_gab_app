@@ -28,7 +28,7 @@ abstract class PostResponseItem implements Built<PostResponseItem, PostResponseI
 
   /// 画像情報
   @BuiltValueField(wireName: r'postImages')
-  BuiltList<ShowPostImage> get postImages;
+  BuiltList<ShowPostImage>? get postImages;
 
   /// ユーザー情報
   @BuiltValueField(wireName: r'user')
@@ -43,7 +43,8 @@ abstract class PostResponseItem implements Built<PostResponseItem, PostResponseI
   factory PostResponseItem([void updates(PostResponseItemBuilder b)]) = _$PostResponseItem;
 
   @BuiltValueHook(initializeBuilder: true)
-  static void _defaults(PostResponseItemBuilder b) => b;
+  static void _defaults(PostResponseItemBuilder b) => b
+      ..postImages = ListBuilder();
 
   @BuiltValueSerializer(custom: true)
   static Serializer<PostResponseItem> get serializer => _$PostResponseItemSerializer();
@@ -66,11 +67,13 @@ class _$PostResponseItemSerializer implements PrimitiveSerializer<PostResponseIt
       object.post,
       specifiedType: const FullType(ShowPosts),
     );
-    yield r'postImages';
-    yield serializers.serialize(
-      object.postImages,
-      specifiedType: const FullType(BuiltList, [FullType(ShowPostImage)]),
-    );
+    if (object.postImages != null) {
+      yield r'postImages';
+      yield serializers.serialize(
+        object.postImages,
+        specifiedType: const FullType(BuiltList, [FullType(ShowPostImage)]),
+      );
+    }
     yield r'user';
     yield serializers.serialize(
       object.user,
